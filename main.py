@@ -3,12 +3,9 @@ import json
 import time
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
 from google import genai
-from google.oauth2.service_account import Credentials
-from googleapiclient.discovery import build
 
-# --- ご指定いただいた全12タイトル、公式サイト・攻略Wiki・YouTubeチャンネルのリスト ---
+# --- 全12タイトル・31URLのリスト ---
 TARGET_URLS = [
     # --- FGO ---
     {"app_name": "FGO", "url": "https://news.fate-go.jp/"},
@@ -76,7 +73,7 @@ def fetch_web_text(url):
             script.extract()
         return soup.get_text(separator="\n", strip=True)
     except Exception as e:
-        print(f"URLの取得に失敗しました ({url}): {e}")
+        print(f"URLの取得に失敗 ({url}): {e}")
         return ""
 
 def fetch_youtube_text(channel_url):
@@ -85,92 +82,55 @@ def fetch_youtube_text(channel_url):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         response = requests.get(channel_url, headers=headers, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
-        
-        rss_link = None
         link_tag = soup.find("link", {"rel": "alternate", "type": "application/rss+xml"})
-        if link_tag:
-            rss_link = link_tag.get("href")
-            
-        if not rss_link:
+        if not link_tag:
             return ""
-            
-        rss_response = requests.get(rss_link, headers=headers, timeout=10)
+        rss_response = requests.get(link_tag.get("href"), headers=headers, timeout=10)
         rss_soup = BeautifulSoup(rss_response.text, 'xml')
         
         text_data = []
-        entries = rss_soup.find_all('entry')
-        for entry in entries[:5]:
+        for entry in rss_soup.find_all('entry')[:5]:
             title = entry.find('title').text if entry.find('title') else ""
             group = entry.find('media:group')
             desc = group.find('media:description').text if group and group.find('media:description') else ""
             text_data.append(f"動画タイトル: {title}\n概要欄:\n{desc}\n---")
-            
         return "\n".join(text_data)
     except Exception as e:
-        print(f"YouTubeの取得に失敗しました ({channel_url}): {e}")
+        print(f"YouTube取得失敗 ({channel_url}): {e}")
         return ""
 
 def extract_events_with_ai(raw_text, app_name):
-    """新しい google-genai SDK を使ってイベント情報を抽出する"""
+    """Gemini AIを使ってイベント情報を抽出する"""
     try:
         client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
-        
         prompt = f"""
 以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
-ここから**【ゲーム内イベント】**および**【リアルイベント（ポップアップストア、展覧会、コラボカフェ、コンビニ・飲食店とのコラボ、リアルライブ等）】**の情報をすべて抽出し、以下のJSON形式の配列（リスト）だけで出力してください。
-余計な解説文やマークダウンのバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。イベントが見つからない場合は空の配列 `[]` を返してください。
-
-抽出項目：
-- title: イベント名（リアルイベントの場合は「【リアル】イベント名」のように分かりやすくしてください）
-- start_date: 開始日 (YYYY-MM-DD形式)
-- end_date: 終了日 (YYYY-MM-DD形式)
-- description: 開催場所（秋葉原、渋谷など）やコラボ先、特典、獲得できる報酬などの概要
+ここから【ゲーム内イベント】および【リアルイベント】の情報をすべて抽出し、以下のJSON形式の配列だけで出力してください。
+余計な解説文やバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。見つからない場合は `[]` を返してください。
+- title: イベント名
+- start_date: 開始日 (YYYY-MM-DD)
+- end_date: 終了日 (YYYY-MM-DD)
+- description: 概要
 
 対象テキスト：
 {raw_text[:15000]}
 """
-        
-        response = client.models.generate_content(
-            model='gemini-3.8-flash',
-            contents=prompt,
-        )
+        response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
         time.sleep(12)
-        
         text = response.text.strip()
-        if text.startswith("```json"):
-            text = text[7:]
-        if text.endswith("```"):
-            text = text[:-3]
+        if text.startswith("```json"): text = text[7:]
+        if text.endswith("```"): text = text[:-3]
         return json.loads(text.strip())
     except Exception as e:
-        print(f"AIによる解析エラー ({app_name}): {e}")
+        print(f"AI解析エラー ({app_name}): {e}")
         time.sleep(12)
         return []
 
 def main():
-    calendar_id = os.environ.get('GOOGLE_CALENDAR_ID')
-
-    if not calendar_id:
-        print("環境変数（GOOGLE_CALENDAR_ID）が設定されていません。")
+    gas_url = os.environ.get('GAS_WEB_APP_URL')
+    if not gas_url:
+        print("GAS_WEB_APP_URL が設定されていません。")
         return
-
-    try:
-        with open('service_account.json', 'r', encoding='utf-8') as f:
-            service_account_info = json.load(f)
-            
-        if 'private_key' in service_account_info:
-            service_account_info['private_key'] = service_account_info['private_key'].replace('\\n', '\n')
-
-        creds = Credentials.from_service_account_info(
-            service_account_info,
-            scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
-        )
-    except Exception as e:
-        print(f"Googleカレンダーの認証情報の読み込みに失敗しました: {e}")
-        return
-
-    calendar_service = build('calendar', 'v3', credentials=creds)
-    today = datetime.now().date()
 
     all_events = []
     for target in TARGET_URLS:
@@ -178,11 +138,7 @@ def main():
         app_name = target['app_name']
         print(f"🔍 情報収集中: {app_name} ({url})")
         
-        if "youtube.com" in url or "youtu.be" in url:
-            raw_text = fetch_youtube_text(url)
-        else:
-            raw_text = fetch_web_text(url)
-            
+        raw_text = fetch_youtube_text(url) if "youtube.com" in url else fetch_web_text(url)
         if not raw_text:
             continue
         
@@ -191,75 +147,13 @@ def main():
             ev['app_name'] = app_name
             all_events.append(ev)
 
+    # 集めた全イベントデータをGAS（スプレッドシート）へ送信
+    print(f"📤 スプレッドシート＆カレンダーへデータ送信中... (計 {len(all_events)} 件)")
     try:
-        existing_events_res = calendar_service.events().list(
-            calendarId=calendar_id, singleEvents=True
-        ).execute()
-        existing_items = existing_events_res.get('items', [])
+        res = requests.post(gas_url, json=all_events, timeout=30)
+        print(f"送信結果: {res.text}")
     except Exception as e:
-        print(f"カレンダーのイベント取得に失敗しました: {e}")
-        return
-
-    # 期限切れイベントの削除
-    for item in existing_items:
-        summary = item.get('summary', '')
-        end_date_str = item.get('end', {}).get('date')
-        if end_date_str:
-            try:
-                end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
-                if end_date < today:
-                    calendar_service.events().delete(
-                        calendarId=calendar_id, eventId=item['id']
-                    ).execute()
-                    print(f"🗑️ 期限切れイベントを削除: {summary}")
-            except Exception:
-                continue
-
-    # 新規登録・更新
-    for ev in all_events:
-        title = ev.get('title')
-        app_name = ev.get('app_name')
-        start_date = ev.get('start_date')
-        end_date = ev.get('end_date')
-        desc = f"詳細: {ev.get('description')}"
-
-        if not title or not start_date or not end_date:
-            continue
-
-        try:
-            end_dt = datetime.strptime(end_date, '%Y-%m-%d')
-            next_day = (end_dt + timedelta(days=1)).strftime('%Y-%m-%d')
-        except ValueError:
-            continue
-
-        display_title = f"【{app_name}】{title}"
-        
-        found_event_id = None
-        for item in existing_items:
-            if item.get('summary') == display_title:
-                found_event_id = item['id']
-                break
-
-        event_body = {
-            'summary': display_title,
-            'description': desc,
-            'start': {'date': start_date},
-            'end': {'date': next_day},
-        }
-
-        try:
-            if found_event_id:
-                calendar_service.events().update(
-                    calendarId=calendar_id, eventId=found_event_id, body=event_body
-                ).execute()
-                print(f"🔄 更新: {display_title}")
-            else:
-                calendar_service.events().insert(
-                    calendarId=calendar_id, body=event_body
-                ).execute()
-                print(f"✨ 新規登録: {display_title}")
-        except Exception as e:
-            print(f"カレンダーへの登録/更新に失敗しました ({display_title}): {e}")
+        print(f"送信エラー: {e}")
 
 if __name__ == '__main__':
     main()
