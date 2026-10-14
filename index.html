@@ -6,13 +6,21 @@
     <title>ゲームイベント管理ダッシュボード</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 万が一Tailwindが読み込めなくても確実に黒背景と白文字にする保険のスタイル */
+        body {
+            background-color: #030712 !important;
+            color: #f8fafc !important;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white">
     <div class="max-w-6xl mx-auto px-4 py-8">
         <!-- ヘッダー -->
         <header class="mb-8 relative flex flex-col items-center">
             <!-- 最終更新日時（右上） -->
-            <div id="last-updated" class="absolute top-0 right-0 hidden md:flex items-center gap-1.5 text-xs text-slate-400 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+            <div id="last-updated" class="absolute top-0 right-0 hidden md:flex items-center gap-1.5 text-xs text-slate-400 bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
                 <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>最終更新: <strong id="update-time-text" class="text-slate-200">読み込み中...</strong></span>
             </div>
@@ -33,9 +41,9 @@
         </header>
 
         <!-- 検索 & アプリタブのコントロール -->
-        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-800/80 shadow-xl">
+        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
             <div id="app-tabs" class="flex flex-wrap gap-2 justify-center">
-                <!-- タブがここに動的に入ります -->
+                <span class="text-xs text-slate-400 py-2">タブを読み込んでいます...</span>
             </div>
             <div class="w-full md:w-72 relative">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
@@ -51,9 +59,9 @@
         </div>
 
         <!-- データなし・ローディング表示 -->
-        <div id="loading" class="text-center py-20 text-slate-500">
+        <div id="loading" class="text-center py-20 text-slate-400">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent mb-3"></div>
-            <p>データを読み込んでいます...</p>
+            <p>スプレッドシートからデータを読み込んでいます...</p>
         </div>
     </div>
 
@@ -79,7 +87,7 @@
     </div>
 
     <script>
-        // ★ここにあなたのGASの「ウェブアプリのURL」を貼り付けてください
+        // ★ここにあなたのGASの「ウェブアプリのURL」を必ず貼り付けてください
         const GAS_URL = "https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec";
 
         let allEvents = [];
@@ -89,6 +97,10 @@
         async function fetchEvents() {
             const loading = document.getElementById('loading');
             try {
+                if (GAS_URL.includes("YOUR_GAS_WEB_APP_URL")) {
+                    throw new Error("GASのウェブアプリURLが設定されていません。コード内の GAS_URL を書き換えてください。");
+                }
+
                 const response = await fetch(GAS_URL);
                 const data = await response.json();
                 
@@ -108,7 +120,7 @@
                 buildTabs();
                 renderEvents(allEvents);
             } catch (err) {
-                loading.innerHTML = `<span class="text-red-400 font-medium">データの読み込みに失敗しました: ${err.message}</span>`;
+                loading.innerHTML = `<div class="bg-red-950/50 border border-red-800 p-4 rounded-2xl text-red-300 text-sm inline-block"><strong class="font-bold">データの読み込みに失敗しました</strong><br>${err.message}</div>`;
             }
         }
 
@@ -165,20 +177,16 @@
                     endDateObj.setHours(0, 0, 0, 0);
                     const diffTime = endDateObj - today;
                     const diffDays = diffTime / (1000 * 60 * 60 * 24);
-                    // 0日以上（今日〜7日以内）
                     if (diffDays >= 0 && diffDays <= 7) {
                         isUrgent = true;
                     }
                 }
 
-                // カードの枠線・背景のスタイル（緊急時はオレンジ/赤系に光らせる）
                 const cardBorder = isUrgent ? 'border-amber-500/60 shadow-lg shadow-amber-500/10 bg-gradient-to-br from-slate-900 to-amber-950/20' : 'border-slate-800 hover:border-indigo-500/50 bg-slate-900/90 shadow-sm';
-                
-                // 終了日の表示テキスト
                 const endDateHtml = e.end_date ? `<div>終了: <span class="font-medium text-amber-400">${e.end_date}</span></div>` : `<div>終了: <span class="text-slate-500">未設定</span></div>`;
 
                 html += `
-                    <div onclick="openModal('${e.app_name}', '${escapedTitle}', '${e.start_date}', '${e.end_date || '未設定'}', '${escapedDesc}')" class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
+                    <div onclick="openModal('${e.app_name}', '${escapedTitle}', '${e.start_date || '未設定'}', '${e.end_date || '未設定'}', '${escapedDesc}')" class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
                         ${isUrgent ? '<div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-bl-xl tracking-wider shadow">⚠️ 終了間近</div>' : ''}
                         <div>
                             <div class="flex justify-between items-start mb-3">
@@ -203,7 +211,7 @@
         function openModal(app, title, start, end, desc) {
             document.getElementById('modal-app-badge').innerText = app;
             document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-start').innerText = start || '未設定';
+            document.getElementById('modal-start').innerText = start;
             document.getElementById('modal-end').innerText = end;
             document.getElementById('modal-description').innerText = desc;
 
