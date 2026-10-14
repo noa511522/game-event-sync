@@ -114,7 +114,7 @@ def fetch_youtube_text(channel_url):
 def extract_events_with_ai(raw_text, app_name):
     """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する"""
     genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    model = genai.GenerativeModel('gemini-3.8-flash')
     
     prompt = f"""
 以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
@@ -148,14 +148,9 @@ def main():
     calendar_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
     calendar_id = os.environ.get('GOOGLE_CALENDAR_ID')
 
-    # --- デバッグ用の確認ログ ---
-    print(f"DEBUG - GEMINI_API_KEY exists: {bool(gemini_key)}")
-    print(f"DEBUG - GOOGLE_CALENDAR_ID exists: {bool(calendar_id)}")
+    # GitHub Secrets経由で文字になった改行(\n)を実際の改行コードに強制修復する
     if calendar_json:
-        print(f"DEBUG - GOOGLE_SERVICE_ACCOUNT_JSON length: {len(calendar_json)}")
-        print(f"DEBUG - GOOGLE_SERVICE_ACCOUNT_JSON start: {calendar_json[:30]}")
-    else:
-        print("DEBUG - GOOGLE_SERVICE_ACCOUNT_JSON is EMPTY or NONE!")
+        calendar_json = calendar_json.replace('\\n', '\n')
 
     if not gemini_key or not calendar_json or not calendar_id:
         print("環境変数（Secrets）が設定されていません。")
