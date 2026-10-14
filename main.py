@@ -57,14 +57,14 @@ TARGET_URLS = [
     # --- アワーノーツ ---
     {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/"},
     {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on"},
-    {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},
+    {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},  # ← カンマ追加
 
     # --- マブラヴ ガールズガーデン ---
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/"},
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
+    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},  # ← カンマ追加
 
     # --- 学園アイドルマスター ---
-    {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"}
+    {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"},  # ← カンマ追加
     {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster"}
 ]
 
