@@ -62,7 +62,7 @@ TARGET_URLS = [
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
 
     # --- 学園アイドルマスター ---
-    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-imas"} # 存在しない日本語ドメインを除外し確実なWikiに変更
+    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-imas"}
 ]
 
 def fetch_web_text(url):
@@ -148,26 +148,20 @@ def extract_events_with_ai(raw_text, app_name):
         return []
 
 def main():
-    gemini_key = os.environ.get('GEMINI_API_KEY')
-    calendar_json_str = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
     calendar_id = os.environ.get('GOOGLE_CALENDAR_ID')
 
-    if not gemini_key or not calendar_json_str or not calendar_id:
-        print("環境変数（Secrets）が設定されていません。")
+    if not calendar_id:
+        print("環境変数（GOOGLE_CALENDAR_ID）が設定されていません。")
         return
 
+    # ★ワークフロー側で作成したファイルから安全に読み込む
     try:
-        service_account_info = json.loads(calendar_json_str)
-        # GitHub Secrets特有の改行エスケープ問題（\nが文字になってしまう現象）を強制修復する
-        if 'private_key' in service_account_info:
-            service_account_info['private_key'] = service_account_info['private_key'].replace('\\n', '\n')
-
-        creds = Credentials.from_service_account_info(
-            service_account_info,
+        creds = Credentials.from_service_account_file(
+            'service_account.json',
             scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
         )
     except Exception as e:
-        print(f"Googleカレンダーの認証情報の解析に失敗しました: {e}")
+        print(f"Googleカレンダーの認証情報の読み込みに失敗しました: {e}")
         return
 
     calendar_service = build('calendar', 'v3', credentials=creds)
