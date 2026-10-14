@@ -4,7 +4,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
-import google.generativeai as genai
+from google import genai
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 
@@ -112,12 +112,11 @@ def fetch_youtube_text(channel_url):
         return ""
 
 def extract_events_with_ai(raw_text, app_name):
-    """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する"""
-    genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-    # 正しいモデル名（gemini-1.5-flash）を指定
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    
-    prompt = f"""
+    """新しい google-genai SDK を使ってイベント情報を抽出する"""
+    try:
+        client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
+        
+        prompt = f"""
 以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
 ここから**【ゲーム内イベント】**および**【リアルイベント（ポップアップストア、展覧会、コラボカフェ、コンビニ・飲食店とのコラボ、リアルライブ等）】**の情報をすべて抽出し、以下のJSON形式の配列（リスト）だけで出力してください。
 余計な解説文やマークダウンのバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。イベントが見つからない場合は空の配列 `[]` を返してください。
@@ -131,9 +130,11 @@ def extract_events_with_ai(raw_text, app_name):
 対象テキスト：
 {raw_text[:15000]}
 """
-    
-    try:
-        response = model.generate_content(prompt)
+        
+        response = client.models.generate_content(
+            model='gemini-3.8-flash',
+            contents=prompt,
+        )
         time.sleep(12)
         
         text = response.text.strip()
@@ -156,7 +157,6 @@ def main():
         print("環境変数（Secrets）が設定されていません。")
         return
 
-    # 一時ファイルを使わず、JSON文字列を直接辞書型にパースして認証情報を作成する
     try:
         service_account_info = json.loads(calendar_json_str)
         creds = Credentials.from_service_account_info(
