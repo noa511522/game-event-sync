@@ -7,31 +7,64 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
+<body class="bg-gradient-to-br from-slate-50 via-indigo-50/20 to-slate-100 text-slate-800 min-h-screen">
     <div class="max-w-6xl mx-auto px-4 py-8">
         <!-- ヘッダー -->
         <header class="mb-8 text-center">
-            <h1 class="text-3xl font-bold text-slate-900 mb-2">🎮 ゲームイベント ダッシュボード</h1>
-            <p class="text-sm text-slate-500">スプレッドシートと連動した最新のイベント一覧です</p>
+            <div class="inline-flex items-center justify-center p-2 bg-indigo-100 rounded-2xl text-indigo-600 mb-3 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-1 tracking-tight">ゲームイベント ダッシュボード</h1>
+            <p class="text-sm text-slate-500">スプレッドシートと連動した最新のイベント情報</p>
         </header>
 
         <!-- 検索 & アプリタブのコントロール -->
-        <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center bg-white/80 backdrop-blur-md p-4 rounded-2xl border border-slate-100 shadow-sm">
             <div id="app-tabs" class="flex flex-wrap gap-2 justify-center">
-                <button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-slate-900 text-white transition shadow-sm">すべて</button>
+                <!-- タブがここに動的に入ります -->
             </div>
-            <div class="w-full md:w-72">
-                <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white shadow-sm">
+            <div class="w-full md:w-72 relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
+                <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-50/50 shadow-inner transition">
             </div>
         </div>
 
         <!-- イベント一覧グリッド -->
-        <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <!-- カードがここに動的に挿入されます -->
         </div>
 
         <!-- データなし・ローディング表示 -->
-        <div id="loading" class="text-center py-20 text-slate-400">データを読み込んでいます...</div>
+        <div id="loading" class="text-center py-20 text-slate-400">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent mb-3"></div>
+            <p>データを読み込んでいます...</p>
+        </div>
+    </div>
+
+    <!-- 詳細ポップアップ（モーダル） -->
+    <div id="event-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative border border-slate-100" id="modal-content-box">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modal-app-badge" class="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-indigo-50 text-indigo-600 mb-3 shadow-xs"></div>
+            <h2 id="modal-title" class="text-xl font-bold text-slate-900 mb-3 leading-snug"></h2>
+            <div class="flex items-center gap-4 text-xs text-slate-500 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <div>開始: <span id="modal-start" class="font-semibold text-slate-700"></span></div>
+                <div>終了: <span id="modal-end" class="font-semibold text-slate-700"></span></div>
+            </div>
+            <div class="max-h-60 overflow-y-auto pr-2">
+                <p id="modal-description" class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap"></p>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal()" class="px-5 py-2 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 transition shadow-sm">閉じる</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -42,7 +75,6 @@
         let currentApp = 'ALL';
 
         async function fetchEvents() {
-            const grid = document.getElementById('event-grid');
             const loading = document.getElementById('loading');
             try {
                 const response = await fetch(GAS_URL);
@@ -58,7 +90,7 @@
                 buildTabs();
                 renderEvents(allEvents);
             } catch (err) {
-                loading.innerHTML = `<span class="text-red-500">データの読み込みに失敗しました: ${err.message}</span>`;
+                loading.innerHTML = `<span class="text-red-500 font-medium">データの読み込みに失敗しました: ${err.message}</span>`;
             }
         }
 
@@ -66,12 +98,12 @@
             const tabsContainer = document.getElementById('app-tabs');
             const apps = [...new Set(allEvents.map(e => e.app_name))];
             
-            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium ${currentApp === 'ALL' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'} transition shadow-sm">すべて (${allEvents.length})</button>`;
+            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${currentApp === 'ALL' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'} transition">すべて (${allEvents.length})</button>`;
             
             apps.forEach(app => {
                 const count = allEvents.filter(e => e.app_name === app).length;
                 const isActive = currentApp === app;
-                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium ${isActive ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'} transition shadow-sm">${app} (${count})</button>`;
+                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${isActive ? 'bg-indigo-600 text-white shadow-md shadow-indigo-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'} transition">${app} (${count})</button>`;
             });
             
             tabsContainer.innerHTML = html;
@@ -96,29 +128,67 @@
         function renderEvents(events) {
             const grid = document.getElementById('event-grid');
             if (events.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400">該当するイベントはありません。</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400 bg-white rounded-3xl border border-slate-100 shadow-sm"><p class="text-base">該当するイベントはありません。</p></div>`;
                 return;
             }
 
             let html = '';
-            events.forEach(e => {
+            events.forEach((e) => {
+                const escapedTitle = e.title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                const escapedDesc = (e.description || '詳細なし').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                
                 html += `
-                    <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div onclick="openModal('${e.app_name}', '${escapedTitle}', '${e.start_date}', '${e.end_date}', '${escapedDesc}')" class="bg-white rounded-2xl p-5 border border-slate-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-200 flex flex-col justify-between cursor-pointer group">
                         <div>
                             <div class="flex justify-between items-start mb-3">
-                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-600">${e.app_name}</span>
-                                <div class="text-right text-xs text-slate-400">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">${e.app_name}</span>
+                                <div class="text-right text-[11px] text-slate-400 space-y-0.5">
                                     <div>開始: <span class="font-medium text-slate-700">${e.start_date || '未設定'}</span></div>
                                     <div>終了: <span class="font-medium text-slate-700">${e.end_date || '未設定'}</span></div>
                                 </div>
                             </div>
-                            <h3 class="font-bold text-slate-900 mb-2 text-base leading-snug">${e.title}</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed line-clamp-3">${e.description || '詳細なし'}</p>
+                            <h3 class="font-bold text-slate-900 mb-2 text-base leading-snug group-hover:text-indigo-600 transition">${e.title}</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">${e.description || '詳細なし'}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400">
+                            <span>詳細を見る</span>
+                            <span class="text-indigo-500 font-medium group-hover:translate-x-1 transition">&rarr;</span>
                         </div>
                     </div>`;
             });
             grid.innerHTML = html;
         }
+
+        function openModal(app, title, start, end, desc) {
+            document.getElementById('modal-app-badge').innerText = app;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-start').innerText = start || '未設定';
+            document.getElementById('modal-end').innerText = end || '未設定';
+            document.getElementById('modal-description').innerText = desc;
+
+            const modal = document.getElementById('event-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                document.getElementById('modal-content-box').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('event-modal');
+            modal.classList.add('opacity-0');
+            document.getElementById('modal-content-box').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // 背景クリックでモーダル閉じる
+        document.getElementById('event-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'event-modal') {
+                closeModal();
+            }
+        });
 
         // ページ読み込み時にデータ取得
         fetchEvents();
