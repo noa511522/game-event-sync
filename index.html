@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲームイベント管理ダッシュボード</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <!-- ヘッダー -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-slate-900 mb-2">🎮 ゲームイベント ダッシュボード</h1>
+            <p class="text-sm text-slate-500">スプレッドシートと連動した最新のイベント一覧です</p>
+        </header>
+
+        <!-- 検索 & アプリタブのコントロール -->
+        <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+            <div id="app-tabs" class="flex flex-wrap gap-2 justify-center">
+                <button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-slate-900 text-white transition shadow-sm">すべて</button>
+            </div>
+            <div class="w-full md:w-72">
+                <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white shadow-sm">
+            </div>
+        </div>
+
+        <!-- イベント一覧グリッド -->
+        <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- カードがここに動的に挿入されます -->
+        </div>
+
+        <!-- データなし・ローディング表示 -->
+        <div id="loading" class="text-center py-20 text-slate-400">データを読み込んでいます...</div>
+    </div>
+
+    <script>
+        // ★ここにあなたのGASの「ウェブアプリのURL」を貼り付けてください
+        const GAS_URL = "YOUR_GAS_WEB_APP_URL";
+
+        let allEvents = [];
+        let currentApp = 'ALL';
+
+        async function fetchEvents() {
+            const grid = document.getElementById('event-grid');
+            const loading = document.getElementById('loading');
+            try {
+                const response = await fetch(GAS_URL);
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                allEvents = data;
+                loading.style.display = 'none';
+                
+                buildTabs();
+                renderEvents(allEvents);
+            } catch (err) {
+                loading.innerHTML = `<span class="text-red-500">データの読み込みに失敗しました: ${err.message}</span>`;
+            }
+        }
+
+        function buildTabs() {
+            const tabsContainer = document.getElementById('app-tabs');
+            const apps = [...new Set(allEvents.map(e => e.app_name))];
+            
+            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium ${currentApp === 'ALL' ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'} transition shadow-sm">すべて (${allEvents.length})</button>`;
+            
+            apps.forEach(app => {
+                const count = allEvents.filter(e => e.app_name === app).length;
+                const isActive = currentApp === app;
+                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium ${isActive ? 'bg-slate-900 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'} transition shadow-sm">${app} (${count})</button>`;
+            });
+            
+            tabsContainer.innerHTML = html;
+        }
+
+        function filterApp(app) {
+            currentApp = app;
+            buildTabs();
+            filterEvents();
+        }
+
+        function filterEvents() {
+            const keyword = document.getElementById('search-box').value.toLowerCase();
+            const filtered = allEvents.filter(e => {
+                const matchApp = currentApp === 'ALL' || e.app_name === currentApp;
+                const matchKeyword = e.title.toLowerCase().includes(keyword) || (e.description && e.description.toLowerCase().includes(keyword)) || e.app_name.toLowerCase().includes(keyword);
+                return matchApp && matchKeyword;
+            });
+            renderEvents(filtered);
+        }
+
+        function renderEvents(events) {
+            const grid = document.getElementById('event-grid');
+            if (events.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400">該当するイベントはありません。</div>`;
+                return;
+            }
+
+            let html = '';
+            events.forEach(e => {
+                html += `
+                    bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between
+                ">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-600">${e.app_name}</span>
+                            <div class="text-right text-xs text-slate-400">
+                                <div>開始: <span class="font-medium text-slate-700">${e.start_date || '未設定'}</span></div>
+                                <div>終了: <span class="font-medium text-slate-700">${e.end_date || '未設定'}</span></div>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-2 text-base leading-snug">${e.title}</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed line-clamp-3">${e.description || '詳細なし'}</p>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        // ページ読み込み時にデータ取得
+        fetchEvents();
+    </script>
+</body>
+</html>
