@@ -7,30 +7,41 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-indigo-50/20 to-slate-100 text-slate-800 min-h-screen">
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white">
     <div class="max-w-6xl mx-auto px-4 py-8">
         <!-- ヘッダー -->
-        <header class="mb-8 text-center">
-            <div class="inline-flex items-center justify-center p-2 bg-indigo-100 rounded-2xl text-indigo-600 mb-3 shadow-sm">
+        <header class="mb-8 relative flex flex-col items-center">
+            <!-- 最終更新日時（右上） -->
+            <div id="last-updated" class="absolute top-0 right-0 hidden md:flex items-center gap-1.5 text-xs text-slate-400 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>最終更新: <strong id="update-time-text" class="text-slate-200">読み込み中...</strong></span>
+            </div>
+
+            <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-2xl text-indigo-400 mb-3 border border-indigo-500/20 shadow-lg shadow-indigo-500/5">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <h1 class="text-3xl font-extrabold text-slate-900 mb-1 tracking-tight">ゲームイベント ダッシュボード</h1>
-            <p class="text-sm text-slate-500">スプレッドシートと連動した最新のイベント情報</p>
+            <h1 class="text-3xl font-extrabold text-white mb-1 tracking-tight">ゲームイベント ダッシュボード</h1>
+            <p class="text-sm text-slate-400">スプレッドシートと連動した最新のイベント情報</p>
+            
+            <!-- スマホ用の最終更新表示 -->
+            <div id="last-updated-mobile" class="mt-3 md:hidden text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
+                最終更新: <span id="update-time-text-mobile" class="text-slate-200">読み込み中...</span>
+            </div>
         </header>
 
         <!-- 検索 & アプリタブのコントロール -->
-        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center bg-white/80 backdrop-blur-md p-4 rounded-2xl border border-slate-100 shadow-sm">
+        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-800/80 shadow-xl">
             <div id="app-tabs" class="flex flex-wrap gap-2 justify-center">
                 <!-- タブがここに動的に入ります -->
             </div>
             <div class="w-full md:w-72 relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </span>
-                <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-50/50 shadow-inner transition">
+                <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-950 text-slate-100 placeholder-slate-500 shadow-inner transition">
             </div>
         </div>
 
@@ -40,29 +51,29 @@
         </div>
 
         <!-- データなし・ローディング表示 -->
-        <div id="loading" class="text-center py-20 text-slate-400">
+        <div id="loading" class="text-center py-20 text-slate-500">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent mb-3"></div>
             <p>データを読み込んでいます...</p>
         </div>
     </div>
 
     <!-- 詳細ポップアップ（モーダル） -->
-    <div id="event-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative border border-slate-100" id="modal-content-box">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition">
+    <div id="event-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative text-slate-100" id="modal-content-box">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div id="modal-app-badge" class="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-indigo-50 text-indigo-600 mb-3 shadow-xs"></div>
-            <h2 id="modal-title" class="text-xl font-bold text-slate-900 mb-3 leading-snug"></h2>
-            <div class="flex items-center gap-4 text-xs text-slate-500 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <div>開始: <span id="modal-start" class="font-semibold text-slate-700"></span></div>
-                <div>終了: <span id="modal-end" class="font-semibold text-slate-700"></span></div>
+            <div id="modal-app-badge" class="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-3"></div>
+            <h2 id="modal-title" class="text-xl font-bold text-white mb-3 leading-snug"></h2>
+            <div class="flex items-center gap-4 text-xs text-slate-300 mb-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div>開始: <span id="modal-start" class="font-semibold text-indigo-400"></span></div>
+                <div>終了: <span id="modal-end" class="font-semibold text-amber-400"></span></div>
             </div>
             <div class="max-h-60 overflow-y-auto pr-2">
-                <p id="modal-description" class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap"></p>
+                <p id="modal-description" class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap"></p>
             </div>
             <div class="mt-6 text-right">
-                <button onclick="closeModal()" class="px-5 py-2 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 transition shadow-sm">閉じる</button>
+                <button onclick="closeModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-600/30">閉じる</button>
             </div>
         </div>
     </div>
@@ -73,6 +84,7 @@
 
         let allEvents = [];
         let currentApp = 'ALL';
+        let lastUpdatedTime = '';
 
         async function fetchEvents() {
             const loading = document.getElementById('loading');
@@ -84,13 +96,19 @@
                     throw new Error(data.error);
                 }
 
-                allEvents = data;
+                allEvents = data.events || data;
+                lastUpdatedTime = data.last_updated || '不明';
+                
+                // 更新日時を画面に反映
+                document.getElementById('update-time-text').innerText = lastUpdatedTime;
+                document.getElementById('update-time-text-mobile').innerText = lastUpdatedTime;
+
                 loading.style.display = 'none';
                 
                 buildTabs();
                 renderEvents(allEvents);
             } catch (err) {
-                loading.innerHTML = `<span class="text-red-500 font-medium">データの読み込みに失敗しました: ${err.message}</span>`;
+                loading.innerHTML = `<span class="text-red-400 font-medium">データの読み込みに失敗しました: ${err.message}</span>`;
             }
         }
 
@@ -98,12 +116,12 @@
             const tabsContainer = document.getElementById('app-tabs');
             const apps = [...new Set(allEvents.map(e => e.app_name))];
             
-            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${currentApp === 'ALL' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'} transition">すべて (${allEvents.length})</button>`;
+            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${currentApp === 'ALL' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800'} transition">すべて (${allEvents.length})</button>`;
             
             apps.forEach(app => {
                 const count = allEvents.filter(e => e.app_name === app).length;
                 const isActive = currentApp === app;
-                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${isActive ? 'bg-indigo-600 text-white shadow-md shadow-indigo-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'} transition">${app} (${count})</button>`;
+                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800'} transition">${app} (${count})</button>`;
             });
             
             tabsContainer.innerHTML = html;
@@ -128,31 +146,54 @@
         function renderEvents(events) {
             const grid = document.getElementById('event-grid');
             if (events.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400 bg-white rounded-3xl border border-slate-100 shadow-sm"><p class="text-base">該当するイベントはありません。</p></div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-500 bg-slate-900/50 rounded-3xl border border-slate-800 shadow-inner"><p class="text-base">該当するイベントはありません。</p></div>`;
                 return;
             }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
 
             let html = '';
             events.forEach((e) => {
                 const escapedTitle = e.title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
                 const escapedDesc = (e.description || '詳細なし').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
                 
+                // 終了1週間以内（7日以内）の判定
+                let isUrgent = false;
+                if (e.end_date) {
+                    const endDateObj = new Date(e.end_date);
+                    endDateObj.setHours(0, 0, 0, 0);
+                    const diffTime = endDateObj - today;
+                    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                    // 0日以上（今日〜7日以内）
+                    if (diffDays >= 0 && diffDays <= 7) {
+                        isUrgent = true;
+                    }
+                }
+
+                // カードの枠線・背景のスタイル（緊急時はオレンジ/赤系に光らせる）
+                const cardBorder = isUrgent ? 'border-amber-500/60 shadow-lg shadow-amber-500/10 bg-gradient-to-br from-slate-900 to-amber-950/20' : 'border-slate-800 hover:border-indigo-500/50 bg-slate-900/90 shadow-sm';
+                
+                // 終了日の表示テキスト
+                const endDateHtml = e.end_date ? `<div>終了: <span class="font-medium text-amber-400">${e.end_date}</span></div>` : `<div>終了: <span class="text-slate-500">未設定</span></div>`;
+
                 html += `
-                    <div onclick="openModal('${e.app_name}', '${escapedTitle}', '${e.start_date}', '${e.end_date}', '${escapedDesc}')" class="bg-white rounded-2xl p-5 border border-slate-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-200 flex flex-col justify-between cursor-pointer group">
+                    <div onclick="openModal('${e.app_name}', '${escapedTitle}', '${e.start_date}', '${e.end_date || '未設定'}', '${escapedDesc}')" class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
+                        ${isUrgent ? '<div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-bl-xl tracking-wider shadow">⚠️ 終了間近</div>' : ''}
                         <div>
                             <div class="flex justify-between items-start mb-3">
-                                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">${e.app_name}</span>
-                                <div class="text-right text-[11px] text-slate-400 space-y-0.5">
-                                    <div>開始: <span class="font-medium text-slate-700">${e.start_date || '未設定'}</span></div>
-                                    <div>終了: <span class="font-medium text-slate-700">${e.end_date || '未設定'}</span></div>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/20 group-hover:bg-indigo-600 group-hover:text-white transition">${e.app_name}</span>
+                                <div class="text-right text-[11px] text-slate-400 space-y-0.5 ${isUrgent ? 'mr-14' : ''}">
+                                    <div>開始: <span class="font-medium text-slate-300">${e.start_date || '未設定'}</span></div>
+                                    ${endDateHtml}
                                 </div>
                             </div>
-                            <h3 class="font-bold text-slate-900 mb-2 text-base leading-snug group-hover:text-indigo-600 transition">${e.title}</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">${e.description || '詳細なし'}</p>
+                            <h3 class="font-bold text-white mb-2 text-base leading-snug group-hover:text-indigo-400 transition">${e.title}</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed line-clamp-2">${e.description || '詳細なし'}</p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400">
+                        <div class="mt-4 pt-3 border-t border-slate-800/80 flex justify-between items-center text-[11px] text-slate-400">
                             <span>詳細を見る</span>
-                            <span class="text-indigo-500 font-medium group-hover:translate-x-1 transition">&rarr;</span>
+                            <span class="text-indigo-400 font-medium group-hover:translate-x-1 transition">&rarr;</span>
                         </div>
                     </div>`;
             });
@@ -163,7 +204,7 @@
             document.getElementById('modal-app-badge').innerText = app;
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-start').innerText = start || '未設定';
-            document.getElementById('modal-end').innerText = end || '未設定';
+            document.getElementById('modal-end').innerText = end;
             document.getElementById('modal-description').innerText = desc;
 
             const modal = document.getElementById('event-modal');
@@ -183,7 +224,6 @@
             }, 300);
         }
 
-        // 背景クリックでモーダル閉じる
         document.getElementById('event-modal').addEventListener('click', (e) => {
             if (e.target.id === 'event-modal') {
                 closeModal();
