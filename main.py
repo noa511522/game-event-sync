@@ -156,8 +156,8 @@ def main():
 
     print(f"📤 スプレッドシート＆カレンダーへデータ送信中... (計 {len(all_events)} 件)")
     try:
-        # タイムアウトを60秒に延長
-        res = requests.post(gas_url, json=all_events, timeout=60)
+        # タイムアウトを120秒に延長
+        res = requests.post(gas_url, json=all_events, timeout=120)
         print(f"送信結果: {res.text}")
     except Exception as e:
         print(f"送信エラー: {e}")
