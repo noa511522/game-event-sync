@@ -153,9 +153,7 @@ def main():
 
     creds = Credentials.from_service_account_info(
         json.loads(calendar_json),
-    creds = Credentials.from_service_account_info(
-        json.loads(calendar_json),
-        scopes=['https://www.googleapis.com/auth/calendar']
+        scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
     )
     calendar_service = build('calendar', 'v3', credentials=creds)
     today = datetime.now().date()
