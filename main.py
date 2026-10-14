@@ -152,7 +152,7 @@ def main():
         print("環境変数（Secrets）が設定されていません。")
         return
 
-    # 一時ファイルを経由して認証情報を安全に読み込む
+    # 一時ファイルを経由して認証情報を安全に読み込む（RefreshError対策）
     with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as temp_file:
         temp_file.write(calendar_json)
         temp_file_path = temp_file.name
