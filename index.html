@@ -82,7 +82,7 @@
             <div class="flex justify-between items-center pt-4 border-t border-slate-800">
                 <button onclick="deleteCurrentEvent()" class="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    このタスクを削除
+                    このタスクを削除 (要パスワード)
                 </button>
                 <button onclick="closeModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-600/30">閉じる</button>
             </div>
@@ -96,7 +96,7 @@
         let allEvents = [];
         let currentApp = 'ALL';
         let lastUpdatedTime = '';
-        let currentSelectedEvent = null; // 現在モーダルで開いているイベント情報
+        let currentSelectedEvent = null;
 
         async function fetchEvents() {
             const loading = document.getElementById('loading');
@@ -170,9 +170,6 @@
 
             let html = '';
             events.forEach((e) => {
-                const escapedTitle = e.title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-                const escapedDesc = (e.description || '詳細なし').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-                
                 let isUrgent = false;
                 if (e.end_date) {
                     const endDateObj = new Date(e.end_date);
@@ -187,9 +184,6 @@
                 const cardBorder = isUrgent ? 'border-amber-500/60 shadow-lg shadow-amber-500/10 bg-gradient-to-br from-slate-900 to-amber-950/20' : 'border-slate-800 hover:border-indigo-500/50 bg-slate-900/90 shadow-sm';
                 const endDateHtml = e.end_date ? `<div>終了: <span class="font-medium text-amber-400">${e.end_date}</span></div>` : `<div>終了: <span class="text-slate-500">未設定</span></div>`;
 
-                // イベントオブジェクトをエスケープして安全に渡すため、インデックス経由でopenModalを呼ぶように変更
-                const eventJson = JSON.stringify(e).replace(/"/g, '&quot;').replace(./g, c => c);
-                
                 html += `
                     <div onclick='openModal(${JSON.stringify(e)})' class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
                         ${isUrgent ? '<div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-bl-xl tracking-wider shadow">⚠️ 終了間近</div>' : ''}
@@ -214,7 +208,7 @@
         }
 
         function openModal(eventObj) {
-            currentSelectedEvent = eventObj; // 削除用に保持
+            currentSelectedEvent = eventObj;
 
             document.getElementById('modal-app-badge').innerText = eventObj.app_name;
             document.getElementById('modal-title').innerText = eventObj.title;
@@ -240,41 +234,40 @@
             currentSelectedEvent = null;
         }
 
-        // 削除ボタンが押された時の処理
+        // 削除ボタンが押された時の処理（パスワード認証付き）
         async function deleteCurrentEvent() {
             if (!currentSelectedEvent) return;
 
-            // 確認ダイアログを表示
-            const confirmed = window.confirm(`「${currentSelectedEvent.title}」を本当に削除しますか？\n（スプレッドシートからも削除されます）`);
-            if (!confirmed) return;
+            // パスワード入力入力を促すプロンプト
+            const password = prompt("オーナーパスワードを入力してください:");
+            if (password === null) return; // キャンセルされた場合
 
             try {
-                // ローディング演出など（必要に応じて）
                 const response = await fetch(GAS_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' }, // GASでのCORSエラー回避のためtext/plain指定
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         action: 'delete',
                         app_name: currentSelectedEvent.app_name,
-                        title: currentSelectedEvent.title
+                        title: currentSelectedEvent.title,
+                        password: password
                     })
                 });
 
                 const result = await response.json();
                 if (result.status === 'success') {
-                    // 画面上の配列からも削除
                     allEvents = allEvents.filter(e => !(e.app_name === currentSelectedEvent.app_name && e.title === currentSelectedEvent.title));
                     
                     closeModal();
                     buildTabs();
                     filterEvents();
                     
-                    alert('タスクを削除しました。');
+                    alert('タスクを正常に削除しました。');
                 } else {
-                    throw new Error(result.message || '削除に失敗しました');
+                    alert('エラー: ' + (result.message || 'パスワードが違うため削除できませんでした。'));
                 }
             } catch (err) {
-                alert('削除エラー: ' + err.message);
+                alert('通信エラー: ' + err.message);
             }
         }
 
