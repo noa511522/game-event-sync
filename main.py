@@ -154,7 +154,6 @@ def main():
         print("環境変数（GOOGLE_CALENDAR_ID）が設定されていません。")
         return
 
-    # ★ファイル読み込み後、秘密鍵の \n を本物の改行に置換する処理を追加
     try:
         with open('service_account.json', 'r', encoding='utf-8') as f:
             service_account_info = json.load(f)
@@ -224,7 +223,7 @@ def main():
         end_date = ev.get('end_date')
         desc = f"詳細: {ev.get('description')}"
 
-5.         if not title or not start_date or not end_date:
+        if not title or not start_date or not end_date:
             continue
 
         try:
