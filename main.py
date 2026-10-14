@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
@@ -112,7 +113,7 @@ def fetch_youtube_text(channel_url):
         return ""
 
 def extract_events_with_ai(raw_text, app_name):
-    """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する"""
+    """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する（レート制限対策のウェイト付き）"""
     genai.configure(api_key=os.environ['GEMINI_API_KEY'])
     model = genai.GenerativeModel('gemini-3.8-flash')
     
@@ -133,6 +134,9 @@ def extract_events_with_ai(raw_text, app_name):
     
     try:
         response = model.generate_content(prompt)
+        # 無料枠のレート制限（1分間に5回まで）を回避するため、リクエストごとに12秒待機する
+        time.sleep(12)
+        
         text = response.text.strip()
         if text.startswith("```json"):
             text = text[7:]
@@ -141,6 +145,7 @@ def extract_events_with_ai(raw_text, app_name):
         return json.loads(text.strip())
     except Exception as e:
         print(f"AIによる解析エラー ({app_name}): {e}")
+        time.sleep(12)
         return []
 
 def main():
