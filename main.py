@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 import google.generativeai as genai
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
-import tempfile
 
 # --- ご指定いただいた全12タイトル、公式サイト・攻略Wiki・YouTubeチャンネルのリスト ---
 TARGET_URLS = [
@@ -113,9 +112,10 @@ def fetch_youtube_text(channel_url):
         return ""
 
 def extract_events_with_ai(raw_text, app_name):
-    """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する（レート制限対策のウェイト付き）"""
+    """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する"""
     genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-    model = genai.GenerativeModel('gemini-2.5-flash') # モデル名がもし必要なら調整
+    # 正しいモデル名（gemini-1.5-flash）を指定
+    model = genai.GenerativeModel('gemini-1.5-flash')
     
     prompt = f"""
 以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
@@ -149,26 +149,23 @@ def extract_events_with_ai(raw_text, app_name):
 
 def main():
     gemini_key = os.environ.get('GEMINI_API_KEY')
-    calendar_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
+    calendar_json_str = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
     calendar_id = os.environ.get('GOOGLE_CALENDAR_ID')
 
-    if not gemini_key or not calendar_json or not calendar_id:
+    if not gemini_key or not calendar_json_str or not calendar_id:
         print("環境変数（Secrets）が設定されていません。")
         return
 
-    # 一時ファイルを経由して認証情報を安全に読み込む
-    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as temp_file:
-        temp_file.write(calendar_json)
-        temp_file_path = temp_file.name
-
+    # 一時ファイルを使わず、JSON文字列を直接辞書型にパースして認証情報を作成する
     try:
-        creds = Credentials.from_service_account_file(
-            temp_file_path,
+        service_account_info = json.loads(calendar_json_str)
+        creds = Credentials.from_service_account_info(
+            service_account_info,
             scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
         )
-    finally:
-        if os.path.exists(temp_file_path):
-            os.remove(temp_file_path)
+    except Exception as e:
+        print(f"Googleカレンダーの認証情報の解析に失敗しました: {e}")
+        return
 
     calendar_service = build('calendar', 'v3', credentials=creds)
     today = datetime.now().date()
@@ -192,22 +189,29 @@ def main():
             ev['app_name'] = app_name
             all_events.append(ev)
 
-    existing_events_res = calendar_service.events().list(
-        calendarId=calendar_id, singleEvents=True
-    ).execute()
-    existing_items = existing_events_res.get('items', [])
+    try:
+        existing_events_res = calendar_service.events().list(
+            calendarId=calendar_id, singleEvents=True
+        ).execute()
+        existing_items = existing_events_res.get('items', [])
+    except Exception as e:
+        print(f"カレンダーのイベント取得に失敗しました: {e}")
+        return
 
     # 期限切れイベントの削除
     for item in existing_items:
         summary = item.get('summary', '')
         end_date_str = item.get('end', {}).get('date')
         if end_date_str:
-            end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
-            if end_date < today:
-                calendar_service.events().delete(
-                    calendarId=calendar_id, eventId=item['id']
-                ).execute()
-                print(f"🗑️ 期限切れイベントを削除: {summary}")
+            try:
+                end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
+                if end_date < today:
+                    calendar_service.events().delete(
+                        calendarId=calendar_id, eventId=item['id']
+                    ).execute()
+                    print(f"🗑️ 期限切れイベントを削除: {summary}")
+            except Exception:
+                continue
 
     # 新規登録・更新
     for ev in all_events:
@@ -241,16 +245,19 @@ def main():
             'end': {'date': next_day},
         }
 
-        if found_event_id:
-            calendar_service.events().update(
-                calendarId=calendar_id, eventId=found_event_id, body=event_body
-            ).execute()
-            print(f"🔄 更新: {display_title}")
-        else:
-            calendar_service.events().insert(
-                calendarId=calendar_id, body=event_body
-            ).execute()
-            print(f"✨ 新規登録: {display_title}")
+        try:
+            if found_event_id:
+                calendar_service.events().update(
+                    calendarId=calendar_id, eventId=found_event_id, body=event_body
+                ).execute()
+                print(f"🔄 更新: {display_title}")
+            else:
+                calendar_service.events().insert(
+                    calendarId=calendar_id, body=event_body
+                ).execute()
+                print(f"✨ 新規登録: {display_title}")
+        except Exception as e:
+            print(f"カレンダーへの登録/更新に失敗しました ({display_title}): {e}")
 
 if __name__ == '__main__':
     main()
