@@ -62,8 +62,7 @@ TARGET_URLS = [
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
 
     # --- 学園アイドルマスター ---
-    {"app_name": "学園アイドルマスター", "url": "https://学園アイドルマスター.jp/"},
-    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-imas"}
+    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-imas"} # 存在しない日本語ドメインを除外し確実なWikiに変更
 ]
 
 def fetch_web_text(url):
@@ -159,6 +158,10 @@ def main():
 
     try:
         service_account_info = json.loads(calendar_json_str)
+        # GitHub Secrets特有の改行エスケープ問題（\nが文字になってしまう現象）を強制修復する
+        if 'private_key' in service_account_info:
+            service_account_info['private_key'] = service_account_info['private_key'].replace('\\n', '\n')
+
         creds = Credentials.from_service_account_info(
             service_account_info,
             scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
