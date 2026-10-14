@@ -22,11 +22,12 @@ TARGET_URLS = [
 
     # --- 崩壊スターレイル ---
     {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/news"},
-    {"app_name": "崩壊スターレイル", "url": "https://gamewith.jp/star-rail/"},
-    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/hsr"},
+    {"app_name": "崩壊スターレイル", "url": "https://gamewith.jp/houkaistarrail/"},
+    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail"},
 
     # --- 崩壊3rd ---
-    {"app_name": "崩壊3rd", "url": "https://honkaiimpact3.hoyoverse.com/news"},
+    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/fab"},
+    {"app_name": "崩壊3rd", "url": "https://spicycurryboy.hatenablog.com/archive/category/%E5%B4%A9%E5%A3%8A3rd"},
 
     # --- 鳴潮 ---
     {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/"},
@@ -36,14 +37,17 @@ TARGET_URLS = [
 
     # --- IDOLY PRIDE ---
     {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/"},
+    {"app_name": "IDOLY PRIDE", "url": "https://idolyp.cloudfree.jp/"},
 
     # --- プリンセスコネクト!Re:Dive ---
     {"app_name": "プリコネR", "url": "https://priconne-redive.jp/"},
+    {"app_name": "プリコネR", "url": "https://gamewith.jp/pricone-re/"},
     {"app_name": "プリコネR", "url": "https://www.youtube.com/@vashpeer"},
     {"app_name": "プリコネR", "url": "https://www.youtube.com/@Eruru"},
 
     # --- ブルーアーカイブ ---
     {"app_name": "ブルーアーカイブ", "url": "https://bluearchive.jp/"},
+    {"app_name": "ブルーアーカイブ", "url": "https://game8.jp/blue-archive"},
     {"app_name": "ブルーアーカイブ", "url": "https://www.youtube.com/@vashpeer"},
 
     # --- ヘブンバーンズレッド ---
@@ -51,19 +55,20 @@ TARGET_URLS = [
     {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred"},
 
     # --- アワーノーツ ---
-    {"app_name": "アワーノーツ", "url": "https://ournotes.jp/"},
+    {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/"},
+    {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on"},
     {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},
 
     # --- マブラヴ ガールズガーデン ---
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-gg.com/"},
+    {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/"},
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
 
     # --- 学園アイドルマスター ---
-    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-imas"}
+    {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"}
+    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster"}
 ]
 
 def fetch_web_text(url):
-    """通常のWebサイトや攻略Wikiからテキストを抽出する"""
     try:
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         response = requests.get(url, headers=headers, timeout=10)
@@ -77,7 +82,6 @@ def fetch_web_text(url):
         return ""
 
 def fetch_youtube_text(channel_url):
-    """YouTubeチャンネルのRSSから最新動画のタイトルと概要欄を取得する"""
     try:
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         response = requests.get(channel_url, headers=headers, timeout=10)
@@ -100,7 +104,6 @@ def fetch_youtube_text(channel_url):
         return ""
 
 def extract_events_with_ai(raw_text, app_name):
-    """Gemini AIを使ってイベント情報を抽出する"""
     try:
         client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
         prompt = f"""
@@ -109,13 +112,12 @@ def extract_events_with_ai(raw_text, app_name):
 余計な解説文やバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。見つからない場合は `[]` を返してください。
 - title: イベント名
 - start_date: 開始日 (YYYY-MM-DD)
-- end_date: 終了日 (YYYY-MM-DD)
+- end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください。空欄にしないでください）
 - description: 概要
 
 対象テキスト：
 {raw_text[:15000]}
 """
-        # ★ Googleが案内していた正しい最新モデル名に設定
         response = client.models.generate_content(model='gemini-3.8-flash', contents=prompt)
         time.sleep(12)
         text = response.text.strip()
