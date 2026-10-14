@@ -115,8 +115,8 @@ def extract_events_with_ai(raw_text, app_name):
 対象テキスト：
 {raw_text[:15000]}
 """
-        # ★ ここに正しいモデル名を設定しています
-        response = client.models.generate_content(model='gemini-1.5-flash', contents=prompt)
+        # ★ Googleが案内していた正しい最新モデル名に設定
+        response = client.models.generate_content(model='gemini-3.8-flash', contents=prompt)
         time.sleep(12)
         text = response.text.strip()
         if text.startswith("```json"): text = text[7:]
