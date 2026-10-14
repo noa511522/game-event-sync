@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import google.generativeai as genai
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
+import tempfile
 
 # --- ご指定いただいた全12タイトル、公式サイト・攻略Wiki・YouTubeチャンネルのリスト ---
 TARGET_URLS = [
@@ -151,10 +152,20 @@ def main():
         print("環境変数（Secrets）が設定されていません。")
         return
 
-    creds = Credentials.from_service_account_info(
-        json.loads(calendar_json),
-        scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
-    )
+    # 一時ファイルを経由して認証情報を安全に読み込む
+    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as temp_file:
+        temp_file.write(calendar_json)
+        temp_file_path = temp_file.name
+
+    try:
+        creds = Credentials.from_service_account_file(
+            temp_file_path,
+            scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
+        )
+    finally:
+        if os.path.exists(temp_file_path):
+            os.remove(temp_file_path)
+
     calendar_service = build('calendar', 'v3', credentials=creds)
     today = datetime.now().date()
 
