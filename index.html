@@ -103,20 +103,19 @@
             let html = '';
             events.forEach(e => {
                 html += `
-                    bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between
-                ">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-600">${e.app_name}</span>
-                            <div class="text-right text-xs text-slate-400">
-                                <div>開始: <span class="font-medium text-slate-700">${e.start_date || '未設定'}</span></div>
-                                <div>終了: <span class="font-medium text-slate-700">${e.end_date || '未設定'}</span></div>
+                    <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-600">${e.app_name}</span>
+                                <div class="text-right text-xs text-slate-400">
+                                    <div>開始: <span class="font-medium text-slate-700">${e.start_date || '未設定'}</span></div>
+                                    <div>終了: <span class="font-medium text-slate-700">${e.end_date || '未設定'}</span></div>
+                                </div>
                             </div>
+                            <h3 class="font-bold text-slate-900 mb-2 text-base leading-snug">${e.title}</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed line-clamp-3">${e.description || '詳細なし'}</p>
                         </div>
-                        <h3 class="font-bold text-slate-900 mb-2 text-base leading-snug">${e.title}</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed line-clamp-3">${e.description || '詳細なし'}</p>
-                    </div>
-                </div>`;
+                    </div>`;
             });
             grid.innerHTML = html;
         }
