@@ -115,7 +115,7 @@ def fetch_youtube_text(channel_url):
 def extract_events_with_ai(raw_text, app_name):
     """Gemini APIを使い、ゲーム内イベントおよびリアルイベントを抽出する（レート制限対策のウェイト付き）"""
     genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-    model = genai.GenerativeModel('gemini-3.8-flash')
+    model = genai.GenerativeModel('gemini-2.5-flash') # モデル名がもし必要なら調整
     
     prompt = f"""
 以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
@@ -134,7 +134,6 @@ def extract_events_with_ai(raw_text, app_name):
     
     try:
         response = model.generate_content(prompt)
-        # 無料枠のレート制限（1分間に5回まで）を回避するため、リクエストごとに12秒待機する
         time.sleep(12)
         
         text = response.text.strip()
