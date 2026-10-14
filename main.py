@@ -57,14 +57,14 @@ TARGET_URLS = [
     # --- アワーノーツ ---
     {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/"},
     {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on"},
-    {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},  # ← カンマ追加
+    {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},
 
     # --- マブラヴ ガールズガーデン ---
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/"},
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},  # ← カンマ追加
+    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
 
     # --- 学園アイドルマスター ---
-    {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"},  # ← カンマ追加
+    {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"},
     {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster"}
 ]
 
@@ -156,7 +156,8 @@ def main():
 
     print(f"📤 スプレッドシート＆カレンダーへデータ送信中... (計 {len(all_events)} 件)")
     try:
-        res = requests.post(gas_url, json=all_events, timeout=30)
+        # タイムアウトを60秒に延長
+        res = requests.post(gas_url, json=all_events, timeout=60)
         print(f"送信結果: {res.text}")
     except Exception as e:
         print(f"送信エラー: {e}")
