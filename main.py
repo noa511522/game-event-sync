@@ -63,7 +63,6 @@ TARGET_URLS = [
 ]
 
 def fetch_web_text(url):
-    """通常のWebサイトや攻略Wikiからテキストを抽出する"""
     try:
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         response = requests.get(url, headers=headers, timeout=10)
@@ -77,7 +76,6 @@ def fetch_web_text(url):
         return ""
 
 def fetch_youtube_text(channel_url):
-    """YouTubeチャンネルのRSSから最新動画のタイトルと概要欄を取得する"""
     try:
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         response = requests.get(channel_url, headers=headers, timeout=10)
@@ -100,7 +98,6 @@ def fetch_youtube_text(channel_url):
         return ""
 
 def extract_events_with_ai(raw_text, app_name):
-    """Gemini AIを使ってイベント情報を抽出する"""
     try:
         client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
         prompt = f"""
@@ -115,7 +112,8 @@ def extract_events_with_ai(raw_text, app_name):
 対象テキスト：
 {raw_text[:15000]}
 """
-        response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
+        # ★正しく存在するモデル名に変更
+        response = client.models.generate_content(model='gemini-1.5-flash', contents=prompt)
         time.sleep(12)
         text = response.text.strip()
         if text.startswith("```json"): text = text[7:]
@@ -147,7 +145,10 @@ def main():
             ev['app_name'] = app_name
             all_events.append(ev)
 
-    # 集めた全イベントデータをGAS（スプレッドシート）へ送信
+    if not all_events:
+        print("⚠️ 抽出できたイベントが0件だったため、送信をスキップします。")
+        return
+
     print(f"📤 スプレッドシート＆カレンダーへデータ送信中... (計 {len(all_events)} 件)")
     try:
         res = requests.post(gas_url, json=all_events, timeout=30)
