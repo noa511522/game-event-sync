@@ -154,10 +154,16 @@ def main():
         print("環境変数（GOOGLE_CALENDAR_ID）が設定されていません。")
         return
 
-    # ★ワークフロー側で作成したファイルから安全に読み込む
+    # ★ファイル読み込み後、秘密鍵の \n を本物の改行に置換する処理を追加
     try:
-        creds = Credentials.from_service_account_file(
-            'service_account.json',
+        with open('service_account.json', 'r', encoding='utf-8') as f:
+            service_account_info = json.load(f)
+            
+        if 'private_key' in service_account_info:
+            service_account_info['private_key'] = service_account_info['private_key'].replace('\\n', '\n')
+
+        creds = Credentials.from_service_account_info(
+            service_account_info,
             scopes=['[https://www.googleapis.com/auth/calendar](https://www.googleapis.com/auth/calendar)']
         )
     except Exception as e:
@@ -218,7 +224,7 @@ def main():
         end_date = ev.get('end_date')
         desc = f"詳細: {ev.get('description')}"
 
-        if not title or not start_date or not end_date:
+5.         if not title or not start_date or not end_date:
             continue
 
         try:
