@@ -148,6 +148,15 @@ def main():
     calendar_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
     calendar_id = os.environ.get('GOOGLE_CALENDAR_ID')
 
+    # --- デバッグ用の確認ログ ---
+    print(f"DEBUG - GEMINI_API_KEY exists: {bool(gemini_key)}")
+    print(f"DEBUG - GOOGLE_CALENDAR_ID exists: {bool(calendar_id)}")
+    if calendar_json:
+        print(f"DEBUG - GOOGLE_SERVICE_ACCOUNT_JSON length: {len(calendar_json)}")
+        print(f"DEBUG - GOOGLE_SERVICE_ACCOUNT_JSON start: {calendar_json[:30]}")
+    else:
+        print("DEBUG - GOOGLE_SERVICE_ACCOUNT_JSON is EMPTY or NONE!")
+
     if not gemini_key or not calendar_json or not calendar_id:
         print("環境変数（Secrets）が設定されていません。")
         return
