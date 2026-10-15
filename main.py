@@ -148,17 +148,21 @@ def extract_events_with_ai(raw_text, app_name):
         client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
         prompt = f"""
 以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
-ここから【ゲーム内イベント】および【リアルイベント】の情報をすべて抽出し、以下のJSON形式の配列だけで出力してください。
+ここから【ゲーム内イベント・ガチャ情報】および【リアルイベント（ポップアップストアやコラボカフェ、展覧会など）】の情報をすべて抽出し、以下のJSON形式の配列だけで出力してください。
 余計な解説文やバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。見つからない場合は `[]` を返してください。
+
+各要素は以下のキーを持つオブジェクトにしてください：
 - title: イベント名
 - start_date: 開始日 (YYYY-MM-DD)
 - end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください。空欄にしないでください）
 - description: 概要
+- category: "game" （ゲーム内イベントやキャンペーン等の場合） または "gacha" （ガチャやピックアップ等の場合） または "real" （現実世界のコラボカフェ、ポップアップ等のリアルイベントの場合）
 
 対象テキスト：
 {raw_text[:15000]}
 """
-        response = client.models.generate_content(model='gemini-3.8-flash', contents=prompt)
+        # モデル名を正しい 'gemini-1.5-flash' に指定
+        response = client.models.generate_content(model='gemini-1.5-flash', contents=prompt)
         time.sleep(12)
         text = response.text.strip()
         if text.startswith("```json"): text = text[7:]
@@ -188,6 +192,9 @@ def main():
         events = extract_events_with_ai(raw_text, app_name)
         for ev in events:
             ev['app_name'] = app_name
+            # 保険としてcategoryがない場合は "game" を設定
+            if 'category' not in ev:
+                ev['category'] = 'game'
             all_events.append(ev)
 
     if not all_events:
@@ -196,7 +203,6 @@ def main():
 
     print(f"📤 スプレッドシート＆カレンダーへデータ送信中... (計 {len(all_events)} 件)")
     try:
-        # タイムアウトを120秒に延長
         res = requests.post(gas_url, json=all_events, timeout=120)
         print(f"送信結果: {res.text}")
     except Exception as e:
