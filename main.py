@@ -24,12 +24,9 @@ APPS = [
 def extract_events_with_ai(app_name):
     client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
     
-    # 🔑 環境変数 'GEMINI_MODEL' からモデル名を取得（未設定なら 'gemini-3.8-flash' をデフォルトに）
     default_model = os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash')
-    
-    # 🔄 試すモデルのリスト（優先順：指定モデル ➔ 旧・予備モデル）
     models_to_try = [default_model, 'gemini-2.5-flash']
-    models_to_try = list(dict.fromkeys(models_to_try)) # 重複排除
+    models_to_try = list(dict.fromkeys(models_to_try))
 
     prompt = f"""
 あなたはソシャゲやゲームの最新情報リサーチャーです。
@@ -47,6 +44,7 @@ def extract_events_with_ai(app_name):
 - end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください。空欄にしないでください）
 - description: 概要（開催場所や詳細な内容も含めてください）
 - category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・ポップアップ等のリアルイベントの場合）
+- links: 関連する公式サイトや主要な攻略サイト（Wiki等）のリスト（配列）。各要素は name（例: "公式サイト", "攻略Wiki" 等の名称）と url（URL）のキーを持つオブジェクト。見つからない場合は空配列 `[]` にしてください。
 """
     
     for model_name in models_to_try:
@@ -88,6 +86,8 @@ def main():
             ev['app_name'] = app_name
             if 'category' not in ev:
                 ev['category'] = 'game'
+            if 'links' not in ev:
+                ev['links'] = []
             all_events.append(ev)
 
     if not all_events:
