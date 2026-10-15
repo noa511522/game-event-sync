@@ -55,7 +55,7 @@
         </header>
 
         <!-- コントロールパネル（カテゴリフィルター ＆ アプリタブ ＆ 検索） -->
-        <div class="mb-6 flex flex-col gap-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
+        <div class="mb-8 flex flex-col gap-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
             <!-- カテゴリ絞り込みタブ -->
             <div id="category-tabs" class="flex flex-wrap gap-2 justify-center pb-3 border-b border-slate-800">
                 <button onclick="filterCategory('ALL', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20">すべて</button>
@@ -77,11 +77,6 @@
                     <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-950 text-slate-100 placeholder-slate-500 shadow-inner transition">
                 </div>
             </div>
-        </div>
-
-        <!-- 🔗 各アプリの公式・攻略・ガチャ・リアル情報リンクエリア（アプリタブ選択時のみ表示） -->
-        <div id="app-links-container" class="hidden mb-6 p-4 bg-slate-900/60 border border-slate-800/80 rounded-2xl shadow-inner flex flex-wrap items-center justify-between gap-3">
-            <!-- 動的にボタンが挿入されます -->
         </div>
 
         <!-- イベント一覧グリッド -->
@@ -108,7 +103,17 @@
                 <div>開始: <span id="modal-start" class="font-semibold text-indigo-400"></span></div>
                 <div>終了: <span id="modal-end" class="font-semibold text-amber-400"></span></div>
             </div>
-            <div class="max-h-60 overflow-y-auto pr-2 mb-6">
+            
+            <!-- 🔗 ポップアップ内の関連リンクボタンエリア -->
+            <div class="mb-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div class="text-[11px] font-bold text-slate-400 mb-2 flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                    <span>関連リンク・検索:</span>
+                </div>
+                <div id="modal-links" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div class="max-h-48 overflow-y-auto pr-2 mb-6">
                 <p id="modal-description" class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap"></p>
             </div>
             <div class="flex justify-between items-center pt-4 border-t border-slate-800">
@@ -130,21 +135,21 @@
         let lastUpdatedTime = '';
         let currentSelectedEvent = null;
 
-        // 🌐 【アプリごとの便利リンク集】（必要に応じてURLを追加・変更できます）
+        // 🌐 【アプリごとの便利リンク集】
         const APP_LINKS = {
             "FGO": [
                 { name: "🌐 公式サイト", url: "https://www.fate-go.jp/" },
                 { name: "📖 攻略Wiki (AppMedia)", url: "https://appmedia.jp/fgo" },
-                { name: "🎰 ガチャ/イベント情報", url: "https://news.fate-go.jp/" }
+                { name: "🎰 公式ニュース", url: "https://news.fate-go.jp/" }
             ],
             "勝利の女神NIKKE": [
                 { name: "🌐 公式サイト", url: "https://nikke-jp.com/" },
                 { name: "📖 攻略Wiki", url: "https://kamigame.jp/nikke/" },
-                { name: "📍 公式X (Twitter)", url: "https://x.com/NIKKE_japan" }
+                { name: "📍 公式X", url: "https://x.com/NIKKE_japan" }
             ],
             "崩壊スターレイル": [
                 { name: "🌐 公式サイト", url: "https://hsr.hoyoverse.com/ja-jp" },
-                { name: "📖 HoYoLAB (公式コミュニティ)", url: "https://www.hoyolab.com/accountCenter/postList?id=6" },
+                { name: "📖 HoYoLAB", url: "https://www.hoyolab.com/accountCenter/postList?id=6" },
                 { name: "📖 攻略Wiki", url: "https://kamigame.jp/star-rail/" }
             ],
             "崩壊3rd": [
@@ -288,30 +293,7 @@
         function filterApp(app) {
             currentApp = app;
             buildTabs();
-            renderAppLinks(); // 🔗 アプリ固有のリンクボタンを描画
             filterEvents();
-        }
-
-        // 🔗 選択されたアプリのリンクボタンを表示する関数
-        function renderAppLinks() {
-            const container = document.getElementById('app-links-container');
-            
-            if (currentApp === 'ALL' || !APP_LINKS[currentApp]) {
-                container.classList.add('hidden');
-                container.innerHTML = '';
-                return;
-            }
-
-            const links = APP_LINKS[currentApp];
-            let linksHtml = `<div class="text-xs font-bold text-indigo-300 flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg><span>${currentApp} の便利リンク:</span></div><div class="flex flex-wrap gap-2">`;
-            
-            links.forEach(l => {
-                linksHtml += `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-950 hover:bg-indigo-950 text-indigo-200 border border-slate-800 hover:border-indigo-500 rounded-xl text-xs font-medium transition shadow-sm flex items-center gap-1">${l.name} <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>`;
-            });
-
-            linksHtml += `</div>`;
-            container.innerHTML = linksHtml;
-            container.classList.remove('hidden');
         }
 
         function filterCategory(cat, btnElement) {
@@ -387,6 +369,7 @@
             grid.innerHTML = html;
         }
 
+        // 🔗 ポップアップを開いたときに、そのタスクに紐づくリンクを動的に生成する
         function openModal(eventObj) {
             currentSelectedEvent = eventObj;
 
@@ -398,6 +381,20 @@
             document.getElementById('modal-start').innerText = eventObj.start_date || '未設定';
             document.getElementById('modal-end').innerText = eventObj.end_date || '未設定';
             document.getElementById('modal-description').innerText = eventObj.description || '詳細なし';
+
+            // ポップアップ内のリンクボタンを描画
+            const modalLinksEl = document.getElementById('modal-links');
+            let links = APP_LINKS[eventObj.app_name] || [];
+            
+            // イベント名でGoogle検索できるボタンも自動で追加
+            const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(eventObj.app_name + ' ' + eventObj.title)}`;
+            const allModalLinks = [...links, { name: "🔍 このイベントを検索", url: searchUrl }];
+
+            let linksHtml = '';
+            allModalLinks.forEach(l => {
+                linksHtml += `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-900 hover:bg-indigo-950 text-indigo-200 border border-slate-800 hover:border-indigo-500 rounded-xl text-xs font-medium transition shadow-sm flex items-center gap-1">${l.name} <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>`;
+            });
+            modalLinksEl.innerHTML = linksHtml;
 
             const modal = document.getElementById('event-modal');
             modal.classList.remove('hidden');
