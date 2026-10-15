@@ -30,7 +30,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <h1 class="text-3xl font-extrabold text-white mb-1 tracking-tight">ゲームイベント ダッシュボード</h1>
+            <h1 class="text-3xl font-extrabold text-white mb-1 tracking-tight">ゲーム＆リアルイベント ダッシュボード</h1>
             <p class="text-sm text-slate-400">スプレッドシートと連動した最新のイベント情報</p>
             
             <!-- スマホ用の最終更新表示 -->
@@ -39,16 +39,28 @@
             </div>
         </header>
 
-        <!-- 検索 & アプリタブのコントロール -->
-        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
-            <div id="app-tabs" class="flex flex-wrap gap-2 justify-center">
-                <span class="text-xs text-slate-400 py-2">タブを読み込んでいます...</span>
+        <!-- コントロールパネル（カテゴリフィルター ＆ アプリタブ ＆ 検索） -->
+        <div class="mb-8 flex flex-col gap-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
+            <!-- カテゴリ絞り込みタブ -->
+            <div id="category-tabs" class="flex flex-wrap gap-2 justify-center pb-3 border-b border-slate-800">
+                <button onclick="filterCategory('ALL', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20">すべて</button>
+                <button onclick="filterCategory('game', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">🎮 ゲーム内</button>
+                <button onclick="filterCategory('gacha', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">🎰 ガチャ</button>
+                <button onclick="filterCategory('real', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">📍 リアルイベント</button>
             </div>
-            <div class="w-full md:w-72 relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </span>
-                <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-950 text-slate-100 placeholder-slate-500 shadow-inner transition">
+
+            <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                <!-- アプリタブ -->
+                <div id="app-tabs" class="flex flex-wrap gap-2 justify-center">
+                    <span class="text-xs text-slate-400 py-2">タブを読み込んでいます...</span>
+                </div>
+                <!-- 検索ボックス -->
+                <div class="w-full md:w-72 relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </span>
+                    <input type="text" id="search-box" placeholder="イベント名や詳細で検索..." oninput="filterEvents()" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-950 text-slate-100 placeholder-slate-500 shadow-inner transition">
+                </div>
             </div>
         </div>
 
@@ -70,7 +82,7 @@
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div id="modal-app-badge" class="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-3"></div>
+            <div id="modal-app-badge" class="flex flex-wrap gap-2 mb-3"></div>
             <h2 id="modal-title" class="text-xl font-bold text-white mb-3 leading-snug"></h2>
             <div class="flex items-center gap-4 text-xs text-slate-300 mb-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
                 <div>開始: <span id="modal-start" class="font-semibold text-indigo-400"></span></div>
@@ -90,11 +102,12 @@
     </div>
 
     <script>
-        // ★ここにあなたのGASの「ウェブアプリのURL」を貼り付けてください
+        // ★ご自身のGASの「ウェブアプリのURL」を設定してください
         const GAS_URL = "https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec";
 
         let allEvents = [];
         let currentApp = 'ALL';
+        let currentCategory = 'ALL'; // カテゴリ絞り込み用
         let lastUpdatedTime = '';
         let currentSelectedEvent = null;
 
@@ -121,9 +134,22 @@
                 loading.style.display = 'none';
                 
                 buildTabs();
-                renderEvents(allEvents);
+                filterEvents();
             } catch (err) {
                 loading.innerHTML = `<div class="bg-red-950/50 border border-red-800 p-4 rounded-2xl text-red-300 text-sm inline-block"><strong class="font-bold">データの読み込みに失敗しました</strong><br>${err.message}</div>`;
+            }
+        }
+
+        // カテゴリバッジのHTMLを生成する関数
+        function getCategoryBadge(category) {
+            switch (category) {
+                case 'real':
+                    return '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-pink-500/15 text-pink-300 border border-pink-500/25">📍 リアルイベント</span>';
+                case 'gacha':
+                    return '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/25">🎰 ガチャ</span>';
+                case 'game':
+                default:
+                    return '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/25">🎮 ゲーム内</span>';
             }
         }
 
@@ -148,12 +174,22 @@
             filterEvents();
         }
 
+        function filterCategory(cat, btnElement) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition";
+            });
+            btnElement.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20";
+            filterEvents();
+        }
+
         function filterEvents() {
             const keyword = document.getElementById('search-box').value.toLowerCase();
             const filtered = allEvents.filter(e => {
                 const matchApp = currentApp === 'ALL' || e.app_name === currentApp;
+                const matchCat = currentCategory === 'ALL' || (e.category || 'game') === currentCategory;
                 const matchKeyword = e.title.toLowerCase().includes(keyword) || (e.description && e.description.toLowerCase().includes(keyword)) || e.app_name.toLowerCase().includes(keyword);
-                return matchApp && matchKeyword;
+                return matchApp && matchCat && matchKeyword;
             });
             renderEvents(filtered);
         }
@@ -183,13 +219,17 @@
 
                 const cardBorder = isUrgent ? 'border-amber-500/60 shadow-lg shadow-amber-500/10 bg-gradient-to-br from-slate-900 to-amber-950/20' : 'border-slate-800 hover:border-indigo-500/50 bg-slate-900/90 shadow-sm';
                 const endDateHtml = e.end_date ? `<div>終了: <span class="font-medium text-amber-400">${e.end_date}</span></div>` : `<div>終了: <span class="text-slate-500">未設定</span></div>`;
+                const categoryBadgeHtml = getCategoryBadge(e.category);
 
                 html += `
                     <div onclick='openModal(${JSON.stringify(e)})' class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
                         ${isUrgent ? '<div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-bl-xl tracking-wider shadow">⚠️ 終了間近</div>' : ''}
                         <div>
                             <div class="flex justify-between items-start mb-3">
-                                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/20 group-hover:bg-indigo-600 group-hover:text-white transition">${e.app_name}</span>
+                                <div class="flex flex-wrap gap-1.5 items-center">
+                                    <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/20 group-hover:bg-indigo-600 group-hover:text-white transition">${e.app_name}</span>
+                                    ${categoryBadgeHtml}
+                                </div>
                                 <div class="text-right text-[11px] text-slate-400 space-y-0.5 ${isUrgent ? 'mr-14' : ''}">
                                     <div>開始: <span class="font-medium text-slate-300">${e.start_date || '未設定'}</span></div>
                                     ${endDateHtml}
@@ -210,7 +250,10 @@
         function openModal(eventObj) {
             currentSelectedEvent = eventObj;
 
-            document.getElementById('modal-app-badge').innerText = eventObj.app_name;
+            document.getElementById('modal-app-badge').innerHTML = `
+                <span class="px-3 py-1 rounded-lg text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${eventObj.app_name}</span>
+                ${getCategoryBadge(eventObj.category)}
+            `;
             document.getElementById('modal-title').innerText = eventObj.title;
             document.getElementById('modal-start').innerText = eventObj.start_date || '未設定';
             document.getElementById('modal-end').innerText = eventObj.end_date || '未設定';
@@ -238,9 +281,8 @@
         async function deleteCurrentEvent() {
             if (!currentSelectedEvent) return;
 
-            // パスワード入力入力を促すプロンプト
             const password = prompt("オーナーパスワードを入力してください:");
-            if (password === null) return; // キャンセルされた場合
+            if (password === null) return;
 
             try {
                 const response = await fetch(GAS_URL, {
