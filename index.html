@@ -117,7 +117,6 @@
     </div>
 
     <script>
-        // ★ご自身のGASの「ウェブアプリのURL」を設定してください
         const GAS_URL = "https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec";
 
         let allEvents = [];
@@ -126,9 +125,6 @@
         let lastUpdatedTime = '';
         let currentSelectedEvent = null;
 
-        // ==========================================
-        // 🚀 GAS経由で安全にGitHub Actionsを動かす関数
-        // ==========================================
         async function triggerGitHubAction() {
             if (!confirm("最新情報の収集・更新をGitHubに指示しますか？\n（裏でAI検索が走るため、完了まで1〜2分かかります）")) {
                 return;
@@ -154,6 +150,25 @@
 
         async function fetchEvents() {
             const loading = document.getElementById('loading');
+            
+            // 🚀 【高速化】キャッシュがあれば、読み込み待ちなしで瞬時に画面を表示する
+            const cachedData = localStorage.getItem('game_dashboard_cache');
+            const cachedTime = localStorage.getItem('game_dashboard_time');
+            if (cachedData) {
+                try {
+                    const parsed = JSON.parse(cachedData);
+                    allEvents = parsed.events || parsed;
+                    lastUpdatedTime = cachedTime || 'キャッシュ表示中';
+                    document.getElementById('update-time-text').innerText = lastUpdatedTime;
+                    document.getElementById('update-time-text-mobile').innerText = lastUpdatedTime;
+                    loading.style.display = 'none';
+                    buildTabs();
+                    filterEvents();
+                } catch (e) {
+                    console.log("キャッシュ読込エラー");
+                }
+            }
+
             try {
                 if (GAS_URL.includes("YOUR_GAS_WEB_APP_URL")) {
                     throw new Error("GASのウェブアプリURLが設定されていません。");
@@ -169,6 +184,10 @@
                 allEvents = data.events || data;
                 lastUpdatedTime = data.last_updated || '不明';
                 
+                // 📦 取得した最新データをキャッシュに保存
+                localStorage.setItem('game_dashboard_cache', JSON.stringify(data));
+                localStorage.setItem('game_dashboard_time', lastUpdatedTime);
+
                 document.getElementById('update-time-text').innerText = lastUpdatedTime;
                 document.getElementById('update-time-text-mobile').innerText = lastUpdatedTime;
 
@@ -177,7 +196,10 @@
                 buildTabs();
                 filterEvents();
             } catch (err) {
-                loading.innerHTML = `<div class="bg-red-950/50 border border-red-800 p-4 rounded-2xl text-red-300 text-sm inline-block"><strong class="font-bold">データの読み込みに失敗しました</strong><br>${err.message}</div>`;
+                // キャッシュもない初回アクセス時のみエラーを表示
+                if (!cachedData) {
+                    loading.innerHTML = `<div class="bg-red-950/50 border border-red-800 p-4 rounded-2xl text-red-300 text-sm inline-block"><strong class="font-bold">データの読み込みに失敗しました</strong><br>${err.message}</div>`;
+                }
             }
         }
 
@@ -346,3 +368,19 @@
                     alert('タスクを正常に削除しました。');
                 } else {
                     alert('エラー: ' + (result.message || 'パスワードが違うため削除できませんでした。'));
+                }
+            } catch (err) {
+                alert('通信エラー: ' + err.message);
+            }
+        }
+
+        document.getElementById('event-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'event-modal') {
+                closeModal();
+            }
+        });
+
+        fetchEvents();
+    </script>
+</body>
+</html>
