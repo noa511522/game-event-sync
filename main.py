@@ -2,174 +2,63 @@ import os
 import json
 import time
 import requests
-from bs4 import BeautifulSoup
 from google import genai
+from google.genai import types
 
-# --- 全12タイトル・31URLのリスト ---
-TARGET_URLS = [
-    # --- FGO ---
-    {"app_name": "FGO", "url": "https://news.fate-go.jp/"},
-    {"app_name": "FGO", "url": "https://gamewith.jp/fgo/"},
-    {"app_name": "FGO", "url": "https://gamewith.jp/fgo/article/show/75563"},
-    {"app_name": "FGO", "url": "https://gamewith.jp/fgo/article/show/78295"},
-    {"app_name": "FGO", "url": "https://appmedia.jp/fategrandorder"},
-    {"app_name": "FGO", "url": "https://appmedia.jp/fategrandorder/2967115"},
-    {"app_name": "FGO", "url": "https://appmedia.jp/fategrandorder/2482354"},
-    {"app_name": "FGO", "url": "https://www.youtube.com/@FGOAppMedia"},
-    {"app_name": "FGO", "url": "https://www.youtube.com/@koyahan"},
-    {"app_name": "FGO", "url": "https://www.youtube.com/@hakuginhato"},
-
-    # --- 勝利の女神NIKKE ---
-    {"app_name": "勝利の女神NIKKE", "url": "https://nikke-jp.com/"},
-    {"app_name": "勝利の女神NIKKE", "url": "https://nikke-jp.com/news.html"},
-    {"app_name": "勝利の女神NIKKE", "url": "https://gamewith.jp/nikke/"},
-    {"app_name": "勝利の女神NIKKE", "url": "https://gamewith.jp/nikke/article/show/547482"},
-    {"app_name": "勝利の女神NIKKE", "url": "https://game8.jp/nikke"},
-    {"app_name": "勝利の女神NIKKE", "url": "https://game8.jp/nikke/492016"},
-
-    # --- 崩壊スターレイル ---
-    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/news"},
-    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/ja-jp/news?type=news_all"},
-    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/ja-jp/news?type=news"},
-    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/ja-jp/news?type=activity"},
-    {"app_name": "崩壊スターレイル", "url": "https://gamewith.jp/houkaistarrail/"},
-    {"app_name": "崩壊スターレイル", "url": "https://gamewith.jp/houkaistarrail/article/show/396229"},
-    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail"},
-    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/525554"},
-    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/524340"},
-    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/721000"},
-    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/614662"},
-
-    # --- 崩壊3rd ---
-    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/home"},
-    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/news/cate/555"},
-    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/news/cate/557"},
-    {"app_name": "崩壊3rd", "url": "https://spicycurryboy.hatenablog.com/archive/category/%E5%B4%A9%E5%A3%8A3rd"},
-
-    # --- 鳴潮 ---
-    {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/"},
-    {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/main#main"},
-    {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/main#news"},
-    {"app_name": "鳴潮", "url": "https://gamewith.jp/wutheringwaves/"},
-    {"app_name": "鳴潮", "url": "https://game8.jp/meicho"},
-    {"app_name": "鳴潮", "url": "https://game8.jp/meicho/610590"},
-    {"app_name": "鳴潮", "url": "https://www.youtube.com/@toryu/featured"},
-
-    # --- IDOLY PRIDE ---
-    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/"},
-    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/"},
-    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/game/"},
-    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/event/"},
-    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/media/"},
-    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/others/"},
-    {"app_name": "IDOLY PRIDE", "url": "https://idolyp.cloudfree.jp/"},
-
-    # --- プリンセスコネクト!Re:Dive ---
-    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/"},
-    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/news/"},
-    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/news/?category=information"},
-    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/news/?category=event"},
-    {"app_name": "プリコネR", "url": "https://gamewith.jp/pricone-re/"},
-    {"app_name": "プリコネR", "url": "https://www.youtube.com/@vashpeer"},
-    {"app_name": "プリコネR", "url": "https://www.youtube.com/@Eruru"},
-
-    # --- ブルーアーカイブ ---
-    {"app_name": "ブルーアーカイブ", "url": "https://bluearchive.jp/"},
-    {"app_name": "ブルーアーカイブ", "url": "https://bluearchive.jp/news/newsJump"},
-    {"app_name": "ブルーアーカイブ", "url": "https://game8.jp/blue-archive"},
-    {"app_name": "ブルーアーカイブ", "url": "https://game8.jp/blue-archive/634829"},
-    {"app_name": "ブルーアーカイブ", "url": "https://www.youtube.com/@vashpeer"},
-
-    # --- ヘブンバーンズレッド ---
-    {"app_name": "ヘブンバーンズレッド", "url": "https://heaven-burns-red.com/"},
-    {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred"},
-    {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred/437512"},
-    {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred/424221"},
-
-    # --- アワーノーツ ---
-    {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/"},
-    {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/news/"},
-    {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on"},
-    {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on#gacha"},
-    {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on#news"},
-    {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},
-
-    # --- マブラヴ ガールズガーデン ---
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/"},
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/#news"},
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/index.html#%E3%83%9E%E3%83%96%E3%82%AC%E3%83%AB%E3%81%AE%E6%9C%80%E6%96%B0%E6%83%85%E5%A0%B1"},
-    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/index.html#%E3%83%9E%E3%83%96%E3%82%AC%E3%83%AB%E3%81%AE%E3%82%AC%E3%83%81%E3%83%A3"},
-
-    # --- 学園アイドルマスター ---
-    {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"},
-    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster/610573"},
-    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster/609696"},
-    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster"}
+# --- 対象のアプリ名リスト ---
+APPS = [
+    "FGO",
+    "勝利の女神NIKKE",
+    "崩壊スターレイル",
+    "崩壊3rd",
+    "鳴潮",
+    "IDOLY PRIDE",
+    "プリコネR",
+    "ブルーアーカイブ",
+    "ヘブンバーンズレッド",
+    "アワーノーツ",
+    "マブラヴ ガールズガーデン",
+    "学園アイドルマスター"
 ]
 
-def fetch_web_text(url):
-    try:
-        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-        response = requests.get(url, headers=headers, timeout=10)
-        response.encoding = response.apparent_encoding
-        soup = BeautifulSoup(response.text, 'html.parser')
-        for script in soup(["script", "style", "nav", "footer"]):
-            script.extract()
-        return soup.get_text(separator="\n", strip=True)
-    except Exception as e:
-        print(f"URLの取得に失敗 ({url}): {e}")
-        return ""
-
-def fetch_youtube_text(channel_url):
-    try:
-        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-        response = requests.get(channel_url, headers=headers, timeout=10)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        link_tag = soup.find("link", {"rel": "alternate", "type": "application/rss+xml"})
-        if not link_tag:
-            return ""
-        rss_response = requests.get(link_tag.get("href"), headers=headers, timeout=10)
-        rss_soup = BeautifulSoup(rss_response.text, 'xml')
-        
-        text_data = []
-        for entry in rss_soup.find_all('entry')[:5]:
-            title = entry.find('title').text if entry.find('title') else ""
-            group = entry.find('media:group')
-            desc = group.find('media:description').text if group and group.find('media:description') else ""
-            text_data.append(f"動画タイトル: {title}\n概要欄:\n{desc}\n---")
-        return "\n".join(text_data)
-    except Exception as e:
-        print(f"YouTube取得失敗 ({channel_url}): {e}")
-        return ""
-
-def extract_events_with_ai(raw_text, app_name):
+def extract_events_with_ai(app_name):
     try:
         client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
+        
         prompt = f"""
-以下のテキストはソシャゲ「{app_name}」の公式サイト、攻略情報、または関連YouTube動画の概要欄です。
-ここから【ゲーム内イベント・ガチャ情報】および【リアルイベント（ポップアップストアやコラボカフェ、展覧会など）】の情報をすべて抽出し、以下のJSON形式の配列だけで出力してください。
+あなたはソシャゲやゲームの最新情報リサーチャーです。
+現在開催中、または今後開催予定のソシャゲ「{app_name}」に関する以下の情報を、Google検索を用いて網羅的に探してください：
+1. ゲーム内イベント・キャンペーン情報
+2. ガチャ・ピックアップ情報
+3. リアルイベント（ポップアップストア、コラボカフェ、展覧会、ライブ、アニメイトフェアなど）
+
+直近〜今後のスケジュールを調べ、以下のJSON形式の配列だけで出力してください。
 余計な解説文やバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。見つからない場合は `[]` を返してください。
 
 各要素は以下のキーを持つオブジェクトにしてください：
 - title: イベント名
 - start_date: 開始日 (YYYY-MM-DD)
 - end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください。空欄にしないでください）
-- description: 概要
-- category: "game" （ゲーム内イベントやキャンペーン等の場合） または "gacha" （ガチャやピックアップ等の場合） または "real" （現実世界のコラボカフェ、ポップアップ等のリアルイベントの場合）
-
-対象テキスト：
-{raw_text[:15000]}
+- description: 概要（開催場所や詳細な内容も含めてください）
+- category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・ポップアップ等のリアルイベントの場合）
 """
-        # モデル名を正しい 'gemini-1.5-flash' に指定
-        response = client.models.generate_content(model='gemini-1.5-flash', contents=prompt)
+        
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                tools=[types.Tool(google_search=types.GoogleSearch())],
+                temperature=0.3
+            )
+        )
+        
         time.sleep(12)
         text = response.text.strip()
         if text.startswith("```json"): text = text[7:]
         if text.endswith("```"): text = text[:-3]
         return json.loads(text.strip())
     except Exception as e:
-        print(f"AI解析エラー ({app_name}): {e}")
+        print(f"AI検索エラー ({app_name}): {e}")
         time.sleep(12)
         return []
 
@@ -180,19 +69,11 @@ def main():
         return
 
     all_events = []
-    for target in TARGET_URLS:
-        url = target['url']
-        app_name = target['app_name']
-        print(f"🔍 情報収集中: {app_name} ({url})")
-        
-        raw_text = fetch_youtube_text(url) if "youtube.com" in url else fetch_web_text(url)
-        if not raw_text:
-            continue
-        
-        events = extract_events_with_ai(raw_text, app_name)
+    for app_name in APPS:
+        print(f"🔍 Google検索で情報収集中: {app_name}")
+        events = extract_events_with_ai(app_name)
         for ev in events:
             ev['app_name'] = app_name
-            # 保険としてcategoryがない場合は "game" を設定
             if 'category' not in ev:
                 ev['category'] = 'game'
             all_events.append(ev)
@@ -201,7 +82,7 @@ def main():
         print("⚠️ 抽出できたイベントが0件だったため、送信をスキップします。")
         return
 
-    print(f"📤 スプレッドシート＆カレンダーへデータ送信中... (計 {len(all_events)} 件)")
+    print(f"📤 スプレッドシートへデータ送信中... (計 {len(all_events)} 件)")
     try:
         res = requests.post(gas_url, json=all_events, timeout=120)
         print(f"送信結果: {res.text}")
