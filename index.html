@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ゲーム＆リアルイベント ダッシュボード</title>
     <!-- Tailwind CSS -->
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background-color: #030712 !important;
@@ -34,7 +34,7 @@
             </div>
 
             <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-2xl text-indigo-400 mb-3 border border-indigo-500/20 shadow-lg shadow-indigo-500/5">
-                <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -58,10 +58,10 @@
         <div class="mb-8 flex flex-col gap-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
             <!-- カテゴリ絞り込みタブ -->
             <div id="category-tabs" class="flex flex-wrap gap-2 justify-center pb-3 border-b border-slate-800">
-                <button onclick="filterCategory('ALL', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20">すべて</button>
-                <button onclick="filterCategory('game', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">🎮 ゲーム内</button>
-                <button onclick="filterCategory('gacha', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">🎰 ガチャ</button>
-                <button onclick="filterCategory('real', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">📍 リアルイベント</button>
+                <button onclick="filterCategory('ALL', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/25 cursor-pointer">すべて</button>
+                <button onclick="filterCategory('game', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition cursor-pointer">🎮 ゲーム内</button>
+                <button onclick="filterCategory('gacha', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition cursor-pointer">🎰 ガチャ</button>
+                <button onclick="filterCategory('real', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition cursor-pointer">📍 リアルイベント</button>
             </div>
 
             <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
@@ -94,7 +94,7 @@
     <!-- 詳細ポップアップ（モーダル） -->
     <div id="event-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative text-slate-100" id="modal-content-box">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition cursor-pointer">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div id="modal-app-badge" class="flex flex-wrap gap-2 mb-3"></div>
@@ -127,7 +127,7 @@
     </div>
 
     <script>
-        const GAS_URL = "[https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec](https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec)";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec";
 
         let allEvents = [];
         let currentApp = 'ALL';
@@ -162,7 +162,6 @@
             const loading = document.getElementById('loading');
             
             try {
-                // 同じリポジトリ内にある data.json を直接読み込む（ボット判定完全回避）
                 const response = await fetch('./data.json?t=' + new Date().getTime());
                 if (!response.ok) {
                     throw new Error("data.jsonが見つかりませんでした。上の「今すぐ情報を更新」ボタンを押して最初のデータを生成してください。");
@@ -222,7 +221,7 @@
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition cursor-pointer";
             });
-            btnElement.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20 cursor-pointer";
+            btnElement.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/25 cursor-pointer";
             filterEvents();
         }
 
@@ -290,7 +289,6 @@
             grid.innerHTML = html;
         }
 
-        // 🔗 ポップアップを開いたときに、AIが動的に取得した複数の関連リンクと検索ボタンを生成する
         function openModal(eventObj) {
             currentSelectedEvent = eventObj;
 
@@ -303,11 +301,9 @@
             document.getElementById('modal-end').innerText = eventObj.end_date || '未設定';
             document.getElementById('modal-description').innerText = eventObj.description || '詳細なし';
 
-            // ポップアップ内のリンクボタンを描画
             const modalLinksEl = document.getElementById('modal-links');
             let linksHtml = '';
 
-            // ① AIが動的に見つけてきた関連リンク（複数対応）があればボタンを追加
             if (eventObj.links && Array.isArray(eventObj.links) && eventObj.links.length > 0) {
                 eventObj.links.forEach(l => {
                     if (l.name && l.url) {
@@ -316,8 +312,7 @@
                 });
             }
 
-            // ② 「このイベントを検索」ボタンも常備
-            const searchUrl = `[https://www.google.com/search?q=$](https://www.google.com/search?q=$){encodeURIComponent(eventObj.app_name + ' ' + eventObj.title)}`;
+            const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(eventObj.app_name + ' ' + eventObj.title)}`;
             linksHtml += `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-900 hover:bg-indigo-950 text-indigo-200 border border-slate-800 hover:border-indigo-500 rounded-xl text-xs font-medium transition shadow-sm flex items-center gap-1">🔍 このイベントを検索 <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>`;
 
             modalLinksEl.innerHTML = linksHtml;
@@ -352,7 +347,7 @@
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         action: 'delete',
-5                        app_name: currentSelectedEvent.app_name,
+                        app_name: currentSelectedEvent.app_name,
                         title: currentSelectedEvent.title,
                         password: password
                     })
