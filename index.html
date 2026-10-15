@@ -101,6 +101,15 @@
                 <div>開始: <span id="modal-start" class="font-semibold text-indigo-400"></span></div>
                 <div>終了: <span id="modal-end" class="font-semibold text-amber-400"></span></div>
             </div>
+            
+            <!-- 📅 Googleカレンダーに追加ボタン -->
+            <div class="mb-4">
+                <button onclick="addCurrentEventToCalendar()" class="w-full py-2.5 bg-emerald-600/90 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-1.5 cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Googleカレンダーに直接追加する
+                </button>
+            </div>
+
             <div class="mb-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
                 <div class="text-[11px] font-bold text-slate-400 mb-2 flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
@@ -121,7 +130,7 @@
         </div>
     </div>
 
-    <!-- ✨ 完了・通知用リッチポップアップ（新規追加） -->
+    <!-- ✨ 完了・通知用リッチポップアップ -->
     <div id="notification-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="bg-slate-900 border border-indigo-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 text-center relative" id="notif-content-box">
             <div class="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-indigo-500/30 shadow-inner">
@@ -182,6 +191,39 @@
                     );
                 } else {
                     showNotificationModal("⚠️ 送信失敗", "送信に失敗しました: " + (result.message || '不明なエラー'));
+                }
+            } catch (err) {
+                showNotificationModal("🚨 通信エラー", "通信エラーが発生しました: " + err.message);
+            }
+        }
+
+        // 📅 Googleカレンダーに直接追加する関数
+        async function addCurrentEventToCalendar() {
+            if (!currentSelectedEvent) return;
+
+            if (!confirm(`「[${currentSelectedEvent.app_name}] ${currentSelectedEvent.title}」をGoogleカレンダーに追加しますか？`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: 'add_to_calendar',
+                        app_name: currentSelectedEvent.app_name,
+                        title: currentSelectedEvent.title,
+                        start_date: currentSelectedEvent.start_date,
+                        end_date: currentSelectedEvent.end_date,
+                        description: currentSelectedEvent.description
+                    })
+                });
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    showNotificationModal("📅 追加成功！", `「[${currentSelectedEvent.app_name}] ${currentSelectedEvent.title}」をあなたのGoogleカレンダーに登録しました！`);
+                } else {
+                    showNotificationModal("⚠️ エラー", "追加に失敗しました: " + (result.message || '不明なエラー'));
                 }
             } catch (err) {
                 showNotificationModal("🚨 通信エラー", "通信エラーが発生しました: " + err.message);
@@ -358,7 +400,7 @@
         function closeModal() {
             const modal = document.getElementById('event-modal');
             modal.classList.add('opacity-0');
-            document.getElementById('modal-content-box').classList.add('scale-95');
+            document.getElementById('modal-content-box'].classList.add('scale-95');
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 300);
