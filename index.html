@@ -87,7 +87,7 @@
         <!-- データなし・ローディング表示 -->
         <div id="loading" class="text-center py-20 text-slate-400">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent mb-3"></div>
-            <p>スプレッドシートからデータを読み込んでいます...</p>
+            <p>データを読み込んでいます...</p>
         </div>
     </div>
 
@@ -117,11 +117,11 @@
                 <p id="modal-description" class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap"></p>
             </div>
             <div class="flex justify-between items-center pt-4 border-t border-slate-800">
-                <button onclick="deleteCurrentEvent()" class="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+                <button onclick="deleteCurrentEvent()" class="px-4 py-2 bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/30 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     このタスクを削除 (要パスワード)
                 </button>
-                <button onclick="closeModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-600/30">閉じる</button>
+                <button onclick="closeModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-600/30 cursor-pointer">閉じる</button>
             </div>
         </div>
     </div>
@@ -161,40 +161,16 @@
         async function fetchEvents() {
             const loading = document.getElementById('loading');
             
-            const cachedData = localStorage.getItem('game_dashboard_cache');
-            const cachedTime = localStorage.getItem('game_dashboard_time');
-            if (cachedData) {
-                try {
-                    const parsed = JSON.parse(cachedData);
-                    allEvents = parsed.events || parsed;
-                    lastUpdatedTime = cachedTime || 'キャッシュ表示中';
-                    document.getElementById('update-time-text').innerText = lastUpdatedTime;
-                    document.getElementById('update-time-text-mobile').innerText = lastUpdatedTime;
-                    loading.style.display = 'none';
-                    buildTabs();
-                    filterEvents();
-                } catch (e) {
-                    console.log("キャッシュ読込エラー");
-                }
-            }
-
             try {
-                if (GAS_URL.includes("YOUR_GAS_WEB_APP_URL")) {
-                    throw new Error("GASのウェブアプリURLが設定されていません。");
+                // 同じリポジトリ内にある data.json を直接読み込む（ボット判定完全回避）
+                const response = await fetch('./data.json?t=' + new Date().getTime());
+                if (!response.ok) {
+                    throw new Error("data.jsonが見つかりませんでした。上の「今すぐ情報を更新」ボタンを押して最初のデータを生成してください。");
                 }
-
-                const response = await fetch(GAS_URL);
                 const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error);
-                }
 
                 allEvents = data.events || data;
                 lastUpdatedTime = data.last_updated || '不明';
-                
-                localStorage.setItem('game_dashboard_cache', JSON.stringify(data));
-                localStorage.setItem('game_dashboard_time', lastUpdatedTime);
 
                 document.getElementById('update-time-text').innerText = lastUpdatedTime;
                 document.getElementById('update-time-text-mobile').innerText = lastUpdatedTime;
@@ -204,9 +180,7 @@
                 buildTabs();
                 filterEvents();
             } catch (err) {
-                if (!cachedData) {
-                    loading.innerHTML = `<div class="bg-red-950/50 border border-red-800 p-4 rounded-2xl text-red-300 text-sm inline-block"><strong class="font-bold">データの読み込みに失敗しました</strong><br>${err.message}</div>`;
-                }
+                loading.innerHTML = `<div class="bg-red-950/50 border border-red-800 p-4 rounded-2xl text-red-300 text-sm inline-block max-w-md"><strong class="font-bold">データの読み込み待ち</strong><br>${err.message}</div>`;
             }
         }
 
@@ -226,12 +200,12 @@
             const tabsContainer = document.getElementById('app-tabs');
             const apps = [...new Set(allEvents.map(e => e.app_name))];
             
-            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${currentApp === 'ALL' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800'} transition">すべて (${allEvents.length})</button>`;
+            let html = `<button onclick="filterApp('ALL')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${currentApp === 'ALL' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800'} transition cursor-pointer">すべて (${allEvents.length})</button>`;
             
             apps.forEach(app => {
                 const count = allEvents.filter(e => e.app_name === app).length;
                 const isActive = currentApp === app;
-                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800'} transition">${app} (${count})</button>`;
+                html += `<button onclick="filterApp('${app}')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800'} transition cursor-pointer">${app} (${count})</button>`;
             });
             
             tabsContainer.innerHTML = html;
@@ -246,9 +220,9 @@
         function filterCategory(cat, btnElement) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition";
+                btn.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition cursor-pointer";
             });
-            btnElement.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20";
+            btnElement.className = "cat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition shadow-lg shadow-indigo-600/20 cursor-pointer";
             filterEvents();
         }
 
@@ -291,7 +265,7 @@
                 const categoryBadgeHtml = getCategoryBadge(e.category);
 
                 html += `
-                    <div onclick='openModal(${JSON.stringify(e)})' class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
+                    <div onclick='openModal(${JSON.stringify(e).replace(/'/g, "&#39;")})' class="${cardBorder} rounded-2xl p-5 border transition duration-200 flex flex-col justify-between cursor-pointer group relative overflow-hidden">
                         ${isUrgent ? '<div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-bl-xl tracking-wider shadow">⚠️ 終了間近</div>' : ''}
                         <div>
                             <div class="flex justify-between items-start mb-3">
@@ -378,7 +352,7 @@
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         action: 'delete',
-                        app_name: currentSelectedEvent.app_name,
+5                        app_name: currentSelectedEvent.app_name,
                         title: currentSelectedEvent.title,
                         password: password
                     })
@@ -392,7 +366,7 @@
                     buildTabs();
                     filterEvents();
                     
-                    alert('タスクを正常に削除しました。');
+                    alert('タスクを正常に削除しました。\n（※スプレッドシートから削除されました。ダッシュボード側でも反映させるにはGitHub Actionsを再実行してください）');
                 } else {
                     alert('エラー: ' + (result.message || 'パスワードが違うため削除できませんでした。'));
                 }
