@@ -54,7 +54,7 @@
             </div>
         </header>
 
-        <!-- コントロールパネル（カテゴリフィルター ＆ アプリタブ ＆ 検索） -->
+        <!-- コントロールパネル -->
         <div class="mb-8 flex flex-col gap-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 shadow-xl">
             <!-- カテゴリ絞り込みタブ -->
             <div id="category-tabs" class="flex flex-wrap gap-2 justify-center pb-3 border-b border-slate-800">
@@ -80,9 +80,7 @@
         </div>
 
         <!-- イベント一覧グリッド -->
-        <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- カードがここに動的に挿入されます -->
-        </div>
+        <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
         <!-- データなし・ローディング表示 -->
         <div id="loading" class="text-center py-20 text-slate-400">
@@ -103,8 +101,6 @@
                 <div>開始: <span id="modal-start" class="font-semibold text-indigo-400"></span></div>
                 <div>終了: <span id="modal-end" class="font-semibold text-amber-400"></span></div>
             </div>
-            
-            <!-- 🔗 ポップアップ内の関連リンクボタンエリア -->
             <div class="mb-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
                 <div class="text-[11px] font-bold text-slate-400 mb-2 flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
@@ -112,7 +108,6 @@
                 </div>
                 <div id="modal-links" class="flex flex-wrap gap-2"></div>
             </div>
-
             <div class="max-h-48 overflow-y-auto pr-2 mb-6">
                 <p id="modal-description" class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap"></p>
             </div>
@@ -126,6 +121,18 @@
         </div>
     </div>
 
+    <!-- ✨ 完了・通知用リッチポップアップ（新規追加） -->
+    <div id="notification-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-slate-900 border border-indigo-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 text-center relative" id="notif-content-box">
+            <div class="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-indigo-500/30 shadow-inner">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 id="notif-title" class="text-lg font-bold text-white mb-2">更新リクエストを送信しました！</h3>
+            <p id="notif-message" class="text-xs text-slate-300 leading-relaxed mb-6">裏側でAI検索によるデータ収集が開始されました。<br>1〜2分ほどお待ちいただいたあと、ページを再読み込みしてください。</p>
+            <button onclick="closeNotification()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-600/30 cursor-pointer">了解しました</button>
+        </div>
+    </div>
+
     <script>
         const GAS_URL = "https://script.google.com/macros/s/AKfycbyke6CdnShEXeWLetkp4B8lynUU4fgQ4TT22wIcUEjNc1oibpdVj6XYJyKI4oCSfH2O/exec";
 
@@ -134,6 +141,26 @@
         let currentCategory = 'ALL';
         let lastUpdatedTime = '';
         let currentSelectedEvent = null;
+
+        function showNotificationModal(title, message) {
+            document.getElementById('notif-title').innerText = title;
+            document.getElementById('notif-message').innerHTML = message;
+            const modal = document.getElementById('notification-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                document.getElementById('notif-content-box').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeNotification() {
+            const modal = document.getElementById('notification-modal');
+            modal.classList.add('opacity-0');
+            document.getElementById('notif-content-box').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
 
         async function triggerGitHubAction() {
             if (!confirm("最新情報の収集・更新をGitHubに指示しますか？\n（裏でAI検索が走るため、完了まで1〜2分かかります）")) {
@@ -149,12 +176,15 @@
 
                 const result = await response.json();
                 if (result.status === 'success') {
-                    alert("✨ 更新リクエストを送信しました！\n1〜2分ほど待ってからページを再読み込みしてください。最新情報に更新されます。");
+                    showNotificationModal(
+                        "✨ 更新リクエスト送信完了！",
+                        "GitHub Actionsへの指示が正常に送信されました。<br><br>裏側でAI検索が走っているため、<strong class='text-indigo-400'>1〜2分ほど待ってからページを再読み込み</strong>してください。最新情報に切り替わります。"
+                    );
                 } else {
-                    alert("送信に失敗しました: " + (result.message || '不明なエラー'));
+                    showNotificationModal("⚠️ 送信失敗", "送信に失敗しました: " + (result.message || '不明なエラー'));
                 }
             } catch (err) {
-                alert("通信エラーが発生しました: " + err.message);
+                showNotificationModal("🚨 通信エラー", "通信エラーが発生しました: " + err.message);
             }
         }
 
@@ -361,12 +391,12 @@
                     buildTabs();
                     filterEvents();
                     
-                    alert('タスクを正常に削除しました。\n（※スプレッドシートから削除されました。ダッシュボード側でも反映させるにはGitHub Actionsを再実行してください）');
+                    showNotificationModal("🗑️ 削除完了", "タスクを正常に削除しました。<br>（※スプレッドシートから削除されました。ダッシュボード側でも反映させるにはGitHub Actionsを再実行してください）");
                 } else {
-                    alert('エラー: ' + (result.message || 'パスワードが違うため削除できませんでした。'));
+                    showNotificationModal("⚠️ エラー", 'エラー: ' + (result.message || 'パスワードが違うため削除できませんでした。'));
                 }
             } catch (err) {
-                alert('通信エラー: ' + err.message);
+                showNotificationModal("🚨 通信エラー", '通信エラー: ' + err.message);
             }
         }
 
