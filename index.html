@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ゲームイベント管理ダッシュボード</title>
+    <title>ゲーム＆リアルイベント ダッシュボード</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -18,10 +18,19 @@
     <div class="max-w-6xl mx-auto px-4 py-8">
         <!-- ヘッダー -->
         <header class="mb-8 relative flex flex-col items-center">
-            <!-- 最終更新日時（右上） -->
-            <div id="last-updated" class="absolute top-0 right-0 hidden md:flex items-center gap-1.5 text-xs text-slate-400 bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
-                <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span>最終更新: <strong id="update-time-text" class="text-slate-200">読み込み中...</strong></span>
+            <!-- 右上のコントロール群（更新ボタン ＆ 最終更新日時） -->
+            <div class="absolute top-0 right-0 hidden md:flex items-center gap-2">
+                <!-- 🔄 今すぐ更新ボタン -->
+                <button onclick="triggerGitHubAction()" class="flex items-center gap-1.5 text-xs text-indigo-300 bg-indigo-950/90 hover:bg-indigo-900 px-3.5 py-2 rounded-xl border border-indigo-800 shadow transition cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    <span>今すぐ情報を更新</span>
+                </button>
+
+                <!-- 最終更新日時 -->
+                <div id="last-updated" class="flex items-center gap-1.5 text-xs text-slate-400 bg-slate-900/90 px-3.5 py-2 rounded-xl border border-slate-800 shadow-inner">
+                    <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>最終更新: <strong id="update-time-text" class="text-slate-200">読み込み中...</strong></span>
+                </div>
             </div>
 
             <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-2xl text-indigo-400 mb-3 border border-indigo-500/20 shadow-lg shadow-indigo-500/5">
@@ -33,9 +42,15 @@
             <h1 class="text-3xl font-extrabold text-white mb-1 tracking-tight">ゲーム＆リアルイベント ダッシュボード</h1>
             <p class="text-sm text-slate-400">スプレッドシートと連動した最新のイベント情報</p>
             
-            <!-- スマホ用の最終更新表示 -->
-            <div id="last-updated-mobile" class="mt-3 md:hidden text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
-                最終更新: <span id="update-time-text-mobile" class="text-slate-200">読み込み中...</span>
+            <!-- スマホ用のボタン＆最終更新表示 -->
+            <div class="mt-4 md:hidden flex flex-col gap-2 w-full max-w-xs items-center">
+                <button onclick="triggerGitHubAction()" class="w-full flex items-center justify-center gap-1.5 text-xs text-indigo-300 bg-indigo-950/90 hover:bg-indigo-900 px-4 py-2.5 rounded-xl border border-indigo-800 shadow transition cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    <span>今すぐ情報を更新</span>
+                </button>
+                <div id="last-updated-mobile" class="text-xs text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-center w-full">
+                    最終更新: <span id="update-time-text-mobile" class="text-slate-200">読み込み中...</span>
+                </div>
             </div>
         </header>
 
@@ -107,9 +122,35 @@
 
         let allEvents = [];
         let currentApp = 'ALL';
-        let currentCategory = 'ALL'; // カテゴリ絞り込み用
+        let currentCategory = 'ALL';
         let lastUpdatedTime = '';
         let currentSelectedEvent = null;
+
+        // ==========================================
+        // 🚀 GAS経由で安全にGitHub Actionsを動かす関数
+        // ==========================================
+        async function triggerGitHubAction() {
+            if (!confirm("最新情報の収集・更新をGitHubに指示しますか？\n（裏でAI検索が走るため、完了まで1〜2分かかります）")) {
+                return;
+            }
+
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'trigger_action' })
+                });
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert("✨ 更新リクエストを送信しました！\n1〜2分ほど待ってからページを再読み込みしてください。最新情報に更新されます。");
+                } else {
+                    alert("送信に失敗しました: " + (result.message || '不明なエラー'));
+                }
+            } catch (err) {
+                alert("通信エラーが発生しました: " + err.message);
+            }
+        }
 
         async function fetchEvents() {
             const loading = document.getElementById('loading');
@@ -140,7 +181,6 @@
             }
         }
 
-        // カテゴリバッジのHTMLを生成する関数
         function getCategoryBadge(category) {
             switch (category) {
                 case 'real':
@@ -277,7 +317,6 @@
             currentSelectedEvent = null;
         }
 
-        // 削除ボタンが押された時の処理（パスワード認証付き）
         async function deleteCurrentEvent() {
             if (!currentSelectedEvent) return;
 
@@ -307,20 +346,3 @@
                     alert('タスクを正常に削除しました。');
                 } else {
                     alert('エラー: ' + (result.message || 'パスワードが違うため削除できませんでした。'));
-                }
-            } catch (err) {
-                alert('通信エラー: ' + err.message);
-            }
-        }
-
-        document.getElementById('event-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'event-modal') {
-                closeModal();
-            }
-        });
-
-        // ページ読み込み時にデータ取得
-        fetchEvents();
-    </script>
-</body>
-</html>
