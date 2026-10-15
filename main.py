@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import datetime
 import requests
 from google import genai
 from google.genai import types
@@ -74,10 +75,7 @@ def extract_events_with_ai(app_name):
 
 def main():
     gas_url = os.environ.get('GAS_WEB_APP_URL')
-    if not gas_url:
-        print("GAS_WEB_APP_URL が設定されていません。")
-        return
-
+    
     all_events = []
     for app_name in APPS:
         print(f"🔍 Google検索で情報収集中: {app_name}")
@@ -91,15 +89,33 @@ def main():
             all_events.append(ev)
 
     if not all_events:
-        print("⚠️ 抽出できたイベントが0件だったため、送信をスキップします。")
+        print("⚠️ 抽出できたイベントが0件だったため、保存・送信をスキップします。")
         return
 
-    print(f"📤 スプレッドシートへデータ送信中... (計 {len(all_events)} 件)")
+    # 1️⃣ スプレッドシート（バックアップ用）へデータ送信
+    if gas_url:
+        print(f"📤 スプレッドシートへデータ送信中... (計 {len(all_events)} 件)")
+        try:
+            res = requests.post(gas_url, json=all_events, timeout=120)
+            print(f"送信結果: {res.text}")
+        except Exception as e:
+            print(f"送信エラー (スプレッドシート): {e}")
+
+    # 2️⃣ ダッシュボード配信用に data.json をローカルへ保存
     try:
-        res = requests.post(gas_url, json=all_events, timeout=120)
-        print(f"送信結果: {res.text}")
+        jst = datetime.timezone(datetime.timedelta(hours=9))
+        now_str = datetime.datetime.now(jst).strftime("%Y-%m-%d %H:%M")
+        
+        output_data = {
+            "last_updated": now_str,
+            "events": all_events
+        }
+        
+        with open("data.json", "w", encoding="utf-8") as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
+        print("📁 data.json を正常に保存しました。")
     except Exception as e:
-        print(f"送信エラー: {e}")
+        print(f"ファイル保存エラー (data.json): {e}")
 
 if __name__ == '__main__':
     main()
