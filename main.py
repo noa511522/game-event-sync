@@ -43,8 +43,9 @@ def extract_events_with_ai(app_name):
 - category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・ポップアップ等のリアルイベントの場合）
 """
         
+        # モデル名を最新の gemini-2.5-flash に変更
         response = client.models.generate_content(
-            model='gemini-1.5-flash',
+            model='gemini-2.5-flash',
             contents=prompt,
             config=types.GenerateContentConfig(
                 tools=[types.Tool(google_search=types.GoogleSearch())],
