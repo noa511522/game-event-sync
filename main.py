@@ -22,10 +22,16 @@ APPS = [
 ]
 
 def extract_events_with_ai(app_name):
-    try:
-        client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
-        
-        prompt = f"""
+    client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
+    
+    # 🔑 環境変数 'GEMINI_MODEL' からモデル名を取得（未設定なら 'gemini-3.8-flash' をデフォルトに）
+    default_model = os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash')
+    
+    # 🔄 試すモデルのリスト（優先順：指定モデル ➔ 旧・予備モデル）
+    models_to_try = [default_model, 'gemini-2.5-flash']
+    models_to_try = list(dict.fromkeys(models_to_try)) # 重複排除
+
+    prompt = f"""
 あなたはソシャゲやゲームの最新情報リサーチャーです。
 現在開催中、または今後開催予定のソシャゲ「{app_name}」に関する以下の情報を、Google検索を用いて網羅的に探してください：
 1. ゲーム内イベント・キャンペーン情報
@@ -42,26 +48,31 @@ def extract_events_with_ai(app_name):
 - description: 概要（開催場所や詳細な内容も含めてください）
 - category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・ポップアップ等のリアルイベントの場合）
 """
-        
-        # モデル名を最新の gemini-2.5-flash に変更
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                tools=[types.Tool(google_search=types.GoogleSearch())],
-                temperature=0.3
+    
+    for model_name in models_to_try:
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    tools=[types.Tool(google_search=types.GoogleSearch())],
+                    temperature=0.3
+                )
             )
-        )
-        
-        time.sleep(12)
-        text = response.text.strip()
-        if text.startswith("```json"): text = text[7:]
-        if text.endswith("```"): text = text[:-3]
-        return json.loads(text.strip())
-    except Exception as e:
-        print(f"AI検索エラー ({app_name}): {e}")
-        time.sleep(12)
-        return []
+            
+            time.sleep(12)
+            text = response.text.strip()
+            if text.startswith("```json"): text = text[7:]
+            if text.endswith("```"): text = text[:-3]
+            return json.loads(text.strip())
+        except Exception as e:
+            print(f"⚠️ モデル '{model_name}' でエラー ({app_name}): {e}")
+            time.sleep(5)
+            continue
+            
+    print(f"AI検索エラー ({app_name}): すべてのモデルでの処理に失敗しました。")
+    time.sleep(12)
+    return []
 
 def main():
     gas_url = os.environ.get('GAS_WEB_APP_URL')
