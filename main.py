@@ -49,7 +49,7 @@ def extract_events_with_ai(app_name):
     models_to_try = [default_model, 'gemini-2.5-flash']
     models_to_try = list(dict.fromkeys(models_to_try))
 
-    # 💡 YouTubeや公式放送のリンクも含めるようプロンプトを強化
+    # 💡 表記揺れの防止とリンクの安定化ルールをプロンプトに追加・強化
     prompt = f"""
 あなたはソシャゲやゲームの最新情報リサーチャーです。
 現在開催中、または今後開催予定のソシャゲ「{app_name}」に関する以下の情報を、Google検索を用いて網羅的に探してください：
@@ -57,6 +57,11 @@ def extract_events_with_ai(app_name):
 2. ガチャ・ピックアップ情報
 3. リアルイベント（ポップアップストア、コラボカフェ、展覧会、ライブ、アニメイトフェアなど）
 4. 公式生放送やYouTubeでの記念配信、PVなどの情報
+
+【重要なお願い（データの安定化・正規化ルール）】
+- イベント名は、公式サイトで使われている公式名称を正確に取得し、更新のたびに微妙な表現や略称が変わらない（揺れない）ように統一してください。
+- 過去に開催されている定番イベントや継続中のものについても、正式なタイトルで一貫性を持たせてください。
+- 関連リンク（公式サイト、公式YouTube、配信ページなど）は、主要なものを厳選して出力してください。無駄な増減や重複が発生しないよう整理してください。実際に存在する確実なURLのみを記載し、架空のURLは絶対に作らないでください。
 
 直近〜今後のスケジュールを調べ、以下のJSON形式の配列だけで出力してください。
 余計な解説文やバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。見つからない場合は `[]` を返してください。
@@ -67,8 +72,7 @@ def extract_events_with_ai(app_name):
 - end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください）
 - description: 概要（開催場所や詳細な内容も含めてください）
 - category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・リアルイベント・公式生放送等の場合）
-- links: 公式サイト、公式YouTubeチャンネル、配信ページ、主要な攻略サイト（WikiやAppMediaやゲームウィズやゲームエイト等）のリスト（配列）。各要素は name（例: "公式サイト", "公式YouTube", "配信ページ" 等の名称）と url（URL）のキーを持つオブジェクト。
-  ※重要注意事項: 実際に存在する確実な公式URL（YouTubeの公式チャンネルやライブ配信ページを含む）のみを入れてください。架空のURLを作らないでください。見つからない場合は空配列 `[]` にしてください。
+- links: 公式サイト、公式YouTubeチャンネル、配信ページ等のリスト（配列）。各要素は name（例: "公式サイト", "公式YouTube", "配信ページ" 等の名称）と url（URL）のキーを持つオブジェクト。見つからない場合は空配列 `[]` にしてください。
 """
     
     for model_name in models_to_try:
@@ -78,7 +82,7 @@ def extract_events_with_ai(app_name):
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     tools=[types.Tool(google_search=types.GoogleSearch())],
-                    temperature=0.3
+                    temperature=0.2  # 💡 より安定した出力を得るため温度を少し下げました
                 )
             )
             
