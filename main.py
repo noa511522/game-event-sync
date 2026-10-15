@@ -10,61 +10,101 @@ TARGET_URLS = [
     # --- FGO ---
     {"app_name": "FGO", "url": "https://news.fate-go.jp/"},
     {"app_name": "FGO", "url": "https://gamewith.jp/fgo/"},
-    {"app_name": "FGO", "url": "https://game8.jp/fgo"},
+    {"app_name": "FGO", "url": "https://gamewith.jp/fgo/article/show/75563"},
+    {"app_name": "FGO", "url": "https://gamewith.jp/fgo/article/show/78295"},
+    {"app_name": "FGO", "url": "https://appmedia.jp/fategrandorder"},
+    {"app_name": "FGO", "url": "https://appmedia.jp/fategrandorder/2967115"},
+    {"app_name": "FGO", "url": "https://appmedia.jp/fategrandorder/2482354"},
     {"app_name": "FGO", "url": "https://www.youtube.com/@FGOAppMedia"},
     {"app_name": "FGO", "url": "https://www.youtube.com/@koyahan"},
     {"app_name": "FGO", "url": "https://www.youtube.com/@hakuginhato"},
 
     # --- 勝利の女神NIKKE ---
     {"app_name": "勝利の女神NIKKE", "url": "https://nikke-jp.com/"},
+    {"app_name": "勝利の女神NIKKE", "url": "https://nikke-jp.com/news.html"},
     {"app_name": "勝利の女神NIKKE", "url": "https://gamewith.jp/nikke/"},
+    {"app_name": "勝利の女神NIKKE", "url": "https://gamewith.jp/nikke/article/show/547482"},
     {"app_name": "勝利の女神NIKKE", "url": "https://game8.jp/nikke"},
+    {"app_name": "勝利の女神NIKKE", "url": "https://game8.jp/nikke/492016"},
 
     # --- 崩壊スターレイル ---
     {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/news"},
+    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/ja-jp/news?type=news_all"},
+    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/ja-jp/news?type=news"},
+    {"app_name": "崩壊スターレイル", "url": "https://hsr.hoyoverse.com/ja-jp/news?type=activity"},
     {"app_name": "崩壊スターレイル", "url": "https://gamewith.jp/houkaistarrail/"},
+    {"app_name": "崩壊スターレイル", "url": "https://gamewith.jp/houkaistarrail/article/show/396229"},
     {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail"},
+    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/525554"},
+    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/524340"},
+    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/721000"},
+    {"app_name": "崩壊スターレイル", "url": "https://game8.jp/houkaistarrail/614662"},
 
     # --- 崩壊3rd ---
-    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/fab"},
+    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/home"},
+    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/news/cate/555"},
+    {"app_name": "崩壊3rd", "url": "https://houkai3rd.hoyoverse.com/news/cate/557"},
     {"app_name": "崩壊3rd", "url": "https://spicycurryboy.hatenablog.com/archive/category/%E5%B4%A9%E5%A3%8A3rd"},
 
     # --- 鳴潮 ---
     {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/"},
+    {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/main#main"},
+    {"app_name": "鳴潮", "url": "https://wutheringwaves.kurogames.com/jp/main#news"},
     {"app_name": "鳴潮", "url": "https://gamewith.jp/wutheringwaves/"},
-    {"app_name": "鳴潮", "url": "https://game8.jp/wutheringwaves"},
+    {"app_name": "鳴潮", "url": "https://game8.jp/meicho"},
+    {"app_name": "鳴潮", "url": "https://game8.jp/meicho/610590"},
     {"app_name": "鳴潮", "url": "https://www.youtube.com/@toryu/featured"},
 
     # --- IDOLY PRIDE ---
     {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/"},
+    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/"},
+    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/game/"},
+    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/event/"},
+    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/media/"},
+    {"app_name": "IDOLY PRIDE", "url": "https://idolypride.jp/news/category/others/"},
     {"app_name": "IDOLY PRIDE", "url": "https://idolyp.cloudfree.jp/"},
 
     # --- プリンセスコネクト!Re:Dive ---
     {"app_name": "プリコネR", "url": "https://priconne-redive.jp/"},
+    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/news/"},
+    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/news/?category=information"},
+    {"app_name": "プリコネR", "url": "https://priconne-redive.jp/news/?category=event"},
     {"app_name": "プリコネR", "url": "https://gamewith.jp/pricone-re/"},
     {"app_name": "プリコネR", "url": "https://www.youtube.com/@vashpeer"},
     {"app_name": "プリコネR", "url": "https://www.youtube.com/@Eruru"},
 
     # --- ブルーアーカイブ ---
     {"app_name": "ブルーアーカイブ", "url": "https://bluearchive.jp/"},
+    {"app_name": "ブルーアーカイブ", "url": "https://bluearchive.jp/news/newsJump"},
     {"app_name": "ブルーアーカイブ", "url": "https://game8.jp/blue-archive"},
+    {"app_name": "ブルーアーカイブ", "url": "https://game8.jp/blue-archive/634829"},
     {"app_name": "ブルーアーカイブ", "url": "https://www.youtube.com/@vashpeer"},
 
     # --- ヘブンバーンズレッド ---
     {"app_name": "ヘブンバーンズレッド", "url": "https://heaven-burns-red.com/"},
     {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred"},
+    {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred/437512"},
+    {"app_name": "ヘブンバーンズレッド", "url": "https://game8.jp/heavenburnsred/424221"},
 
     # --- アワーノーツ ---
     {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/"},
+    {"app_name": "アワーノーツ", "url": "https://bang-dream-on.bushimo.jp/news/"},
     {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on"},
+    {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on#gacha"},
+    {"app_name": "アワーノーツ", "url": "https://appmedia.jp/bang-dream-on#news"},
     {"app_name": "アワーノーツ", "url": "https://www.youtube.com/@marcie0404"},
 
     # --- マブラヴ ガールズガーデン ---
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/"},
+    {"app_name": "マブラヴ ガールズガーデン", "url": "https://muvluv-girls-garden.com/#news"},
     {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/"},
+    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/index.html#%E3%83%9E%E3%83%96%E3%82%AC%E3%83%AB%E3%81%AE%E6%9C%80%E6%96%B0%E6%83%85%E5%A0%B1"},
+    {"app_name": "マブラヴ ガールズガーデン", "url": "https://kamigame.jp/muvluv-gg/index.html#%E3%83%9E%E3%83%96%E3%82%AC%E3%83%AB%E3%81%AE%E3%82%AC%E3%83%81%E3%83%A3"},
 
     # --- 学園アイドルマスター ---
     {"app_name": "学園アイドルマスター", "url": "https://gakuen.idolmaster-official.jp/"},
+    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster/610573"},
+    {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster/609696"},
     {"app_name": "学園アイドルマスター", "url": "https://game8.jp/gakuen-idolmaster"}
 ]
 
