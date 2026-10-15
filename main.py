@@ -22,6 +22,32 @@ APPS = [
     "学園アイドルマスター"
 ]
 
+def clean_links(links):
+    """AIが生成したリンクの中から、壊れているURLや架空のYouTubeリンクなどを自動で除外するフィルター"""
+    cleaned = []
+    for l in links:
+        if not isinstance(l, dict):
+            continue
+        url = l.get('url', '')
+        name = l.get('name', '')
+        
+        # 1. URLが空、またはhttpから始まらないものは除外
+        if not url or not url.startswith('http'):
+            continue
+            
+        # 2. YouTubeリンクの厳格なチェック（架空のチャンネルや個別配信の破損URLを防ぐ）
+        if 'youtube.com' in url or 'youtu.be' in url:
+            # チャンネル(@)、動画(watch?v=)、プレイリスト、ライブなどの主要な正しいパターン以外は弾く
+            if not ('watch?v=' in url or '@' in url or '/channel/' in url or '/c/' in url or '/playlist?list=' in url or '/live/' in url):
+                continue
+                
+        # 3. ダッシュボードやサイトでエラーになりやすい不要な文字列を弾く
+        if 'javascript:' in url or 'example.com' in url or 'placeholder' in url:
+            continue
+            
+        cleaned.append({"name": name, "url": url})
+    return cleaned
+
 def extract_events_with_ai(app_name):
     client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
     
@@ -45,7 +71,8 @@ def extract_events_with_ai(app_name):
 - end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください。空欄にしないでください）
 - description: 概要（開催場所や詳細な内容も含めてください）
 - category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・ポップアップ等のリアルイベントの場合）
-- links: 関連する公式サイトや主要な攻略サイト（Wiki等）のリスト（配列）。各要素は name（例: "公式サイト", "攻略Wiki" 等の名称）と url（URL）のキーを持つオブジェクト。見つからない場合は空配列 `[]` にしてください。
+- links: 関連する公式サイトや主要な攻略サイト（Wiki等）のリスト（配列）。各要素は name（例: "公式サイト", "攻略Wiki" 等の名称）と url（URL）のキーを持つオブジェクト。
+  ※重要注意事項: 実際に存在しアクセスできる確実な公式URL（公式サイト、公式X、有名ゲームWikiなど）のみを入れてください。存在するか分からないYouTubeチャンネルや、過去の古い不完全なURLを推測・ハルシネーションで勝手に作らないでください。見つからない場合は空配列 `[]` にしてください。
 """
     
     for model_name in models_to_try:
@@ -84,8 +111,11 @@ def main():
             ev['app_name'] = app_name
             if 'category' not in ev:
                 ev['category'] = 'game'
-            if 'links' not in ev:
-                ev['links'] = []
+            
+            # 🔗 AIが持ってきたリンクをクリーンな状態にフィルター
+            raw_links = ev.get('links', [])
+            ev['links'] = clean_links(raw_links)
+            
             all_events.append(ev)
 
     if not all_events:
