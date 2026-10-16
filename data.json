@@ -1,30 +1,30 @@
 {
-  "last_updated": "2026-10-16 10:45",
+  "last_updated": "2026-10-17 06:30",
   "events": [
     {
-      "title": "Fate/Samurai Remnant×Fate/Grand Orderコラボレーションイベント「復刻版:盈月剣風帖」",
+      "title": "期間限定 Fate/Samurai Remnant×Fate/Grand Order コラボレーションイベント「復刻版:盈月剣風帖」",
       "start_date": "2026-10-14",
       "end_date": "2026-11-04",
-      "description": "慶安四年の江戸を舞台に、宮本伊織らと共に繰り広げられる「盈月の儀」を描いた復刻コラボレーションイベント。メインクエストを進行することでイベント限定サーヴァント「★4(SR)宮本伊織」が正式加入します。参加条件は「第1部序章(特異点F 炎上汚染都市 冬木)」クリア。",
+      "description": "『Fate/Samurai Remnant』とのコラボレーションイベント復刻版。鋼屋ジン氏執筆のオリジナルストーリーが展開され、メインクエストを進めることでイベント限定配布サーヴァント「★4(SR) 宮本伊織」が正式加入します。",
       "category": "game",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
     },
     {
-      "title": "『「冠位名代戦」準備応援キャンペーン』",
+      "title": "「冠位名代戦」準備応援キャンペーン",
       "start_date": "2026-10-07",
       "end_date": "2026-10-23",
-      "description": "新コンテンツ「冠位名代戦」の開幕に向けた戦力強化応援キャンペーン。期間中「冠位戴冠戦：Extra」の冠位研鑽戦における「ストーム・ポッド」の消費が0になるほか、特別ログインボーナスや対象サーヴァントの「幕間の物語」期間限定開放などが実施されます。",
+      "description": "新コンテンツ「冠位名代戦」の開幕に先駆けて開催される準備応援キャンペーン。期間限定のログインボーナスや限定ミッションの実施、特定クエストの消費AP削減等が行われます。",
       "category": "game",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
@@ -32,142 +32,185 @@
     {
       "title": "「冠位名代戦」",
       "start_date": "2026-10-23",
-      "end_date": "2026-11-06",
-      "description": "グランドサーヴァントで挑む新たな戦い。エクストラクラスのグランドサーヴァント選定枠が2枠から4枠へと拡張され、参加条件を満たしたマスター全員で挑む期間限定「レイドバトル」が発生します。参加条件は「アフタータイムのはじまり」および「冠位戴冠戦：Extra」の冠位解放戦クリア。",
+      "end_date": "2026-11-04",
+      "description": "新コンテンツとして開幕予定の「冠位名代戦」。エクストラクラスなどを活用した新たな高難度・レイド形式のバトルコンテンツです。",
       "category": "game",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
     },
     {
-      "title": "「復刻 Fate/Samurai Remnant×Fate/Grand Orderコラボレーションイベント ヤマトタケルピックアップ召喚」",
+      "title": "復刻 Fate/Samurai Remnant×Fate/Grand Orderコラボレーションイベント ヤマトタケルピックアップ召喚",
       "start_date": "2026-10-14",
       "end_date": "2026-11-04",
-      "description": "コラボレーションイベント「復刻版:盈月剣風帖」の開催を記念し、期間限定サーヴァント「★5(SSR)ヤマトタケル」「★4(SR)由井正雪」と、イベント特効効果を持つ期間限定概念礼装3種をピックアップする聖晶石召喚。",
+      "description": "期間限定イベント「復刻版:盈月剣風帖」の開幕を記念し、期間限定サーヴァント「★5(SSR) ヤマトタケル」および期間限定概念礼装をピックアップする召喚です。",
       "category": "gacha",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
     },
     {
-      "title": "「復刻 Fate/Samurai Remnant×Fate/Grand Orderコラボレーションイベントピックアップ2召喚」",
-      "start_date": "2026-10-14",
+      "title": "復刻 Fate/Samurai Remnant×Fate/Grand Orderコラボレーションイベント 源頼光／丑御前ピックアップ召喚",
+      "start_date": "2026-10-16",
       "end_date": "2026-11-04",
-      "description": "「復刻版:盈月剣風帖」の開幕を記念し、「★5(SSR)ジャンヌ・ダルク〔オルタ〕(アヴェンジャー)」や「★5(SSR)ジャンヌ・ダルク(ルーラー)」などをピックアップする聖晶石召喚。",
+      "description": "期間限定イベント「復刻版:盈月剣風帖」の開幕を記念し、期間限定サーヴァント「★5(SSR) 源頼光／丑御前」および「★4(SR) 由井正雪」、期間限定概念礼装をピックアップする召喚です。",
       "category": "gacha",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
     },
     {
-      "title": "『「冠位名代戦」準備応援ピックアップ召喚』",
+      "title": "復刻 Fate/Samurai Remnant×Fate/Grand Orderコラボレーションイベントピックアップ4召喚",
+      "start_date": "2026-10-16",
+      "end_date": "2026-11-04",
+      "description": "期間限定イベント「復刻版:盈月剣風帖」の開幕を記念し、「★5(SSR) 宮本武蔵(セイバー)」「★5(SSR) ギルガメッシュ(アーチャー)」など関連サーヴァント11騎をピックアップする召喚です。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
+        }
+      ],
+      "app_name": "FGO"
+    },
+    {
+      "title": "「冠位名代戦」準備応援ピックアップ召喚",
       "start_date": "2026-10-07",
       "end_date": "2026-10-23",
-      "description": "「冠位名代戦」の開催に向けて、ルーラー、アヴェンジャー、アルターエゴ、ムーンキャンサー、フォーリナー、プリテンダーの各エクストラクラスのサーヴァントを日替わりでピックアップする期間限定召喚。",
+      "description": "「冠位名代戦」の開幕に合わせた準備応援召喚。エクストラクラスの★5(SSR)サーヴァント等を対象としたピックアップ召喚が開催されます。",
       "category": "gacha",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
     },
     {
-      "title": "「期間限定 岸波白野ピックアップフレンドポイント召喚」",
-      "start_date": "2026-10-07",
-      "end_date": "2026-10-23",
-      "description": "『「冠位名代戦」準備応援キャンペーン』の一環として開催。「★4(SR)岸波白野(男性)」および「★4(SR)岸波白野(女性)」が通常のフレンドポイント召喚の3倍の確率でピックアップされます。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://www.fate-go.jp/"
-        }
-      ],
-      "app_name": "FGO"
-    },
-    {
-      "title": "ROUND1 × 『Fate/Grand Order』コラボキャンペーン",
-      "start_date": "2026-10-13",
-      "end_date": "2027-01-11",
-      "description": "全国のラウンドワン店舗で開催されるコラボキャンペーン。制服姿の描き下ろしイラストを使用したコラボグッズ販売（池袋・梅田・千種店）、限定ノベルティ付きコラボメニュー、カラオケコラボルーム、施設利用コラボパックなどを展開します。",
+      "title": "マチ☆アソビvol.31 トークイベント",
+      "start_date": "2026-10-18",
+      "end_date": "2026-10-18",
+      "description": "徳島県徳島市で開催される「マチ☆アソビ vol.31」にて、2026年10月18日(日)14:30よりTYPE-MOON関連作品連続ステージ内で実施される『Fate/Grand Order』トークイベントです。",
       "category": "real",
       "links": [
         {
-          "name": "ROUND1特設サイト",
-          "url": "https://www.round1.co.jp/collaboration/fate/index.html"
-        },
-        {
-          "name": "AMNIBUS特設サイト",
-          "url": "https://event.amnibus.com/fgo-round1/"
+          "name": "公式サイト お知らせ",
+          "url": "https://news.fate-go.jp/"
         }
       ],
       "app_name": "FGO"
     },
     {
-      "title": "『Fate/Grand Order』× IKEPRI CANVAS「英霊たちの晩餐会」",
+      "title": "Fate/Grand Order カルデア放送局ミニ番組 終章朗読劇＆冬のリアルイベント特集",
+      "start_date": "2026-10-21",
+      "end_date": "2026-10-21",
+      "description": "11月1日に開催される朗読劇「FGO THE DRAMALOGUE -Cosmos in the Lostbelt-」や冬のリアルイベント特集をお届けする公式生放送ミニ番組。川澄綾子氏ほかが出演予定です。",
+      "category": "real",
+      "links": [
+        {
+          "name": "ニコニコ生放送",
+          "url": "https://live.nicovideo.jp/watch/lv351592836"
+        }
+      ],
+      "app_name": "FGO"
+    },
+    {
+      "title": "FGO THE DRAMALOGUE -Cosmos in the Lostbelt-",
+      "start_date": "2026-11-01",
+      "end_date": "2026-11-01",
+      "description": "パシフィコ横浜 国立大ホールにて開催される「第2部 終章」を題材とした公式朗読劇イベント。高橋李依、米澤円、川澄綾子、青木志貴、水島大宙、野島健児ら豪華キャストが出演し、有料ライブ配信も実施されます。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://dramalogue.fate-go.jp/"
+        }
+      ],
+      "app_name": "FGO"
+    },
+    {
+      "title": "Fate/Grand Order × サンシャインシティプリンスホテル「英霊たちの晩餐会」",
       "start_date": "2026-10-31",
       "end_date": "2026-12-20",
-      "description": "サンシャインシティプリンスホテルB1のコラボレーション専用レストラン「IKEPRI CANVAS」にて開催されるコラボレストラン。「英霊たちの晩餐」をテーマに、描き下ろしビジュアル展示、全62品のコラボレーションメニュー・アフタヌーンティー、限定ノベルティやオリジナルグッズの販売を実施します。",
+      "description": "池袋のサンシャインシティプリンスホテルB1「IKEPRI CANVAS」にて開催されるコラボレーションレストラン。英霊たちの晩餐会をテーマとしたアフタヌーンティーやフード・スイーツメニュー、オリジナルグッズの販売が実施されます。",
       "category": "real",
-      "links": [
-        {
-          "name": "プリンスホテル公式特設ページ",
-          "url": "https://www.princehotels.co.jp/sunshine/plan/contents/fate-go/"
-        }
-      ],
-      "app_name": "FGO"
-    },
-    {
-      "title": "くらぶカルデア FGOラジオステーション",
-      "start_date": "2026-10-16",
-      "end_date": "2026-10-16",
-      "description": "文化放送および公式YouTubeチャンネルにて毎週金曜日21:00より配信中の公式ラジオ番組。パーソナリティ（高橋李依、田中美海、大久保瑠美の交代制）による最新情報やお便り紹介を実施。",
-      "category": "real",
-      "links": [
-        {
-          "name": "公式YouTube",
-          "url": "https://www.youtube.com/@FGOchannel"
-        }
-      ],
+      "links": [],
       "app_name": "FGO"
     },
     {
       "title": "ストーリーイベント「LITTLE WITCH TRICK」",
       "start_date": "2026-10-08",
       "end_date": "2026-10-28",
-      "description": "ハロウィンをテーマにしたストーリーイベント。イベント専用ステージのクリアによるストーリー進行、専用アイテムを集めて各種育成素材等と交換できるイベントショップ、ミニゲーム「TRACING THE STARS」、14 Days Loginイベント「HALLOWEEN NIGHT」などが実施されます。",
+      "description": "ハロウィンをテーマにしたストーリーイベント。ハロウィンの祭りを心待ちにしながら準備を進めるベロータを描く限定ストーリーをはじめ、イベントステージのクリアやミニゲーム、専用交換所での各種アイテム獲得が可能です。",
       "category": "game",
       "links": [
         {
           "name": "公式サイト",
           "url": "https://nikke-jp.com/"
-        },
-        {
-          "name": "公式X",
-          "url": "https://x.com/NIKKE_japan"
         }
       ],
       "app_name": "勝利の女神NIKKE"
     },
     {
-      "title": "特殊募集「ベロータ：パンプキンウィッチ」",
+      "title": "14 Days Loginイベント「DAILY TRICK」",
       "start_date": "2026-10-08",
       "end_date": "2026-10-28",
-      "description": "ハロウィン仕様の新SSRニケ「ベロータ：パンプキンウィッチ」が特殊募集（ピックアップガチャ）に登場。味方の攻撃能力を強化する支援型ニケとして期間限定で確率アップします。",
+      "description": "イベント期間中にログインすることで最大14日分のデイリーボーナスを受け取れるキャンペーン。募集チケットや育成素材などの報酬が配布されます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://nikke-jp.com/"
+        }
+      ],
+      "app_name": "勝利の女神NIKKE"
+    },
+    {
+      "title": "スペシャルイベント「Cinderella Special」",
+      "start_date": "2026-10-08",
+      "end_date": "2026-12-03",
+      "description": "SSRニケ「シンデレラ」の限定コスチュームを獲得可能なスペシャルイベントです。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://nikke-jp.com/"
+        }
+      ],
+      "app_name": "勝利の女神NIKKE"
+    },
+    {
+      "title": "4周年記念特設サイト シェアキャンペーン",
+      "start_date": "2026-10-08",
+      "end_date": "2026-11-18",
+      "description": "4周年特設サイトの公開を記念したWebキャンペーン。特設ページをSNSへシェアすることでゲーム内報酬「募集チケット×1」がもらえるほか、4周年バージョンの最新情報が順次公開されます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://nikke-jp.com/"
+        }
+      ],
+      "app_name": "勝利の女神NIKKE"
+    },
+    {
+      "title": "特殊募集：ベロータ：パンプキンウィッチ",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-28",
+      "description": "魔女姿となったハロウィン限定の新SSRニケ「ベロータ：パンプキンウィッチ」の出現確率がアップする期間限定ピックアップガチャです。",
       "category": "gacha",
       "links": [
         {
@@ -178,11 +221,29 @@
       "app_name": "勝利の女神NIKKE"
     },
     {
-      "title": "特別イベント「Cinderella Special」",
-      "start_date": "2026-10-08",
-      "end_date": "2026-12-03",
-      "description": "2026年ニケ人気投票第1位に輝いたピルグリム「シンデレラ」の特別衣装「グラスカーテシー」が登場。イベント期間中にゲームへログインすることで、すべての指揮官が入手可能です。",
-      "category": "game",
+      "title": "4周年記念公式生放送「約束の地へ、女神集結」",
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "description": "サービス開始4周年を記念した公式生放送。第1部（16:30〜）と第2部（19:00〜）の二部構成で実施され、周年大型アップデート情報の発表、ゲストによるトーク・バラエティ企画、音楽ステージなどがYouTube Liveおよび公式Xで配信されます。",
+      "category": "real",
+      "links": [
+        {
+          "name": "配信ページ（YouTube Live）",
+          "url": "https://youtube.com/live/sN9LNEAq8fg"
+        },
+        {
+          "name": "公式サイト",
+          "url": "https://nikke-jp.com/"
+        }
+      ],
+      "app_name": "勝利の女神NIKKE"
+    },
+    {
+      "title": "NIKKE × 東京ドームシティ アトラクションズ「遊園地を奪還せよ、指揮官！」",
+      "start_date": "2026-09-10",
+      "end_date": "2026-10-18",
+      "description": "東京ドームシティ アトラクションズにて開催されるリアルコラボイベント。描き下ろしイラストを使用した謎解きラリー、コラボアトラクション、オリジナルグッズ販売、コラボフード・ドリンクの提供が実施されています。",
+      "category": "real",
       "links": [
         {
           "name": "公式サイト",
@@ -192,51 +253,15 @@
       "app_name": "勝利の女神NIKKE"
     },
     {
-      "title": "4周年記念生放送「約束の地へ、女神集結」",
-      "start_date": "2026-10-24",
-      "end_date": "2026-10-24",
-      "description": "『勝利の女神：NIKKE』のリリース4周年を記念した公式生放送。第1部（16:30〜）と第2部（19:00〜）の二部構成で配信され、豪華ゲストを迎えての最新アップデート情報、バラエティ企画、スペシャル音楽ステージなどが予定されています。",
+      "title": "「NIKKE in 京都」第2弾 ニケと行く、遺失物探しの旅！",
+      "start_date": "2026-09-11",
+      "end_date": "2026-11-10",
+      "description": "JR東海「推し旅」とのタイアップによる京都エリアでの周遊企画。京都駅や市内各所を巡るデジタルスタンプラリー、特別展示、オリジナルノベルティの配布やコラボ記念グッズの販売が行われます。",
       "category": "real",
       "links": [
         {
-          "name": "YouTube Live配信ページ",
-          "url": "https://youtube.com/live/sN9LNEAq8fg"
-        },
-        {
-          "name": "公式X配信ページ",
-          "url": "https://x.com/i/broadcasts/1qKVmyazXEdxB"
-        },
-        {
-          "name": "公式YouTubeチャンネル",
-          "url": "https://www.youtube.com/@NIKKEJAPAN"
-        }
-      ],
-      "app_name": "勝利の女神NIKKE"
-    },
-    {
-      "title": "勝利の女神：NIKKE × 東京ドームシティ アトラクションズ「遊園地を奪還せよ、指揮官！」",
-      "start_date": "2026-09-10",
-      "end_date": "2026-10-18",
-      "description": "東京ドームシティ アトラクションズにて開催中のリアルコラボイベント。限定ノベルティ付きコラボチケットの販売をはじめ、謎解きラリー、オリジナルキャラクターボイスが流れるコラボアトラクション、コラボフード＆ドリンク、限定グッズ販売、ミニゲームなどを展開。",
-      "category": "real",
-      "links": [
-        {
-          "name": "イベント特設ページ",
-          "url": "https://www.at-raku.com/event/nikke/"
-        }
-      ],
-      "app_name": "勝利の女神NIKKE"
-    },
-    {
-      "title": "勝利の女神：NIKKE POPUP エリア防衛戦 第四弾",
-      "start_date": "2026-10-09",
-      "end_date": "2026-12-31",
-      "description": "株式会社アルジャーノンプロダクトによる全国巡回POPUPイベントの第4弾。“ご当地×ニケ”の描き起こしイラストを用いた限定グッズ販売等を、東京・岡山・横浜・札幌・沖縄の全国5都市にて順次展開予定。",
-      "category": "real",
-      "links": [
-        {
-          "name": "アルジャーノンプロダクト イベント情報",
-          "url": "https://algernonproduct.co.jp/nikke_goods/event/"
+          "name": "公式サイト",
+          "url": "https://nikke-jp.com/"
         }
       ],
       "app_name": "勝利の女神NIKKE"
@@ -245,7 +270,7 @@
       "title": "イベント跳躍・キャラクター「海より出づる真珠」",
       "start_date": "2026-09-28",
       "end_date": "2026-11-10",
-      "description": "Ver.4.6にて新登場となる限定星5キャラクター「パール（愉悦・氷）」の出現率が大幅にアップするイベント跳躍。Ver.4.6期間を通じて開催されます。",
+      "description": "Ver.4.6通期で開催されるイベント跳躍。限定星5キャラクター「パール（愉悦・氷）」の出現率がアップし、星4キャラクター「青雀」「雪衣」「ミーシャ」がピックアップされます。",
       "category": "gacha",
       "links": [
         {
@@ -259,7 +284,21 @@
       "title": "イベント跳躍・キャラクター「花盛りの裁き手」",
       "start_date": "2026-09-28",
       "end_date": "2026-10-21",
-      "description": "限定星5キャラクター「緋英」が復刻ピックアップされるイベント跳躍（前半）。ピックアップ星4キャラクターとして青雀、雪衣、ミーシャも出現率がアップします。",
+      "description": "Ver.4.6前半の復刻イベント跳躍。限定星5キャラクター「緋英（愉悦・物理）」の出現率がアップし、星4キャラクター「青雀」「雪衣」「ミーシャ」がピックアップされます。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://hsr.hoyoverse.com/ja-jp/"
+        }
+      ],
+      "app_name": "崩壊スターレイル"
+    },
+    {
+      "title": "イベント跳躍・キャラクター「我、即ち刃なり」",
+      "start_date": "2026-10-21",
+      "end_date": "2026-11-10",
+      "description": "Ver.4.6後半の復刻イベント跳躍。限定星5キャラクター「千冶・刃（炎・壊滅）」の出現率がアップし、星4キャラクター「青雀」「雪衣」「ミーシャ」がピックアップされます。",
       "category": "gacha",
       "links": [
         {
@@ -273,7 +312,7 @@
       "title": "イベント跳躍・光円錐「光陰を定めし影」",
       "start_date": "2026-09-28",
       "end_date": "2026-11-10",
-      "description": "限定星5光円錐「明日に捧げる色（愉悦）」の出現率が大幅にアップするイベント跳躍・光円錐です。",
+      "description": "限定星5光円錐「明日に捧げる色（愉悦）」の出現率がアップする光円錐イベント跳躍です。",
       "category": "gacha",
       "links": [
         {
@@ -286,8 +325,8 @@
     {
       "title": "ログインボーナス「巡星の礼」",
       "start_date": "2026-09-28",
-      "end_date": "2026-11-11",
-      "description": "Ver.4.6期間中に開催されるログインボーナスキャンペーン。ゲームに累計7日間ログインすることで、「星軌専用チケット」を最大10連分獲得できます。",
+      "end_date": "2026-11-10",
+      "description": "Ver.4.6期間中に累計7日間ログインすることで、「星軌専用チケット」を最大10枚獲得できるログインキャンペーンです。",
       "category": "game",
       "links": [
         {
@@ -298,10 +337,10 @@
       "app_name": "崩壊スターレイル"
     },
     {
-      "title": "イベント「愛、幽霊とロボット」",
+      "title": "期間限定イベント「愛、幽霊とロボット」",
       "start_date": "2026-09-28",
       "end_date": "2026-11-11",
-      "description": "Ver.4.6の期間限定テーマイベント。クエストや課題を進めることで、星玉×1,000、運命の足跡、自塑樹脂などの豪華育成素材を獲得できます。",
+      "description": "スコートと共にメカヨロイ工房を経営するパズル系ミニゲームイベント。スコアを獲得して強化を行い、昇格審査をクリアすることで星玉、運命の足跡、自塑樹脂などの報酬を獲得できます（終了後は「常時略伝」に収録）。",
       "category": "game",
       "links": [
         {
@@ -312,24 +351,10 @@
       "app_name": "崩壊スターレイル"
     },
     {
-      "title": "イベント「次元界分裂」",
-      "start_date": "2026-10-12",
-      "end_date": "2026-10-25",
-      "description": "模擬宇宙および階差宇宙の没入装置から得られる「次元界オーナメント」のドロップ数が2倍になるドロップアップイベントです。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://hsr.hoyoverse.com/ja-jp/"
-        }
-      ],
-      "app_name": "崩壊スターレイル"
-    },
-    {
-      "title": "イベント「スターピースフェスティバル：ワンカット」",
+      "title": "期間限定イベント「スターピースフェスティバル：ワンカット」",
       "start_date": "2026-10-21",
       "end_date": "2026-11-11",
-      "description": "Ver.4.6第2期に開催される期間限定イベント。撮影やパズル等の指定ステージをクリアすることで星玉×500などの報酬を獲得できます。",
+      "description": "Ver.4.6後半に開催される期間限定イベント。指定の条件に沿った撮影やミッションをクリアすることで星玉をはじめとする育成素材を獲得できます。",
       "category": "game",
       "links": [
         {
@@ -340,10 +365,24 @@
       "app_name": "崩壊スターレイル"
     },
     {
-      "title": "イベント「花が育む繁生」",
+      "title": "ドロップ倍増イベント「次元界分裂」",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-25",
+      "description": "イベント期間中、模擬宇宙および階差宇宙にて「没入装置」から獲得できる次元界オーナメントの報酬が2倍になります。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://hsr.hoyoverse.com/ja-jp/"
+        }
+      ],
+      "app_name": "崩壊スターレイル"
+    },
+    {
+      "title": "ドロップ倍増イベント「花が育む繁生」",
       "start_date": "2026-10-30",
       "end_date": "2026-11-11",
-      "description": "期間中、「疑似花萼（金）」および「疑似花萼（赤）」に挑戦して得られる素材ドロップ報酬が2倍になる育成応援イベントです。",
+      "description": "イベント期間中、疑似花萼（金）および疑似花萼（赤）をクリアした際のドロップ報酬が2倍になる育成応援キャンペーンです。",
       "category": "game",
       "links": [
         {
@@ -351,22 +390,31 @@
           "url": "https://hsr.hoyoverse.com/ja-jp/"
         }
       ],
-      "app_name": "崩壊スターレイル"
-    },
-    {
-      "title": "「崩壊：スターレイル × まねきねこ 星降るサマーソング」",
-      "start_date": "2026-09-10",
-      "end_date": "2026-11-29",
-      "description": "カラオケ まねきねこ全国対象店舗にて開催されるタイアップコラボ。第1弾（9/10～10/19 12:30）と第2弾（10/19 13:00～11/29）でオリジナルコラボドリンク、限定ノベルティ・グッズの販売、コラボルーム展開を実施。",
-      "category": "real",
-      "links": [],
       "app_name": "崩壊スターレイル"
     },
     {
       "title": "コラボキャンペーン「スターレイル開拓ゲーム in 横浜」",
       "start_date": "2026-10-31",
       "end_date": "2026-11-10",
-      "description": "Ver.4.7公開記念として、横浜市および横浜市観光協会と連携協定を結び横浜都心臨海部にて開催されるリアルコラボイベント。特別な列車の運行や街巡り型の各種開拓企画が実施されます。",
+      "description": "横浜市および公益財団法人横浜市観光協会とCOGNOSPHEREの連携協定により、神奈川県横浜市都心臨海部一帯にて実施されるリアルコラボキャンペーン。Ver.4.7公開を記念した特別企画が展開されます。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://hsr.hoyoverse.com/ja-jp/"
+        },
+        {
+          "name": "公式YouTube",
+          "url": "https://www.youtube.com/@Houkaistarrail_jp"
+        }
+      ],
+      "app_name": "崩壊スターレイル"
+    },
+    {
+      "title": "崩壊：スターレイル×カラオケまねきねこ・JOYSOUND「星降るサマーソング」コラボキャンペーン",
+      "start_date": "2026-09-10",
+      "end_date": "2026-11-29",
+      "description": "全国のカラオケまねきねこおよびカラオケショップJOYSOUND対象店舗にて開催されるタイアップ。キャラクターをイメージした限定コラボドリンクやフードの提供、第1弾・第2弾に分けたオリジナルコースターやフォトカードのノベルティ配布を実施。",
       "category": "real",
       "links": [
         {
@@ -377,444 +425,462 @@
       "app_name": "崩壊スターレイル"
     },
     {
-      "title": "イッテ星穹！——「パール：深層学習中」",
-      "start_date": "2026-09-28",
-      "end_date": "2026-09-28",
-      "description": "公式YouTubeチャンネルにて配信された、新実装キャラクター「パール」のスキル・性能メカニズムをユーモラスに解説する公式紹介番組。",
-      "category": "real",
-      "links": [
-        {
-          "name": "公式YouTube",
-          "url": "https://www.youtube.com/@Houkaistarrail_jp"
-        }
-      ],
-      "app_name": "崩壊スターレイル"
-    },
-    {
-      "title": "【崩壊：スターレイル】パール キャラクターPV 「希望の描き方」",
-      "start_date": "2026-09-23",
-      "end_date": "2026-09-23",
-      "description": "公式YouTubeチャンネルにて公開された「十の石心」パール（CV：安野希世乃）のキャラクタープロモーションビデオ。",
-      "category": "real",
-      "links": [
-        {
-          "name": "公式YouTube",
-          "url": "https://www.youtube.com/@Houkaistarrail_jp"
-        }
-      ],
-      "app_name": "崩壊スターレイル"
-    },
-    {
-      "title": "Ver.7.9「トリック×トリップ」『崩壊：スターレイル』コラボイベント",
-      "start_date": "2024-11-28",
-      "end_date": "2025-01-09",
-      "description": "『崩壊3rd』と『崩壊：スターレイル』のゲーム内大型コラボレーション。コラボテーマイベント「崩壊：愚者カード・解」の開催や、メインストーリー第二部第6章「沈黙の影に悲鳴は響かず」、人の律者配布イベント「花が舞う頃」などが実施され、花火の新衣装「虚構遊戯」や水晶等の豪華報酬を獲得できます。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://www.houkai3rd.com"
-        }
-      ],
-      "app_name": "崩壊3rd"
-    },
-    {
-      "title": "キャラ補給「絢爛なる共演」",
-      "start_date": "2024-11-28",
-      "end_date": "2025-01-09",
-      "description": "『崩壊：スターレイル』コラボ限定の量子タイプS級キャラ、花火・千面役者「友情出演！」がピックアップされるキャラクター補給。最大90回で確定排出され、初回10連が50%OFFで利用可能です。",
+      "title": "新S級キャラ 夢追い人「刻の律者」キャラ補給",
+      "start_date": "2026-10-22",
+      "end_date": "2026-12-04",
+      "description": "Ver.9.1アップデート後より、新S級キャラクター「刻の律者」（虚数タイプ・炎元素・駆動コア）がピックアップされるキャラ補給が開催されます。最大90回以内にピックアップ対象が確定入手可能で、初回十連補給は無料となります。",
       "category": "gacha",
       "links": [
         {
           "name": "公式サイト",
-          "url": "https://www.houkai3rd.com"
+          "url": "https://www.houkai3rd.com/"
         }
       ],
       "app_name": "崩壊3rd"
     },
     {
-      "title": "千面役者「友情出演！」おすすめ装備 武装補給",
-      "start_date": "2024-11-28",
-      "end_date": "2025-01-09",
-      "description": "千面役者「友情出演！」のモチーフ武器である駆動コア「飛遊星」およびおすすめ聖痕セット「希代の名監督」の排出率がアップする期間限定の装備補給です。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://www.houkai3rd.com"
-        }
-      ],
-      "app_name": "崩壊3rd"
-    },
-    {
-      "title": "テーマイベント「シークレットカーニバル2024・星降るホラーナイト」",
-      "start_date": "2024-10-17",
-      "end_date": "2024-11-28",
-      "description": "Ver.7.8で開催されるテーマイベント。ログインイベント「幽夜のホラードリーム」や「シャドウパレード」等を通じて「奇跡の翼」キャラ選択箱や補給チケットなどの報酬が獲得可能です。",
+      "title": "メインストーリー第二部後日談「海が炎の声で歌っている」",
+      "start_date": "2026-10-22",
+      "end_date": "2026-12-04",
+      "description": "Ver.9.1アップデートに伴い開放されるメインストーリー第二部の後日談です。ストーリーを進めることで水晶や各種育成素材などの報酬を獲得できます。",
       "category": "game",
       "links": [
         {
           "name": "公式サイト",
-          "url": "https://www.houkai3rd.com"
+          "url": "https://www.houkai3rd.com/"
         }
       ],
       "app_name": "崩壊3rd"
     },
     {
-      "title": "テーマイベント「荒野育成手記」",
-      "start_date": "2024-10-17",
-      "end_date": "2024-11-28",
-      "description": "廃れた世界の泡を擬態獣たちの力を借りて開拓・再建するシミュレーション系テーマイベント。参加することで羽夢のクローソー新衣装「静謐な揺蕩い」、水晶、根源のプリズム等を入手できます。",
+      "title": "テーマイベント「出会い♪思い出のトイハウス」",
+      "start_date": "2026-10-22",
+      "end_date": "2026-12-04",
+      "description": "Ver.9.1にて開催される期間限定テーマイベントです。イベントコンテンツをクリアすることで、限定衣装や水晶、育成アイテムなどの報酬を獲得できます。",
       "category": "game",
       "links": [
         {
           "name": "公式サイト",
-          "url": "https://www.houkai3rd.com"
+          "url": "https://www.houkai3rd.com/"
         }
       ],
       "app_name": "崩壊3rd"
     },
     {
-      "title": "キャラ補給「星空を流離って」",
-      "start_date": "2024-10-17",
-      "end_date": "2024-11-15",
-      "description": "機械タイプ・雷元素の新S級キャラ、ヴィタ「残星のさすらい人」がピックアップされるキャラクター補給。初回10連が無料で開催されます。",
-      "category": "gacha",
+      "title": "Ver.9.1 カーニバル累計消費イベント",
+      "start_date": "2026-10-22",
+      "end_date": "2026-12-04",
+      "description": "期間中に補給などで水晶や補給チケットを一定数消費することで、キアナの新衣装「心願の炎星」や各種豪華報酬・育成交換アイテムを獲得できる累計消費イベントです。",
+      "category": "game",
       "links": [
         {
           "name": "公式サイト",
-          "url": "https://www.houkai3rd.com"
+          "url": "https://www.houkai3rd.com/"
         }
       ],
       "app_name": "崩壊3rd"
     },
     {
-      "title": "『崩壊3rd』×ドン・キホーテ コラボ",
-      "start_date": "2024-12-14",
-      "end_date": "2025-01-20",
-      "description": "全国のドン・キホーテ対象店舗にて、キアナとヴィタの冬服コーディネート描き下ろしイラストを使用した限定グッズを販売。税込み2,000円購入ごとに特典イラストカード（全9種）がランダムで配布されます（店舗販売はなくなり次第終了、MEDICOS ONLINE SHOPでの事後受注通販は2024年12月20日〜2025年1月20日まで受付）。",
-      "category": "real",
+      "title": "イベント「スイートマーケット」",
+      "start_date": "2026-10-22",
+      "end_date": "2026-12-04",
+      "description": "ログインおよび指定のゲーム内コンテンツを達成して交換用アイテムを入手し、専用ショップにて過去の限定衣装や星々の鍵（武器）などの報酬と交換できるイベントです。",
+      "category": "game",
       "links": [
         {
-          "name": "ドン・キホーテ特設ページ",
-          "url": "https://www.donki.com/products/houkai3rd/"
+          "name": "公式サイト",
+          "url": "https://www.houkai3rd.com/"
         }
       ],
       "app_name": "崩壊3rd"
     },
     {
-      "title": "崩壊3rd公式 Ver.7.9 ハイペリオンラウンジ",
-      "start_date": "2024-11-22",
-      "end_date": "2024-11-22",
-      "description": "公式YouTubeチャンネルにて配信されたVer.7.9「トリック×トリップ」情報紹介番組。『崩壊：スターレイル』コラボの詳細や新キャラ「花火」、メインストーリー第2部第6章のアップデート情報が公開されました。",
+      "title": "ログインイベント「夢からの贈り物」",
+      "start_date": "2026-10-16",
+      "end_date": "2026-12-04",
+      "description": "期間中にログインすることで、S級戦乙女選択ボックス（松雀、アカリ、セルマ等の対象キャラから選択可能）を受け取ることができるスペシャルログインボーナスイベントです。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://www.houkai3rd.com/"
+        }
+      ],
+      "app_name": "崩壊3rd"
+    },
+    {
+      "title": "公式情報番組「崩壊3rd Ver.9.1 ハイペリオンラウンジ」",
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-16",
+      "description": "Ver.9.1「新たなる刻へ」の最新アップデート情報、新S級キャラ「刻の律者」、ストーリー展開、新イベントおよびゲーム内外の各種キャンペーン情報を紹介する公式情報番組配信です。",
       "category": "real",
       "links": [
         {
-          "name": "公式YouTube",
+          "name": "公式YouTubeチャンネル",
           "url": "https://www.youtube.com/@Houkai3rd"
         }
       ],
       "app_name": "崩壊3rd"
     },
     {
+      "title": "公式PV Ver.9.1「新たなる刻へ」公開",
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-16",
+      "description": "Ver.9.1「新たなる刻へ」のリリースに先駆けて公開された公式最新PV映像です。夢追い人「刻の律者」の戦闘アクションやメインストーリー第二部後日談の見どころを紹介しています。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式YouTubeチャンネル",
+          "url": "https://www.youtube.com/@Houkai3rd"
+        }
+      ],
+      "app_name": "崩壊3rd"
+    },
+    {
+      "title": "リアルイベント『華火！お友達！ハイペリオン号出航！』大阪会場",
+      "start_date": "2026-10-23",
+      "end_date": "2026-10-25",
+      "description": "大阪府大阪市中央区城見2-1-61 TWIN21 1Fにて開催されるオフラインイベントです。特設フォトスポット、公式コスプレイヤーの出演・撮影会、イベント限定オリジナルグッズ販売、来場者特典（シリアルコード、ポストカード等）の配布が実施されます（物販エリアは事前予約制）。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://www.houkai3rd.com/"
+        }
+      ],
+      "app_name": "崩壊3rd"
+    },
+    {
+      "title": "リアルイベント『華火！お友達！ハイペリオン号出航！』東京会場",
+      "start_date": "2026-11-13",
+      "end_date": "2026-11-15",
+      "description": "東京都千代田区外神田1-15-16 秋葉原ラジオ会館11Fにて開催されるオフラインイベントです。特設フォトスポット、公式コスプレイヤーとの交流・撮影会、イベント限定グッズの販売、来場特典配布などが実施されます（物販エリアは事前予約制）。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://www.houkai3rd.com/"
+        }
+      ],
+      "app_name": "崩壊3rd"
+    },
+    {
+      "title": "Ver.3.7「鏡に鎖す妄世、心で照らす紅塵」 共鳴者集音 第一期",
+      "start_date": "2026-09-30",
+      "end_date": "2026-10-22",
+      "description": "新★5共鳴者「心（しん）」（属性：電導 / 武器：増幅器）がピックアップされる期間限定イベント集音。復刻★5共鳴者として「ユーノ」「千咲」の集音、およびモチーフ★5武器の武器集音も同時開催されています。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "Ver.3.7「鏡に鎖す妄世、心で照らす紅塵」 共鳴者集音 第二期",
+      "start_date": "2026-10-22",
+      "end_date": "2026-11-11",
+      "description": "新★5共鳴者「鎖暝（さめい）」（属性：電導 / 武器：迅刀）がピックアップされる期間限定イベント集音。復刻★5共鳴者として「リンネー」「ルシラー」の集音、および各モチーフ武器集音が開催予定です。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "勇者ダンダン大乱闘",
+      "start_date": "2026-09-30",
+      "end_date": "2026-11-11",
+      "description": "第二ソラリスの特設ステージを舞台に、ショップフェーズでのアイテム購入・配置・合成と自動戦闘フェーズを駆使して挑戦を進めるVer.3.7のテーマイベント。星声や限定プロフィール、限定アイコンなどの報酬を獲得できます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "匣の中の夢",
+      "start_date": "2026-09-30",
+      "end_date": "2026-11-11",
+      "description": "新エリア「夢枢天羅」の探索、指定任務の達成、エリア内の各種コンテンツを攻略することで、星声や各種育成素材を獲得できるエリア探索イベントです。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "過ぎし夢の契り",
+      "start_date": "2026-09-30",
+      "end_date": "2026-11-11",
+      "description": "心域エリア各地の指定された風景や記憶を撮影して記録するフォト撮影イベント。撮影ミッションを達成することで星声や各種育成素材が入手できます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "天工の探し物",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-26",
+      "description": "複数のウェーブに分かれた戦闘で特殊なバフを活用しながらステージ攻略を目指す期間限定の戦闘イベント。クリア状況に応じて星声や育成素材が手に入ります。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "ウェブイベント「朝月の魚群」",
+      "start_date": "2026-10-15",
+      "end_date": "2026-11-01",
+      "description": "朝月会の屋台をテーマとした公式Web連動イベント。釣りチャレンジに参加して魚群図鑑を埋め、指定されたイベント任務をクリアすることで星声、高級レコードセット、シェルコインなどのゲーム内報酬を獲得できます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "無音イレイサー",
+      "start_date": "2026-10-22",
+      "end_date": "2026-11-09",
+      "description": "Ver.3.7後半に開催予定の戦闘系テーマイベント。各ステージの挑戦目標をクリアすることで星声や共鳴者育成用素材を獲得できます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "傍らに響く雨音のプレゼント",
+      "start_date": "2026-10-22",
+      "end_date": "2026-11-11",
+      "description": "Ver.3.7後半期間中にログインすることでガチャ石やアイテムなどの特典を受け取ることができる期間限定ログインボーナスキャンペーンです。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "潮騒探検・玄方地界",
+      "start_date": "2026-10-29",
+      "end_date": "2026-11-11",
+      "description": "玄方地界を対象としたデイリー探索イベント。期間中に指定された探索任務をクリアすることで星声や恒常集音アイテムなどの報酬を入手できます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
+      "title": "ソラリス復帰招待",
+      "start_date": "2026-09-30",
+      "end_date": "2026-11-12",
+      "description": "未ログイン期間が長い復帰プレイヤーを招待し、専用の招待コードを入力してもらうことで双方が星声や各種アイテムを獲得できるフレンド招待キャンペーンです。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://wutheringwaves.kurogame.com/jp"
+        }
+      ],
+      "app_name": "鳴潮"
+    },
+    {
       "title": "鳴潮×GiGOキャンペーン",
       "start_date": "2026-09-19",
       "end_date": "2026-10-18",
-      "description": "全国のGiGOグループのお店およびオンラインクレーンゲーム「GiGO ONLINE CRANE」にて開催。限定景品（缶バッジ、アクリルボード、ビッグクッション等）の投入、対象クレーンゲームへの500円投入によるクリアカード配布（全6種）、オリジナルコースター付きドリンク販売などを実施。",
+      "description": "全国のGiGOグループ店舗で展開されるリアルコラボキャンペーン。限定プライズ（ビッグクッション、アクリルボード、缶バッジ、デフォルメアクスタなど）の登場や、ノベルティ付きドリンクの販売、対象機への500円投入でオリジナルクリアカードがプレゼントされます。",
       "category": "real",
       "links": [
         {
           "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
+          "url": "https://wutheringwaves.kurogame.com/jp"
         }
       ],
       "app_name": "鳴潮"
     },
     {
-      "title": "Ver.3.7 共鳴者集音 第一期「心」ピックアップ",
-      "start_date": "2026-09-30",
-      "end_date": "2026-10-22",
-      "description": "新登場の限定星5共鳴者「心」（電導・増幅器）の排出確率が大幅にアップするイベント集音。星4共鳴者「トレイ」「桃祈」「釉瑚」もピックアップ。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "Ver.3.7 武器集音 第一期「玉殿に咲き満ちる玄華」",
-      "start_date": "2026-09-30",
-      "end_date": "2026-10-22",
-      "description": "「心」のモチーフ武器となる新星5増幅器「玉殿に咲き満ちる玄華」の排出確率が大幅にアップする武器集音。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "Ver.3.7 復刻共鳴者集音 第一期「ユーノ」「千咲」",
-      "start_date": "2026-09-30",
-      "end_date": "2026-10-22",
-      "description": "星5共鳴者「ユーノ」および「千咲」が復刻登場する期間限定集音。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "エリア探索イベント「匣の中の夢」",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-11",
-      "description": "Ver.3.7で開放された新エリア「夢枢天羅」の探索を進め、指定された探索度や課題を達成することで星声や育成素材などの報酬を獲得できるイベント。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "ログインイベント「朝月のプレゼント」",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-11",
-      "description": "期間中にログインすることで、最大7日分にわたり集音アイテムなどのゲーム内アイテムを受け取ることができるログインボーナスイベント。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "戦闘挑戦イベント「天工の探し物」",
-      "start_date": "2026-10-08",
-      "end_date": "2026-10-26",
-      "description": "特殊な戦闘ルールが適用されたステージで敵と戦う期間限定の挑戦イベント。各ステージの目標を達成することで星声や育成素材を獲得可能。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "育成素材2倍ドロップイベント「反響領域」",
-      "start_date": "2026-10-15",
-      "end_date": "2026-10-22",
-      "description": "期間中、キャラ・武器の育成素材が手に入る「擬真領域」や「無律空境」などの挑戦報酬受取時に、毎日一定回数分2倍の報酬を獲得できるキャンペーン。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "Webイベント「朝月の魚群」",
-      "start_date": "2026-10-15",
-      "end_date": "2026-11-01",
-      "description": "専用の特設Webページにてデイリー任務を達成しミニゲームを進めることで、星声やゲーム内アイテムを獲得できるWeb連動型イベント。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "Ver.3.7 共鳴者集音 第二期「鎖暝」ピックアップ",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "description": "新登場の限定星5共鳴者「鎖暝（サメイ）」（電導・迅刀）の排出確率が大幅にアップするイベント集音。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "Ver.3.7 武器集音 第二期「沈冥」",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "description": "「鎖暝」のモチーフ武器となる新星5迅刀「沈冥」の排出確率がアップする武器集音。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "Ver.3.7 復刻共鳴者集音 第二期「リンネー」「ルシラー」",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "description": "星5共鳴者「リンネー」および「ルシラー」が復刻登場する期間限定集音。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "ログインイベント「傍らに響く雨音のプレゼント」",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "description": "Ver.3.7後半期間に実施されるログインボーナスイベント。期間中にログインすることで最大7日間にわたって集音アイテムなどが配布される。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "依頼イベント「潮騒探検・玄方地界」",
-      "start_date": "2026-10-29",
-      "end_date": "2026-11-11",
-      "description": "玄方地界エリアの各種調査任務や依頼を完了させることで、星声や育成素材などの報酬を獲得できる期間限定イベント。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "音骸素材2倍ドロップイベント「響き渡る音弦」",
-      "start_date": "2026-11-04",
-      "end_date": "2026-11-11",
-      "description": "期間中、無音区のクリア報酬受け取り時に毎日一定回数分2倍の音骸および音骸育成素材を獲得できる育成支援イベント。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://wutheringwaves.kurogames.com/jp/main"
-        }
-      ],
-      "app_name": "鳴潮"
-    },
-    {
-      "title": "月明かりのweekendⅠ ガチャ",
-      "start_date": "2026-10-02",
-      "end_date": "2026-10-20",
-      "description": "期間限定ガチャ。ピックアップアイドルとして「★5 心安らぐ星空の休日 長瀬琴乃」および「★5 桃コーデで弾ける休日 伊吹渚」が登場します。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://idolypride.jp/"
-        }
-      ],
-      "app_name": "IDOLY PRIDE"
-    },
-    {
-      "title": "月明かりのweekendⅡ ガチャ",
-      "start_date": "2026-10-02",
-      "end_date": "2026-10-20",
-      "description": "期間限定ガチャ。ピックアップアイドルとして「★5 浪漫息づく麗らかな休日 白石千紗」、「★5 ElegantなLadyの休日 成宮すず」、「★5 にゃん！と楽しい休日 早坂芽衣」が登場します。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://idolypride.jp/"
-        }
-      ],
-      "app_name": "IDOLY PRIDE"
-    },
-    {
-      "title": "雫誕生日2026 ガチャ",
-      "start_date": "2026-10-15",
-      "end_date": "2026-10-22",
-      "description": "兵藤雫の誕生日を記念した限定ガチャ。新登場アイドルとして「★5 dear precious 雫 兵藤雫」がピックアップされます。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://idolypride.jp/"
-        }
-      ],
-      "app_name": "IDOLY PRIDE"
-    },
-    {
-      "title": "【復刻】選べる雫誕生日 ガチャ",
-      "start_date": "2026-10-15",
-      "end_date": "2026-10-22",
-      "description": "兵藤雫の誕生日を記念した過去の誕生日限定アイドルの復刻ガチャ。「wonderful day for 雫」「誕生日トラベル・雫」「全開！推し活バースデー」などから選んでピックアップ可能です。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://idolypride.jp/"
-        }
-      ],
-      "app_name": "IDOLY PRIDE"
-    },
-    {
-      "title": "麻奈誕生日2026 ガチャ",
-      "start_date": "2026-10-09",
-      "end_date": "2026-10-16",
-      "description": "長瀬麻奈の誕生日を記念した限定ガチャ。「★5 軌跡たどるバースデー 長瀬麻奈」がピックアップ登場します。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://idolypride.jp/"
-        }
-      ],
-      "app_name": "IDOLY PRIDE"
-    },
-    {
-      "title": "アイプラ生放送プチ",
-      "start_date": "2026-10-01",
-      "end_date": "2026-10-01",
-      "description": "公式YouTubeチャンネルおよびニコニコ生放送にて配信。出演は橘美來（長瀬琴乃役）、相川奏多（成宮すず役）。ゲーム内最新情報や新ガチャ情報等をお届け。",
+      "title": "「IDOLY PRIDE」×「横浜・八景島シーパラダイス」コラボイベント",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "description": "横浜・八景島シーパラダイスにて開催されるコラボイベント。水族館やアトラクションでのオリジナル園内放送・ガイドボイス、スーパーイワシイリュージョン~Starry Sea~、デジタルスタンプラリー、コラボフード・グッズ販売、花火シンフォニアやミニライブ・スペシャルイベント等を実施。",
       "category": "real",
       "links": [
         {
-          "name": "公式YouTube",
+          "name": "公式サイトNEWS",
+          "url": "https://idolypride.jp/news/202407251800/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "「IDOLY PRIDE×横浜・八景島シーパラダイス ミニライブ＆スペシャルイベント」〜月のテンペスト＆サニーピースのお待たせしました里帰り～",
+      "start_date": "2024-10-20",
+      "end_date": "2024-10-20",
+      "description": "横浜・八景島シーパラダイス内のライブスタジアムにて開催される、月のテンペストおよびサニーピースによる里帰りミニライブ＆トークスペシャルイベント（昼・夜2回公演）。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイトNEWS",
+          "url": "https://idolypride.jp/news/202407251800/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "「ご注文はうさぎですか？10th Anniversary」コラボイベント「心跳ねるクリスマスパーティー」",
+      "start_date": "2024-11-28",
+      "end_date": "2024-12-23",
+      "description": "『ご注文はうさぎですか？10th Anniversary』とのコラボレーションイベント。ココアとチノがフルボイスで登場する限定ストーリーや、イベントアイドル「★2 赤崎こころ」の獲得、楽曲「Daydream café」の3Dライブ実装などを展開。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://idolypride.jp/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "コラボガチャ「with Rabbit House Ⅰ」",
+      "start_date": "2024-11-28",
+      "end_date": "2024-12-23",
+      "description": "『ご注文はうさぎですか？』コラボガチャ第1弾。★5 ココア、★5 チノが期間限定でピックアップ登場し、初回10連無料および★5アイドルの出現率2倍が適用される。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://idolypride.jp/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "コラボガチャ「with Rabbit House Ⅱ」",
+      "start_date": "2024-12-04",
+      "end_date": "2024-12-23",
+      "description": "『ご注文はうさぎですか？』コラボガチャ第2弾。コラボ限定衣装を着用した「★5 成宮すず」「★5 兵藤雫」がピックアップ対象として登場し、初回10連無料および★5アイドルの出現率2倍が適用される。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://idolypride.jp/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "IDOLY PRIDE POP UP SHOP&衣装展",
+      "start_date": "2025-02-28",
+      "end_date": "2025-03-16",
+      "description": "タワーレコード渋谷店2階催事スペース「TOWER SPACE SHIBUYA」にて開催される展示・物販イベント。歴代ライブの衣装展示（前期・後期入替）や記念グッズの販売、DJイベント、購入者向けスペシャルイベントを実施。大阪・名古屋でもPOP UP SHOPが巡回開催。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://idolypride.jp/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "LAWSON presents IDOLY PRIDE star tomorrow",
+      "start_date": "2025-03-30",
+      "end_date": "2025-03-30",
+      "description": "立川ステージガーデンにて開催される星見プロダクション所属ユニットによる単独ライブ。出演者は月のテンペスト、サニーピース。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト LIVE情報",
+          "url": "https://idolypride.jp/live/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "LAWSON presents IDOLY PRIDE star tomorrow 盛夏祭/涼夏祭",
+      "start_date": "2025-08-02",
+      "end_date": "2025-08-02",
+      "description": "東京・豊洲PITにて開催される単独夏祭りライブ。昼公演「盛夏祭」および夜公演「涼夏祭」の2回公演で、月のテンペストとサニーピースが出演。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト LIVE情報",
+          "url": "https://idolypride.jp/live/"
+        }
+      ],
+      "app_name": "IDOLY PRIDE"
+    },
+    {
+      "title": "アイプラ生放送",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-01",
+      "description": "IDOLY PRIDE公式YouTubeチャンネルにて定期的に配信される公式情報生放送番組。キャストが出演し、ゲーム内外の最新アップデート情報やキャンペーン内容をお届けする。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式YouTubeチャンネル",
           "url": "https://www.youtube.com/@IDOLYPRIDE"
         }
       ],
       "app_name": "IDOLY PRIDE"
     },
     {
-      "title": "期間限定イベント「エルピス討魔戦線」",
-      "start_date": "2026-10-15",
-      "end_date": "2026-10-20",
-      "description": "イベント限定のボスバトルに挑戦し、撃破までのクリアタイムによってスコアを競うタイムアタック型ゲーム内イベントです。今回は光属性と闇属性の属性ボーナスが上昇します。",
+      "title": "プリコネR×ウマ娘 プリティーダービーコラボ記念生放送！",
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-17",
+      "description": "「ウマ娘 プリティーダービー」との大型コラボレーションを記念した公式特別生放送。YouTube Liveおよび公式X Liveにて19:00より生配信。ペコリーヌ役のM・A・Oさん、コッコロ役の伊藤美来さん、キャル役の立花理香さんをはじめ、ウマ娘キャスト陣を迎えてコラボイベントや登場キャラ（ゴールドシップ、アーモンドアイ、ラッキーライラック、デアリングタクト）などの最新情報を公開。公式Xでのリポストプレゼントキャンペーンも同時開催。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://priconne-redive.jp/"
+        },
+        {
+          "name": "公式YouTubeチャンネル",
+          "url": "https://www.youtube.com/@priconne_redive"
+        }
+      ],
+      "app_name": "プリコネR"
+    },
+    {
+      "title": "復刻ストーリーイベント「Summer Anemos, Summer Qualia」",
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-23",
+      "description": "限定ストーリーやイベント限定クエスト、ボスバトルに挑戦できる復刻ストーリーイベント。クエスト周回やボス討伐を通して、ジュエルや育成素材（コネクトRANK強化・プリンセスナイト強化関連アイテム等）を獲得可能。エンディング閲覧でミニコンテンツ「ニノン、オーオクの試練」が解放される。",
       "category": "game",
       "links": [
         {
@@ -825,11 +891,25 @@
       "app_name": "プリコネR"
     },
     {
-      "title": "復刻ストーリーイベント「Summer Anemos, Summer Qualia」",
-      "start_date": "2026-10-16",
-      "end_date": "2026-10-23",
-      "description": "期間限定のストーリーや特別なクエスト、ボスバトルに挑戦できる復刻ストーリーイベントです。イベントをプレイすることで限定ストーリーの閲覧や各種報酬が獲得できます。",
+      "title": "エルピス討魔戦線",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-20",
+      "description": "専用ボスバトルに挑戦し、討伐タイムによってスコアを競う期間限定タイムアタックイベント。今回は光属性および闇属性のキャラクターに属性ボーナスが付与され、スコアに応じて豪華報酬を獲得できる。",
       "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://priconne-redive.jp/"
+        }
+      ],
+      "app_name": "プリコネR"
+    },
+    {
+      "title": "選べるプライズガチャ",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-31",
+      "description": "対象となるハロウィン関連などの期間限定キャラ（ノゾミ（アルケミスト）、サレン（サラサリア）、ミサキ（ハロウィン）、キョウカ（ハロウィン）、カオリ（ハロウィン）、トモ（ハロウィン））の中から好きなキャラをピックアップ選択できるガチャ。ガチャを引くごとにメモリーピースやコネクトコインなどが当たるプライズ報酬も獲得可能。",
+      "category": "gacha",
       "links": [
         {
           "name": "公式サイト",
@@ -840,9 +920,9 @@
     },
     {
       "title": "期間限定キャラ「アメス（ガンナー）」登場！ピックアップガチャ",
-      "start_date": "2026-10-09",
-      "end_date": "2026-10-23",
-      "description": "期間限定新キャラクター「アメス（ガンナー）」の出現率がアップするピックアップガチャです。対象キャラ獲得時にマスターピースやメモリーピースのおまけが付与されます。",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-20",
+      "description": "期間限定の新キャラクター「アメス（ガンナー）」がピックアップガチャおよびプラチナガチャに登場。ピックアップ対象として出現率がアップし、獲得時にはアメス（ガンナー）のメモリーピース200個とマスターピース3個が付与される。",
       "category": "gacha",
       "links": [
         {
@@ -853,33 +933,15 @@
       "app_name": "プリコネR"
     },
     {
-      "title": "「選べるプライズガチャ」",
-      "start_date": "2026-10-15",
+      "title": "バトルスタジアム",
+      "start_date": "2026-10-01",
       "end_date": "2026-10-31",
-      "description": "対象キャラ（ノゾミ（アルケミスト）、サレン（サラサリア）、ミサキ（ハロウィン）、キョウカ（ハロウィン）、カオリ（ハロウィン）、トモ（ハロウィン））の中から好きなキャラを選んでピックアップ設定できるガチャです。ガチャを引くごとにプライズ報酬も獲得できます。",
-      "category": "gacha",
+      "description": "育成した多数のキャラクターや編成を駆使して様々なステージを攻略する高難度コンテンツ。各バトルのクリア状況に応じてジュエルや育成アイテムなどの報酬を獲得できる。",
+      "category": "game",
       "links": [
         {
           "name": "公式サイト",
           "url": "https://priconne-redive.jp/"
-        }
-      ],
-      "app_name": "プリコネR"
-    },
-    {
-      "title": "「プリコネR×ウマ娘 プリティーダービーコラボ記念生放送！」",
-      "start_date": "2026-10-17",
-      "end_date": "2026-10-17",
-      "description": "『ウマ娘 プリティーダービー』とのコラボレーションを記念した公式特別生放送番組です。YouTube Liveおよび公式Xにて配信され、コラボイベントの最新情報やゲーム内情報が発表されます。出演者：M・A・O、伊藤美来、立花理香、上田瞳、石原夏織、中島由貴、羊宮妃那。",
-      "category": "real",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://priconne-redive.jp/"
-        },
-        {
-          "name": "公式YouTube",
-          "url": "https://www.youtube.com/@priconne_redive"
         }
       ],
       "app_name": "プリコネR"
@@ -888,7 +950,7 @@
       "title": "【復刻イベント】「我らオカルト研究会！ ～学院の不思議と古の呪文～」",
       "start_date": "2026-10-07",
       "end_date": "2026-10-21",
-      "description": "期間限定復刻イベント「我らオカルト研究会！ ～学院の不思議と古の呪文～」が開催。イベントステージをクリアして「絵の具」「大理石キューブ」「ショップカード」などの専用アイテムを集め、各種育成素材やアイテムと交換できます。参加条件は任務Area2-3クリア（報酬交換期間は10月28日10:59まで）。",
+      "description": "期間限定復刻イベント「我らオカルト研究会！ ～学院の不思議と古の呪文～」が開催中。イベントステージをクリアして集めたアイテムでミニゲーム「サイコロラン」への参加や、イベント限定家具「デスメタルステージ」などの各種報酬と交換できます。",
       "category": "game",
       "links": [
         {
@@ -902,7 +964,7 @@
       "title": "大決戦「屋外戦・ゲブラ」",
       "start_date": "2026-10-14",
       "end_date": "2026-10-21",
-      "description": "大決戦「屋外戦・ゲブラ」が開催。軽装備・重装甲・特殊装甲の各防御タイプに挑み、大決戦コインやランキングに応じたトロフィーなどの報酬を獲得できます。参加条件は任務Area4-5クリア。",
+      "description": "大決戦「屋外戦・ゲブラ」が開催。屋外戦を舞台に、軽装備・重装甲・特殊装甲の3つの防御タイプに挑み、大決戦コインや順位報酬の獲得を目指します。",
       "category": "game",
       "links": [
         {
@@ -916,7 +978,7 @@
       "title": "制約解除決戦「ティファレト」",
       "start_date": "2026-09-24",
       "end_date": "2026-10-28",
-      "description": "高難易度ボス攻略コンテンツ「制約解除決戦」にて「ティファレト」が開催。段階ごとのクリアを目指して編成・戦術を駆使し、能力解放素材や育成アイテムを獲得できます。参加条件は任務Area5-1クリア。",
+      "description": "高難易度コンテンツ「制約解除決戦」のボス「ティファレト」（地形：屋外戦、防御タイプ：重装甲）が開催中。最大124段階の階層攻略に挑戦できます。",
       "category": "game",
       "links": [
         {
@@ -927,38 +989,10 @@
       "app_name": "ブルーアーカイブ"
     },
     {
-      "title": "任務(Normal)報酬2倍キャンペーン",
-      "start_date": "2026-10-14",
-      "end_date": "2026-10-21",
-      "description": "期間中、任務(Normal)クリア時に獲得できる装備設計図や各種ドロップ報酬の獲得量が通常の2倍となる育成応援キャンペーンです。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://bluearchive.jp/"
-        }
-      ],
-      "app_name": "ブルーアーカイブ"
-    },
-    {
-      "title": "任務(Hard)報酬2倍キャンペーン",
-      "start_date": "2026-10-21",
-      "end_date": "2026-10-28",
-      "description": "期間中、任務(Hard)クリア時に獲得できる生徒の神名文字や各種アイテムのドロップ量が通常の2倍となる育成応援キャンペーンです。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://bluearchive.jp/"
-        }
-      ],
-      "app_name": "ブルーアーカイブ"
-    },
-    {
-      "title": "ピックアップ募集「弦よ、軋め！ 紡がれるは冥界の旋律！」",
+      "title": "ピックアップ募集「弦よ、軋め！紡がれるは冥界の旋律！」",
       "start_date": "2026-10-07",
       "end_date": "2026-10-21",
-      "description": "ワイルドハント芸術学院所属の「オカルト研究会」メンバー、★3「ツムギ」が新規ピックアップ対象として登場する生徒募集です。",
+      "description": "オカルト研究会に所属する★3生徒「ツムギ」の新規ピックアップ募集です。",
       "category": "gacha",
       "links": [
         {
@@ -969,10 +1003,10 @@
       "app_name": "ブルーアーカイブ"
     },
     {
-      "title": "復刻ピックアップ募集「星よ、見て！夢に奔るは魔導の筆！」「影よ、聴け 幻纏うは数多の声」「微速前進 安らぎの浜辺へ」「急速潜航 活路は水底に」",
+      "title": "復刻ピックアップ募集「星よ、見て！夢に奔るは魔導の筆！」",
       "start_date": "2026-10-07",
       "end_date": "2026-10-21",
-      "description": "オカルト研究会の★3「エリ」、★3「カノエ」、ならびに水着姿のRABBIT小隊★3「ミヤコ(水着)」、★3「サキ(水着)」の復刻ピックアップ募集が同時開催されます。",
+      "description": "オカルト研究会所属の★3生徒「エリ」の復刻ピックアップ募集です。",
       "category": "gacha",
       "links": [
         {
@@ -983,29 +1017,43 @@
       "app_name": "ブルーアーカイブ"
     },
     {
-      "title": "ブルーアーカイブ おーたむふぇあ2026 in animate",
-      "start_date": "2026-10-10",
-      "end_date": "2026-11-08",
-      "description": "全国アニメイト各店およびアニメイト通販にて開催されるグッズフェア。期間中『ブルーアーカイブ』関連商品を購入・予約内金1,100円(税込)ごとにイラストカード(全7種)がランダムで1枚プレゼントされます。",
-      "category": "real",
+      "title": "復刻ピックアップ募集「影よ、聴け 幻纏うは数多の声」",
+      "start_date": "2026-10-07",
+      "end_date": "2026-10-21",
+      "description": "オカルト研究会所属の★3生徒「カノエ」の復刻ピックアップ募集です。",
+      "category": "gacha",
       "links": [
         {
-          "name": "アニメイト通販",
-          "url": "https://www.animate-onlineshop.jp/"
+          "name": "公式サイト",
+          "url": "https://bluearchive.jp/"
         }
       ],
       "app_name": "ブルーアーカイブ"
     },
     {
-      "title": "「ブルーアーカイブ×Ｊリーグ」コラボイベント（明治安田Ｊ１リーグ第14節「ヴィッセル神戸 vs. 浦和レッズ」）",
-      "start_date": "2026-11-08",
-      "end_date": "2026-11-08",
-      "description": "Ｊ１全20クラブと『ブルーアーカイブ』のコラボレーション企画。MUFGスタジアム（国立競技場）にて開催される試合会場で「ブルアカＪリーグSHOP」を出店しオリジナルコラボグッズを現地販売。翌11月9日からはJ.LEAGUE ONLINE STOREにて事後通販も実施予定です。",
+      "title": "復刻ピックアップ募集「微速前進 安らぎの浜辺へ」＆「急速潜航 活路は水底に」",
+      "start_date": "2026-10-07",
+      "end_date": "2026-10-21",
+      "description": "水着姿のRABBIT小隊メンバー★3「ミヤコ(水着)」および★3「サキ(水着)」の復刻ピックアップ募集です。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://bluearchive.jp/"
+        }
+      ],
+      "app_name": "ブルーアーカイブ"
+    },
+    {
+      "title": "帰ってきた！ブルアカVR＋",
+      "start_date": "2026-10-30",
+      "end_date": "2026-11-03",
+      "description": "東京・TOC有明にて開催予定のブルアカ5周年5大施策第3弾となる体感型VRイベント。生徒たちとの特別なVR体験や展示が実施されます。",
       "category": "real",
       "links": [
         {
-          "name": "Ｊリーグオンラインストア",
-          "url": "https://store.jleague.jp/"
+          "name": "公式サイト",
+          "url": "https://bluearchive.jp/"
         }
       ],
       "app_name": "ブルーアーカイブ"
@@ -1014,145 +1062,25 @@
       "title": "ブルーアーカイブ ～木枯らしぴゅ～ 金色とことこ 金沢さんぽ♪～",
       "start_date": "2026-11-13",
       "end_date": "2026-12-13",
-      "description": "石川県金沢市内を舞台に開催される公式デジタルスタンプラリー企画。ワイルドハント芸術学院の生徒（エリ、カノエ、ミヨ、レナ、リツ、フユ、ツムギ）の描き下ろし晴れ着ビジュアルを用いたグッズ販売や金箔貼り体験を実施。また11月15日には石川県文教会館にてキャスト5名が出演するトークショーも開催予定です。",
+      "description": "石川県金沢市内各所にて開催される5周年記念全国スタンプラリー第4弾。市内スポットを巡るデジタルスタンプラリーや描き下ろしイラストグッズ販売、ブルアカ仕様の金箔貼り体験、11月15日(日)には石川県文教会館にてキャスト陣出演のトークショー「ブルーアーカイブ トークショー in 金沢」が開催されます。",
       "category": "real",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://bluearchive.jp/"
+          "name": "イベント特設サイト",
+          "url": "https://bluearchive-5thstamp.jp/kanazawa/"
         },
         {
-          "name": "公式YouTubeチャンネル",
-          "url": "https://www.youtube.com/@BlueArchive_JP"
+          "name": "公式サイト",
+          "url": "https://bluearchive.jp/"
         }
       ],
       "app_name": "ブルーアーカイブ"
     },
     {
-      "title": "スナップイベント「このいろは、見えざりて」",
-      "start_date": "2026-10-16",
-      "end_date": "2026-10-30",
-      "description": "第31D部隊の石井色葉にフォーカスしたスナップイベント。イベント限定ストーリーを楽しめるほか、プリズムバトルでメダルを集めることで豪華報酬を獲得できます。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://heaven-burns-red.com/"
-        },
-        {
-          "name": "公式PV",
-          "url": "https://www.youtube.com/watch?v=zAgP83hfYO8"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "「ヘブバン×Angel Beats!」コラボイベント一挙復刻開催",
-      "start_date": "2026-10-02",
-      "end_date": "2026-10-30",
-      "description": "過去に開催された『Angel Beats!』コラボストーリーイベント第1弾「コスモスが咲き続けた場所」、第2弾「Beautiful the Blood」、第3弾「唐突にファザー～オカンとアタシと弟と、ずっとアルコール依存～」が一挙復刻開催。好きなコラボSSスタイル1体プレゼントや最大100連無料などのキャンペーンも同時開催。",
-      "category": "game",
-      "links": [
-        {
-          "name": "コラボ復刻特別サイト",
-          "url": "https://heaven-burns-red.com/collab-angelbeats/"
-        },
-        {
-          "name": "公式サイト",
-          "url": "https://heaven-burns-red.com/"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "ハロウィンログインボーナス",
-      "start_date": "2026-10-16",
-      "end_date": "2026-10-29",
-      "description": "ハロウィンを記念した特別なログインボーナス。期間中のログインでクォーツなどのゲーム内アイテムを獲得できます。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://heaven-burns-red.com/"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "ピックアッププラチナガチャ（SS<レゾナンス>石井色葉 / SS<レゾナンス>佐月マリ）",
-      "start_date": "2026-10-16",
-      "end_date": "2026-10-30",
-      "description": "新スタイル「SS<レゾナンス>[禁忌のシンセサイズ] 石井色葉」および「SS<レゾナンス>[戦慄のナースコール] 佐月マリ」がピックアップされたプラチナガチャ。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://heaven-burns-red.com/"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "ピックアッププラチナガチャ（SS<レゾナンス>和泉ユキ / S逢川めぐみ）",
-      "start_date": "2026-10-09",
-      "end_date": "2026-10-23",
-      "description": "新衣装の「SS<レゾナンス>[フルール・アンシャンテ] 和泉ユキ」および「S[絶好の釣り日和] 逢川めぐみ」がピックアップ対象として登場するプラチナガチャ。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://heaven-burns-red.com/"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "復刻 Angel Beats! コラボガチャ（第1弾〜第3弾）",
-      "start_date": "2026-10-02",
-      "end_date": "2026-10-30",
-      "description": "『Angel Beats!』コラボSSスタイル（立華かなで、仲村ゆり、入江みゆき、芳岡ユイ、岩沢雅美）が再登場する復刻ガチャ。全コラボSSスタイルがSS<レゾナンス>化・バランス調整された状態で登場します。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "コラボ復刻特別サイト",
-          "url": "https://heaven-burns-red.com/collab-angelbeats/"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "ヘブンバーンズレッド全117体ミニキャラ描き下ろし祭り！ 第5弾【クリスマス】先行通販",
-      "start_date": "2026-10-16",
-      "end_date": "2026-10-31",
-      "description": "ヘブバン×A3の6企画連続POP UP企画。第5弾としてクリスマス衣装をまとった部隊（31A、31B、30G、31X）の描き下ろしミニキャラグッズが登場し、eeo Storeにて先行通販が実施されます。",
-      "category": "real",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://heaven-burns-red.com/"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
-      "title": "『ヘブンバーンズレッド』公式生放送 ヘブバン情報局Vol.129",
-      "start_date": "2026-10-29",
-      "end_date": "2026-10-29",
-      "description": "公式YouTubeチャンネルにて20:00より配信される定期生放送番組。今後のアップデート情報や最新スタイル、ゲーム内イベント情報などを発表予定。",
-      "category": "real",
-      "links": [
-        {
-          "name": "公式YouTubeチャンネル",
-          "url": "https://www.youtube.com/@heavenburnsred_official"
-        }
-      ],
-      "app_name": "ヘブンバーンズレッド"
-    },
-    {
       "title": "お願い、サイドスロー",
       "start_date": "2026-10-09",
       "end_date": "2026-10-17",
-      "description": "バンド「millsage」を中心としたチャレンジライブイベント。イベント課題曲のプレイやポイント報酬を通じて、イベント限定報酬のSRメンバー「[笑み、暗がりにて]和泉朋花」やSRスナップ「光、手をかざして」などが獲得可能。",
+      "description": "新バンド「millsage（ミルサージュ）」初となるゲーム内チャレンジライブイベント。課題曲としてオリジナル楽曲『Odd Dice』が登場し、イベント限定報酬として★3/メンバー「[笑み、暗がりにて] 和泉朋花」やスナップ「光、手をかざして」などが獲得できます。",
       "category": "game",
       "links": [
         {
@@ -1163,10 +1091,24 @@
       "app_name": "アワーノーツ"
     },
     {
-      "title": "差し込む光、始まりのときガチャ",
+      "title": "映画「BanG Dream! Ave Mujica prima aurora」公開記念 限定ミッション",
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-31",
+      "description": "劇場版『BanG Dream! Ave Mujica prima aurora』の公開を記念したゲーム内限定ミッション。ミッションを達成して入手できる「映画版ステッカー交換チケット」を使用することで、私服姿のAve Mujicaメンバーがデザインされた限定ステッカーと交換できます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://bang-dream-on.bushimo.jp/"
+        }
+      ],
+      "app_name": "アワーノーツ"
+    },
+    {
+      "title": "ガチャ「差し込む光、始まりのとき」",
       "start_date": "2026-10-09",
-      "end_date": "2026-10-18",
-      "description": "イベント「お願い、サイドスロー」のイベントボーナス対象となる新メンバーおよび新スナップがピックアップされたガチャ。新登場としてSSRメンバー「[薄明を裂いて]琴平凪」、SSRメンバー「[光芒に立つ]伊沢なつめ」、SSRスナップ「赤橙の中」「きみのため」が排出される。",
+      "end_date": "2026-10-17",
+      "description": "イベント「お願い、サイドスロー」に合わせて開催されるピックアップガチャ。SSRメンバー「[薄明を裂いて] 琴平凪」「[光芒に立つ] 伊沢なつめ」、新スナップ「赤橙の中 きみのため」などが登場し、出現率がアップしています。",
       "category": "gacha",
       "links": [
         {
@@ -1177,11 +1119,11 @@
       "app_name": "アワーノーツ"
     },
     {
-      "title": "BanG Dream! 13th☆LIVE「DIMENSIONAL OVERLAP」開催記念 特別ログインボーナス",
-      "start_date": "2026-10-11",
-      "end_date": "2026-10-18",
-      "description": "「夢限大みゅーたいぷ」の単独ライブ「DIMENSIONAL OVERLAP」開催を記念したゲーム内キャンペーン。期間中にゲームへログインすることで「スター×50」およびプロフィール等で使用できる「ライブロゴステッカー」が配布される。",
-      "category": "game",
+      "title": "映画「BanG Dream! Ave Mujica prima aurora」公開記念 Ave Mujicaピックアップガチャ",
+      "start_date": "2026-10-16",
+      "end_date": "2026-10-31",
+      "description": "映画『BanG Dream! Ave Mujica prima aurora』の全国劇場公開を記念して開催されるピックアップガチャ。Ave MujicaのSSRメンバーの出現率がアップするほか、開催期間中は毎日1回無料でガチャを引くことができます。",
+      "category": "gacha",
       "links": [
         {
           "name": "公式サイト",
@@ -1191,144 +1133,186 @@
       "app_name": "アワーノーツ"
     },
     {
-      "title": "BanG Dream! Our Notes × SWEETS PARADISE",
-      "start_date": "2026-11-02",
-      "end_date": "2026-11-29",
-      "description": "スイーツパラダイス全国9店舗（新宿東口店、梅田店、名古屋スパイラルタワーズ店、京都河原町OPA店、広島パルコ店、クレフィ三宮店、町田モディ店、丸井大宮店、仙台パルコ店）にて開催されるコラボカフェ。ゲーム内に登場する5バンド（MyGO!!!!!、Ave Mujica、夢限大みゅーたいぷ、millsage、一家Dumb Rock!）のオリジナルスイーツ・ドリンクメニューや限定描き下ろしグッズ、ノベルティが登場する。",
+      "title": "マチ★アソビ vol.31 出展",
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-18",
+      "description": "徳島県にて開催されるイベント「マチ★アソビ vol.31」にブシロードが出展。『バンドリ！アワーノーツ』の開発を担当するフロムトーキョーのスタッフトークショー（10月17日 11:30～ ufotable CINEMA）や、キャラクターデザイン・アートディレクター信澤収氏＆もちぷよ氏によるサイン会、一家Dumb Rock!キャスト（橘めい・涼泉桜花）によるポストカードお渡し会、関連展示などが実施されます。",
       "category": "real",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://bang-dream-on.bushimo.jp/"
-        },
-        {
-          "name": "バンドリ！公式サイト",
+          "name": "バンドリ！公式サイト イベント情報",
           "url": "https://bang-dream.com/"
         }
       ],
       "app_name": "アワーノーツ"
     },
     {
-      "title": "新章解放イベント【あなたの隣を歩けたら】後半",
-      "start_date": "2026-10-13",
-      "end_date": "2026-10-20",
-      "description": "第1部エピローグにあたる新章解放イベントの後半戦。イベントミッションを達成してポイントを集めることで、スタンダードガチャチケットや特別なイベント限定メモリーなどの豪華報酬を獲得できます。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://muvluv-girls-garden.com/"
-        }
-      ],
-      "app_name": "マブラヴ ガールズガーデン"
-    },
-    {
-      "title": "ピックアップログインボーナスSSR「コトハ」【歩む先に新たな日常を】",
-      "start_date": "2026-10-13",
-      "end_date": "2026-10-27",
-      "description": "新SSRキャラクター「コトハ」【歩む先に新たな日常を】の実装を記念して開催される期間限定ログインボーナス。期間中にログインすることで育成素材や各種便利アイテムを獲得できます。",
-      "category": "game",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://muvluv-girls-garden.com/"
-        }
-      ],
-      "app_name": "マブラヴ ガールズガーデン"
-    },
-    {
-      "title": "NEW CHARACTERピックアップガチャ「コトハ」",
-      "start_date": "2026-10-13",
-      "end_date": "2026-10-27",
-      "description": "新登場のSSRキャラクター「コトハ」【歩む先に新たな日常を】の提供割合がアップした期間限定のピックアップガチャです。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://muvluv-girls-garden.com/"
-        }
-      ],
-      "app_name": "マブラヴ ガールズガーデン"
-    },
-    {
-      "title": "NEW CHARACTERピックアップガチャ「桃園める」",
-      "start_date": "2026-10-06",
-      "end_date": "2026-10-20",
-      "description": "新SSRキャラクター「桃園める」【隣歩む想い】の提供割合がアップした期間限定のピックアップガチャです。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://muvluv-girls-garden.com/"
-        }
-      ],
-      "app_name": "マブラヴ ガールズガーデン"
-    },
-    {
-      "title": "属性ピックアップガチャ「キュート」",
-      "start_date": "2026-10-06",
-      "end_date": "2026-10-20",
-      "description": "キュート属性のキャラクターの排出確率がアップしている属性限定のピックアップガチャです。",
-      "category": "gacha",
-      "links": [
-        {
-          "name": "公式サイト",
-          "url": "https://muvluv-girls-garden.com/"
-        }
-      ],
-      "app_name": "マブラヴ ガールズガーデン"
-    },
-    {
-      "title": "『マブラヴ ガールズガーデン』×「カラオケの鉄人」コラボレーション",
-      "start_date": "2026-09-25",
-      "end_date": "2026-11-08",
-      "description": "「カラオケの鉄人」対象11店舗（新宿大ガード店、池袋東口店、渋谷道玄坂店、秋葉原電気街店、福岡天神店、大阪なんば店、名古屋名駅店、松山銀天街店、京都河原町店、新潟万代シティ店、札幌すすきの店）にて開催中のコラボイベント。ノベルティ付きコラボドリンクやマブガルセットの販売、限定オリジナルグッズ（アクリルスタンド、缶バッジ等）の販売、課題曲チャレンジなどが展開されています。",
+      "title": "BanG Dream! Our Notes リリース記念 オーディオ・ビジュアルフェア",
+      "start_date": "2026-09-29",
+      "end_date": "2026-10-31",
+      "description": "全国のアニメイト、ゲーマーズ、タワーレコード等の対象店舗および通販にて開催中のリリース記念フェア。「BanG Dream!」関連のオーディオ・ビジュアル商品を購入すると、「BanG Dream! Our Notes プロフィールカード」(全25種)がランダムでプレゼントされます（特典がなくなり次第終了）。",
       "category": "real",
       "links": [
         {
-          "name": "コラボ特設サイト",
-          "url": "https://www.karatetsu.com/animegame/muvluv-girls-garden.shtml"
+          "name": "バンドリ！公式サイト ニュース",
+          "url": "https://bang-dream.com/"
         }
       ],
-      "app_name": "マブラヴ ガールズガーデン"
+      "app_name": "アワーノーツ"
     },
     {
-      "title": "公式特別番組『Muv-Luv Presents 2026』",
+      "title": "『BanG Dream! Our Notes』×SWEETS PARADISE コラボカフェ",
+      "start_date": "2026-11-02",
+      "end_date": "2026-11-29",
+      "description": "スイーツパラダイス店舗（新宿東口店、名古屋スパイラルタワーズ店、梅田店、京都河原町OPA店等）にて開催予定のコラボカフェ。本作に登場するバンドやメンバーをイメージしたコラボメニューや限定ノベルティ、描き下ろしイラスト等を用いた限定グッズが販売されます。",
+      "category": "real",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://bang-dream-on.bushimo.jp/"
+        }
+      ],
+      "app_name": "アワーノーツ"
+    },
+    {
+      "title": "「バンドリ！TV LIVE 2026」第337回",
       "start_date": "2026-10-22",
       "end_date": "2026-10-22",
-      "description": "20:00よりYouTube各公式チャンネルにて生配信される記念情報番組。『マブラヴ ガールズガーデン』をはじめとするシリーズ最新情報が公開され、番組内ではリアルタイム視聴限定のプレゼントキャンペーンも実施予定です。",
+      "description": "YouTube公式チャンネル「バンドリちゃんねる☆」にて配信される公式生放送番組。佐々木李子（三角初華 役）と岡田夢以（八幡海鈴 役）が出演し、劇場版やゲーム『バンドリ！アワーノーツ』の最新情報などをお届けします。",
       "category": "real",
       "links": [
         {
-          "name": "マブラヴ公式YouTubeチャンネル",
+          "name": "YouTube配信ページ",
+          "url": "https://youtube.com/live/zjkpWq_pa0s"
+        },
+        {
+          "name": "公式YouTube",
+          "url": "https://www.youtube.com/@bang_dream_official"
+        }
+      ],
+      "app_name": "アワーノーツ"
+    },
+    {
+      "title": "新メインクエストイベント「あなたの隣を歩けたら」",
+      "start_date": "2026-10-06",
+      "end_date": "2026-10-20",
+      "description": "新章解放イベント「あなたの隣を歩けたら」が開催中。イベント限定ストーリーやステージをクリアすることで、限定SRメモリー「コトハの居場所」や各種育成素材などの報酬を獲得できます。10月13日より後半ステージが追加解放されています。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://muvluv-girls-garden.com/"
+        }
+      ],
+      "app_name": "マブラヴ ガールズガーデン"
+    },
+    {
+      "title": "サークル対抗制圧戦（第7回）",
+      "start_date": "2026-10-06",
+      "end_date": "2026-10-16",
+      "description": "サークルメンバーと協力してエリアの制圧を目指すサークル対抗イベント。前半戦（10月6日～10月16日04:59）および後半戦（10月11日12:00～10月16日04:59）が開催され、制圧スコアやランキングに応じた報酬が手に入ります。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://muvluv-girls-garden.com/"
+        }
+      ],
+      "app_name": "マブラヴ ガールズガーデン"
+    },
+    {
+      "title": "リリース400日記念ログインボーナス",
+      "start_date": "2026-10-06",
+      "end_date": "2026-10-20",
+      "description": "ゲームのサービス開始400日突破を記念した特別ログインボーナス。期間中にログインすることで、無償ジェムや育成に役立つ各種ゲーム内アイテムを受け取ることができます。",
+      "category": "game",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://muvluv-girls-garden.com/"
+        }
+      ],
+      "app_name": "マブラヴ ガールズガーデン"
+    },
+    {
+      "title": "NEW CHARACTERピックアップガチャ【歩む先に新たな日常を】コトハ",
+      "start_date": "2026-10-13",
+      "end_date": "2026-10-27",
+      "description": "新SSRキャラクター【歩む先に新たな日常を】コトハがピックアップされて登場する期間限定ガチャです。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://muvluv-girls-garden.com/"
+        }
+      ],
+      "app_name": "マブラヴ ガールズガーデン"
+    },
+    {
+      "title": "NEW CHARACTERピックアップガチャ【隣歩む想い】桃園める",
+      "start_date": "2026-10-06",
+      "end_date": "2026-10-20",
+      "description": "新SSRキャラクター【隣歩む想い】桃園めるの出現率がアップしたピックアップガチャです。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://muvluv-girls-garden.com/"
+        }
+      ],
+      "app_name": "マブラヴ ガールズガーデン"
+    },
+    {
+      "title": "CUTE属性ピックアップガチャ",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-23",
+      "description": "CUTE（キュート）属性のキャラクターがピックアップされた属性限定ガチャです。",
+      "category": "gacha",
+      "links": [
+        {
+          "name": "公式サイト",
+          "url": "https://muvluv-girls-garden.com/"
+        }
+      ],
+      "app_name": "マブラヴ ガールズガーデン"
+    },
+    {
+      "title": "特別番組『Muv-Luv presents 2026』",
+      "start_date": "2026-10-22",
+      "end_date": "2026-10-22",
+      "description": "YouTubeプレミア公開にて配信される特別公式生放送番組（20:00配信開始）。マブラヴシリーズ全体の最新動向とともに、『マブラヴ ガールズガーデン』の今後のアップデート情報や新展開が発表されます。リアルタイム視聴限定プレゼントキャンペーンも実施予定です。",
+      "category": "real",
+      "links": [
+        {
+          "name": "マブラヴ公式YouTube",
           "url": "https://www.youtube.com/@Muvluv_Official"
         },
         {
-          "name": "マブラヴ ガールズガーデン公式YouTubeチャンネル",
+          "name": "マブラヴ ガールズガーデン公式YouTube",
           "url": "https://www.youtube.com/@muvluv-girls-garden"
         }
       ],
       "app_name": "マブラヴ ガールズガーデン"
     },
     {
-      "title": "あさり先生のプロデュースゼミ",
-      "start_date": "2026-10-09",
-      "end_date": "2026-10-20",
-      "description": "メモリーのロックと再抽選を繰り返して理想のメモリーを厳選・育成するゲーム内イベント。プロデュース中には通常と異なるプランのカードが出現する特別仕様となっています。",
-      "category": "game",
+      "title": "『マブラヴ ガールズガーデン』公式画集 発売",
+      "start_date": "2026-11-26",
+      "end_date": "2026-11-26",
+      "description": "『マブラヴ ガールズガーデン』初となる公式画集の発売。第一部に登場した全キャラクターイラストやMG（メイズガーダー）の設定資料・ビジュアルを網羅し、本書限定の特典シリアルコードが付属します。",
+      "category": "real",
       "links": [
         {
           "name": "公式サイト",
-          "url": "https://gakuen.idolmaster-official.jp/"
+          "url": "https://muvluv-girls-garden.com/"
         }
       ],
-      "app_name": "学園アイドルマスター"
+      "app_name": "マブラヴ ガールズガーデン"
     },
     {
       "title": "Agitato 咲季ガシャ",
       "start_date": "2026-10-09",
       "end_date": "2026-10-20",
-      "description": "新SSRプロデュースアイドル「［Agitato］花海咲季」およびサポートカード「SSR これがあのかぼちゃ……」「SR ふたりで衣装作り」がピックアップされた期間限定ガシャです。",
+      "description": "新曲「Agitato」の実装に合わせ、新プロデュースアイドルSSR【Agitato】花海咲季、新サポートカードSSR「これがあのかぼちゃ……」、SR「ふたりで衣装作り」が登場するピックアップガシャです。",
       "category": "gacha",
       "links": [
         {
@@ -1339,10 +1323,10 @@
       "app_name": "学園アイドルマスター"
     },
     {
-      "title": "小悪魔アナザーガシャ",
+      "title": "アナザーアイドル '26小悪魔ガシャ",
       "start_date": "2026-09-30",
       "end_date": "2026-10-20",
-      "description": "SSRサポートカード「小悪魔になっちゃえ♪」などを対象としたアナザーアイドル・サポートカードピックアップガシャです。",
+      "description": "グラビアイベント「小悪魔」をテーマにしたアナザーアイドルを獲得できるガシャです。獲得することで専用の3Dライブ演出や衣装が解放されます。",
       "category": "gacha",
       "links": [
         {
@@ -1353,10 +1337,10 @@
       "app_name": "学園アイドルマスター"
     },
     {
-      "title": "Roar 星南ガシャ",
-      "start_date": "2026-10-20",
-      "end_date": "2026-10-28",
-      "description": "十王星南の新ソロ曲「Roar」の実装に合わせた新プロデュースアイドルピックアップガシャです。",
+      "title": "アナザーアイドルアップデート記念！ 48時間限定SSRアナザーアイドル確定ガシャ",
+      "start_date": "2026-10-09",
+      "end_date": "2026-11-04",
+      "description": "アナザーアイドル機能のアップデートを記念し、シーズン限定のアナザーアイドルが確定で登場する有償ジュエル限定ガシャが48時間ごとにピックアップ対象を切り替えて順次開催されます。",
       "category": "gacha",
       "links": [
         {
@@ -1367,11 +1351,11 @@
       "app_name": "学園アイドルマスター"
     },
     {
-      "title": "復刻ミラクルナナウ(ﾟ∀ﾟ)！ガシャ",
-      "start_date": "2026-10-22",
-      "end_date": "2026-10-30",
-      "description": "過去に開催された「ミラクルナナウ(ﾟ∀ﾟ)！」シリーズの有村麻央および篠澤広のカードを対象とした復刻ピックアップガシャです。",
-      "category": "gacha",
+      "title": "朝の4時よ！一緒に走りに行きましょう！ログインボーナス",
+      "start_date": "2026-10-09",
+      "end_date": "2026-10-20",
+      "description": "期間中にログインすることでAPドリンク10個が獲得できるキャンペーンです（第1回：10月9日 4:00～10月15日 3:59、第2回：10月15日 4:00～10月20日 4:59）。ホーム画面にて各アイドルの朝4時限定ボイスも解放されています。",
+      "category": "game",
       "links": [
         {
           "name": "公式サイト",
@@ -1384,11 +1368,11 @@
       "title": "学園アイドルマスター「はつぼし放課後とーく」",
       "start_date": "2026-10-20",
       "end_date": "2026-10-20",
-      "description": "公式生配信番組。出演者は天音ゆかり（雨夜燕役）、伊藤舞音（倉本千奈役）、春咲暖（秦谷美鈴役）、山本亮プロデューサー。トークや最新情報が配信されます。",
+      "description": "2026年10月20日(火)20:00より配信予定の公式生配信番組。出演者は天音ゆかり（雨夜燕役）、伊藤舞音（倉本千奈役）、春咲暖（秦谷美鈴役）、山本亮（学園アイドルマスター プロデューサー）で、トークを中心にお届けします。",
       "category": "real",
       "links": [
         {
-          "name": "YouTube Live",
+          "name": "YouTube配信ページ",
           "url": "https://youtube.com/live/AqmehK0-ads"
         },
         {
@@ -1396,22 +1380,36 @@
           "url": "https://live.nicovideo.jp/watch/lv351539765"
         },
         {
-          "name": "公式サイト",
-          "url": "https://gakuen.idolmaster-official.jp/"
+          "name": "公式X",
+          "url": "https://x.com/gkmas_official"
         }
       ],
       "app_name": "学園アイドルマスター"
     },
     {
-      "title": "学園アイドルマスター×西武秩父駅前温泉 祭の湯「西武鉄道で行く!山粧う湯けむり旅」",
+      "title": "学園アイドルマスター×西武秩父駅前温泉 祭の湯「西武鉄道で行く！山粧う湯けむり旅」",
       "start_date": "2026-10-16",
       "end_date": "2026-11-29",
-      "description": "西武秩父駅前温泉 祭の湯（埼玉県秩父市）とのコラボレーションイベント。手ぬぐい付き入館セット券の販売、秩父グルメのコラボメニュー、祭の湯ver.のオリジナルグッズ展開、市内を巡るデジタルスタンプラリーや西武鉄道記念乗車券の販売が実施されます。",
+      "description": "埼玉県秩父市の「西武秩父駅前温泉 祭の湯」および西武鉄道沿線にて開催されるコラボイベント。限定手ぬぐい付き入館セット券の販売、秩父グルメコラボメニュー、コラボ記念グッズ販売、秩父市内を巡るデジタルスタンプラリー、記念乗車券の販売などが実施されます。",
       "category": "real",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://gakuen.idolmaster-official.jp/"
+          "name": "西武秩父駅前温泉 祭の湯 公式サイト",
+          "url": "https://www.seibu-leisure.co.jp/matsuri/"
+        }
+      ],
+      "app_name": "学園アイドルマスター"
+    },
+    {
+      "title": "学園アイドルマスター -ECLIPSE LIGHT- フェア in アニメイト",
+      "start_date": "2026-10-10",
+      "end_date": "2026-11-23",
+      "description": "全国アニメイト・アニメイト通販にて開催される物販フェア。「ECLIPSE LIGHT」をテーマにした描き下ろしイラストのグッズ販売に加え、期間中に対象商品を購入・予約することで特典ポストカード（前半6種／後半7種・全13種）がプレゼントされます。",
+      "category": "real",
+      "links": [
+        {
+          "name": "アニメイト特設ページ",
+          "url": "https://www.animate-onlineshop.jp/"
         }
       ],
       "app_name": "学園アイドルマスター"
@@ -1420,12 +1418,12 @@
       "title": "学園アイドルマスター After School キャンペーン in namco",
       "start_date": "2026-09-25",
       "end_date": "2026-11-01",
-      "description": "全国の直営アミューズメント施設「ナムコ」および「ナムコオンラインクレーン」にて開催されるコラボキャンペーン。ナムコ限定景品として「月村手毬 ゴールドの輝きver.」フィギュアやユニットちびぐるみが登場し、対象機への500円投入・利用によるノベルティプレゼント等が行われます。",
+      "description": "全国のアミューズメント施設「ナムコ」および「ナムコオンラインクレーン」で開催されるコラボキャンペーン。ナムコ限定プライズ景品（月村手毬限定フィギュア等）の展開や、対象機への500円投入で「アイドルマスター TOURS」プロモーションカードがプレゼントされます。",
       "category": "real",
       "links": [
         {
-          "name": "公式サイト",
-          "url": "https://gakuen.idolmaster-official.jp/"
+          "name": "キャンペーン特設サイト",
+          "url": "https://bandainamco-am.co.jp/event/game_center/gkmas2026"
         }
       ],
       "app_name": "学園アイドルマスター"
