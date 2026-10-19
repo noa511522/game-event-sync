@@ -23,6 +23,7 @@ APPS = [
 
 def clean_links(links):
     cleaned = []
+    seen_urls = {}  # 💡 重複リンクを排除して安定させるための辞書
     for l in links:
         if not isinstance(l, dict):
             continue
@@ -39,7 +40,9 @@ def clean_links(links):
         if 'javascript:' in url or 'example.com' in url or 'placeholder' in url:
             continue
             
-        cleaned.append({"name": name, "url": url})
+        if url not in seen_urls:
+            seen_urls[url] = True
+            cleaned.append({"name": name, "url": url})
     return cleaned
 
 def extract_events_with_ai(app_name):
@@ -49,30 +52,28 @@ def extract_events_with_ai(app_name):
     models_to_try = [default_model, 'gemini-2.5-flash']
     models_to_try = list(dict.fromkeys(models_to_try))
 
-    # 💡 表記揺れの防止とリンクの安定化ルールをプロンプトに追加・強化
+    # 💡 現在の年（2026年）を明示し、過去のイベントや古いライブの混入を徹底的に防ぐプロンプト
+    current_year = datetime.datetime.now().strftime("%Y")
     prompt = f"""
-あなたはソシャゲやゲームの最新情報リサーチャーです。
-現在開催中、または今後開催予定のソシャゲ「{app_name}」に関する以下の情報を、Google検索を用いて網羅的に探してください：
-1. ゲーム内イベント・キャンペーン情報
-2. ガチャ・ピックアップ情報
-3. リアルイベント（ポップアップストア、コラボカフェ、展覧会、ライブ、アニメイトフェアなど）
-4. 公式生放送やYouTubeでの記念配信、PVなどの情報
+あなたはソシャゲ「{app_name}」の正確な最新情報リサーチャーです。
+現在（{current_year}年）にゲーム内で開催されているイベント、今後開催予定のイベント、ガチャ、リアルイベント（コラボカフェや生放送など）の情報を、Google検索を用いて正確に探してください。
 
-【重要なお願い（データの安定化・正規化ルール）】
-- イベント名は、公式サイトで使われている公式名称を正確に取得し、更新のたびに微妙な表現や略称が変わらない（揺れない）ように統一してください。
-- 過去に開催されている定番イベントや継続中のものについても、正式なタイトルで一貫性を持たせてください。
-- 関連リンク（公式サイト、公式YouTube、配信ページなど）は、主要なものを厳選して出力してください。無駄な増減や重複が発生しないよう整理してください。実際に存在する確実なURLのみを記載し、架空のURLは絶対に作らないでください。
+【🚨 超重要・絶対厳守ルール（過去データの排除）】
+- **必ず {current_year}年 の現在または未来のスケジュールのみを対象にしてください。** 過去（昨年や一昨年など、すでに終了した古いイベントや過去のライブツアー等）の情報は絶対に取得しないでください。
+- 公式サイトや信頼できる最新ニュースに掲載されている情報のみをソースにしてください。
+- 過去のイベントページ（すでに終了した日付のもの）がヒットした場合は、**「現在開催されていない過去のもの」として絶対に除外**してください。
+- 関連リンクは主要な公式のものに絞り、無駄な増減がないよう整理してください。架空のURLは禁止です。
 
 直近〜今後のスケジュールを調べ、以下のJSON形式の配列だけで出力してください。
 余計な解説文やバッククォート(```)は含めず、純粋なJSON文字列のみを返してください。見つからない場合は `[]` を返してください。
 
 各要素は以下のキーを持つオブジェクトにしてください：
-- title: イベント名（公式生放送などの場合はそのタイトル）
+- title: イベント名
 - start_date: 開始日 (YYYY-MM-DD)
 - end_date: 終了日 (YYYY-MM-DD) （※終了日の記載がない場合は開始日と同日、または推測して必ずYYYY-MM-DD形式で入れてください）
 - description: 概要（開催場所や詳細な内容も含めてください）
-- category: "game" （ゲーム内イベント等の場合） または "gacha" （ガチャ等の場合） または "real" （コラボカフェ・リアルイベント・公式生放送等の場合）
-- links: 公式サイト、公式YouTubeチャンネル、配信ページ等のリスト（配列）。各要素は name（例: "公式サイト", "公式YouTube", "配信ページ" 等の名称）と url（URL）のキーを持つオブジェクト。見つからない場合は空配列 `[]` にしてください。
+- category: "game" （ゲーム内） または "gacha" （ガチャ） または "real" （リアルイベント・生放送等）
+- links: 公式サイト等のリスト（配列）。各要素は name と url のキーを持つオブジェクト。
 """
     
     for model_name in models_to_try:
@@ -82,9 +83,21 @@ def extract_events_with_ai(app_name):
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     tools=[types.Tool(google_search=types.GoogleSearch())],
-                    temperature=0.2  # 💡 より安定した出力を得るため温度を少し下げました
+                    temperature=0.1  # 💡 揺らぎを最小限にするため温度を低めに設定
                 )
             )
+            
+            # 🌐 どこを徘徊して情報を引っ張ってきたか（検索ソース）をGitHubのログに出力して確認
+            try:
+                if response.candidates and response.candidates[0].grounding_metadata:
+                    metadata = response.candidates[0].grounding_metadata
+                    if hasattr(metadata, 'grounding_chunks') and metadata.grounding_chunks:
+                        print(f"   🌐 【参照されたWEBソース ({app_name})】")
+                        for chunk in metadata.grounding_chunks:
+                            if chunk.web:
+                                print(f"      - {chunk.web.title}: {chunk.web.uri}")
+            except Exception as log_err:
+                pass
             
             time.sleep(12)
             text = response.text.strip()
@@ -120,11 +133,29 @@ def send_line_notification(messages):
 def main():
     gas_url = os.environ.get('GAS_WEB_APP_URL')
     
+    jst = datetime.timezone(datetime.timedelta(hours=9))
+    today = datetime.datetime.now(jst).date()
+    
     all_events = []
     for app_name in APPS:
         print(f"🔍 Google検索で情報収集中: {app_name}")
         events = extract_events_with_ai(app_name)
+        
         for ev in events:
+            # 🛡️ 【最重要ガード】Python側で完全に日付を検証し、今日より過去のイベントを強制排除する
+            end_str = ev.get('end_date')
+            if end_str:
+                try:
+                    end_date = datetime.date.fromisoformat(end_str)
+                    # 終了日が今日より前のものは、AIが何と言おうと絶対にリストに入れない
+                    if end_date < today:
+                        print(f"   ⏩ 過去のイベントのため除外: [{app_name}] {ev.get('title')} (終了日: {end_str})")
+                        continue
+                except:
+                    continue
+            else:
+                continue
+
             ev['app_name'] = app_name
             if 'category' not in ev:
                 ev['category'] = 'game'
@@ -135,11 +166,9 @@ def main():
             all_events.append(ev)
 
     if not all_events:
-        print("⚠️ 抽出できたイベントが0件だったため、保存・送信をスキップします。")
+        print("⚠️ 抽出できた有効なイベントが0件だったため、保存・送信をスキップします。")
         return
 
-    jst = datetime.timezone(datetime.timedelta(hours=9))
-    today = datetime.datetime.now(jst).date()
     notifications = []
 
     for ev in all_events:
