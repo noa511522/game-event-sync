@@ -25,6 +25,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GAS_WEB_APP_URL: ${{ secrets.GAS_WEB_APP_URL }}
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}  # 💡 ここを追加！
         run: python main.py
       - name: Commit and push if changed
         run: |
